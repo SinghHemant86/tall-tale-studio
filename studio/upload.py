@@ -30,6 +30,11 @@ def upload(video: Path, thumb: Path | None, title: str, meta: dict, cfg: dict) -
     )
     yt = build("youtube", "v3", credentials=creds, cache_discovery=False)
     ch = yt.channels().list(part="snippet", mine=True).execute().get("items", [])
+    want = cfg["youtube"].get("channel_id")
+    got = ch[0]["id"] if ch else None
+    if want and got != want:
+        raise RuntimeError(f"Connected to channel {got}, expected Tall-Tale ({want}). Refusing to upload. "
+                           "Re-run scripts/get_youtube_token.ps1 and pick the Tall-Tale channel.")
     log(f"  youtube: uploading to channel '{ch[0]['snippet']['title'] if ch else 'unknown'}'")
     ycfg = cfg["youtube"]
     body = {

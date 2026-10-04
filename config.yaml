@@ -57,6 +57,7 @@ branding:
 
 youtube:
   upload: true
+  channel_id: UC1n91AJFKbBX_UxWMDDKtRQ   # Tall-Tale (@TallTale-4u); uploads to any other channel are refused
   privacy: private              # private | unlisted | public — keep private and review first
   category_id: "24"             # Entertainment
   made_for_kids: false

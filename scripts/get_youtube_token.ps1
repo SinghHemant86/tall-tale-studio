@@ -31,7 +31,7 @@ $authUrl = "https://accounts.google.com/o/oauth2/v2/auth" +
     "&redirect_uri=" + [uri]::EscapeDataString($redirect) +
     "&response_type=code" +
     "&scope=" + [uri]::EscapeDataString($scopes) +
-    "&access_type=offline&prompt=consent" +
+    "&access_type=offline&prompt=" + [uri]::EscapeDataString("select_account consent") +
     "&state=" + $state
 
 # Small local listener that catches Google's redirect after you approve.
@@ -40,8 +40,8 @@ $listener.Start()
 Start-Process $authUrl
 Write-Host ""
 Write-Host "A browser window has opened." -ForegroundColor Yellow
-Write-Host " - Sign in with the account that owns the Tall-Tale channel"
-Write-Host " - If asked, choose the Tall-Tale channel"
+Write-Host " - On 'Choose an account', pick the Tall-Tale channel itself (it is listed as its own entry"
+Write-Host "   under simhamanthan@gmail.com), NOT the plain Gmail account"
 Write-Host " - On 'Google hasn't verified this app': click Advanced > Go to Tall-Tale-Studio (unsafe)"
 Write-Host " - Tick both permissions and click Continue"
 Write-Host ""
@@ -98,12 +98,17 @@ if (-not $token.refresh_token) {
     Read-Host "Press Enter to close"; exit 1
 }
 
+$expected = "UC1n91AJFKbBX_UxWMDDKtRQ"   # Tall-Tale (@TallTale-4u)
 $ch = Invoke-RestMethod -Uri "https://www.googleapis.com/youtube/v3/channels?part=snippet&mine=true" `
       -Headers @{ Authorization = "Bearer $($token.access_token)" }
 Write-Host ""
-if ($ch.items) {
-    Write-Host ("Connected channel: " + $ch.items[0].snippet.title + "  (https://youtube.com/channel/" + $ch.items[0].id + ")") -ForegroundColor Green
-    Write-Host "If this is NOT the Tall-Tale channel, close this window and run the script again." -ForegroundColor Yellow
+if ($ch.items -and $ch.items[0].id -ne $expected) {
+    Write-Host ("Connected to the WRONG channel: " + $ch.items[0].snippet.title + " (" + $ch.items[0].id + ")") -ForegroundColor Red
+    Write-Host "Run the script again and pick the Tall-Tale entry on the 'Choose an account' screen." -ForegroundColor Yellow
+    Write-Host "Nothing to save this time."
+    Read-Host "Press Enter to close"; exit 1
+} elseif ($ch.items) {
+    Write-Host ("Connected channel: " + $ch.items[0].snippet.title + "  (" + $ch.items[0].id + ")  - correct, this is Tall-Tale") -ForegroundColor Green
 } else {
     Write-Host "Signed in, but this account has no YouTube channel. Run again and pick the Tall-Tale channel." -ForegroundColor Red
 }
