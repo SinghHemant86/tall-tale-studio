@@ -1,5 +1,4 @@
 """Scene clips (Ken Burns motion + horror grade), music bed with ducking, subtitles, thumbnail."""
-import random
 from pathlib import Path
 
 from .common import ROOT, duration, log, run
@@ -76,32 +75,24 @@ def scene_clip(scene: dict, image: Path, lines: list, work: Path, cfg: dict, sub
     return out
 
 
-def pick_track(folder: Path, genre: str, mood: str, index: int) -> Path | None:
-    """Search order: music/<genre>/<mood>*, music/<mood>/ (intro, outro...), music/<genre>/,
-    then legacy music/<mood>_* names, then anything. Rotates through matches so scenes vary."""
-    def files(d: Path, prefix: str = "") -> list[Path]:
-        return sorted(p for p in d.glob(f"{prefix}*") if p.suffix.lower() in (".mp3", ".wav", ".ogg", ".m4a")) if d.is_dir() else []
-    for cands in (files(folder / genre, mood), files(folder / mood), files(folder / genre),
-                  files(folder, f"{mood}_"), [p for p in folder.rglob("*") if p.suffix.lower() in (".mp3", ".wav", ".ogg", ".m4a")]):
-        if cands:
-            return cands[index % len(cands)]
-    return None
-
-
 def music_bed(segments: list[tuple[str, float]], work: Path, cfg: dict, genre: str = "horror") -> Path:
     """One music segment per (mood, seconds) pair, each faded in and out, joined end to end."""
+    from . import music_lib
     mcfg = cfg["music"]
-    folder = ROOT / mcfg["folder"]
+    lib = music_lib.build(ROOT / mcfg["folder"])
     out = work / "music_bed.wav"
     segs = []
     for i, (mood, dur) in enumerate(segments):
         mood = mood or mcfg["default_mood"]
-        track = pick_track(folder, genre, mood, i)
+        pick = music_lib.choose(lib, genre, mood, dur, i)
         seg = work / f"music_{i:02d}.wav"
-        if track:
-            offset = random.Random(i).uniform(0, max(0, duration(track) - dur - 1))
+        if pick:
+            track, offset = pick
+            # level every track to the same loudness so quiet beds aren't lost and loud ones don't blast
+            gain = max(-12.0, min(12.0, -20.0 - music_lib.choose.last_level))
+            log(f"  music {i:02d}: {track.name[:48]} from {offset:.1f}s ({mood}, {gain:+.0f} dB)")
             run(["ffmpeg", "-y", "-stream_loop", "-1", "-ss", f"{offset:.1f}", "-i", str(track),
-                 "-t", f"{dur:.2f}", "-af", "afade=t=in:d=1,afade=t=out:st={:.2f}:d=1".format(max(0, dur - 1)),
+                 "-t", f"{dur:.2f}", "-af", f"volume={gain:.1f}dB,afade=t=in:d=0.8,afade=t=out:st={max(0, dur - 1):.2f}:d=1",
                  "-ar", "44100", "-ac", "2", str(seg)])
         else:
             # no music downloaded yet: low synthetic drone so the video still has atmosphere
