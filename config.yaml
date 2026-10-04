@@ -1,0 +1,62 @@
+# Tall-Tale Studio — pipeline settings. Change engines here, not in code.
+
+video:
+  width: 1280
+  height: 720
+  fps: 25
+  scene_padding_sec: 1.2        # silence after the last line of each scene
+  line_gap_sec: 0.45            # pause between lines inside a scene
+  subtitles: true
+  subtitle_font: Noto Sans      # Noto covers Hindi (Devanagari) too
+
+images:
+  engine: pollinations          # pollinations | placeholder
+  model: flux
+  # visual style comes from the story's genre (studio/genres.py)
+  negative: "text, watermark, logo, cartoon, bright colors, smiling"
+
+voice:
+  engine: edge                  # edge | placeholder
+  narrator: en-IN-PrabhatNeural # channel narrator (a story can set "narrator_voice")
+  # narrator speed/pitch below are fallbacks; each genre sets its own
+  narrator_rate: "-8%"
+  narrator_pitch: "-6Hz"
+
+music:
+  folder: music                 # put Pixabay downloads here, named <mood>_<anything>.mp3
+  volume_db: -16                # music level under voice
+  duck: true                    # music dips while someone is speaking
+  default_mood: dread
+
+llm:
+  # Used only for mechanical steps (missing image prompts, title/description/tags).
+  # Tried in order; first that answers wins. Free model IDs rotate — edit this list.
+  providers:
+    - name: openrouter
+      base_url: https://openrouter.ai/api/v1
+      key_env: OPENROUTER_API_KEY
+      models:
+        - meta-llama/llama-3.3-70b-instruct:free
+        - deepseek/deepseek-r1:free
+    - name: gemini
+      base_url: https://generativelanguage.googleapis.com/v1beta/openai
+      key_env: GEMINI_API_KEY
+      models:
+        - gemini-2.5-flash
+    - name: groq
+      base_url: https://api.groq.com/openai/v1
+      key_env: GROQ_API_KEY
+      models:
+        - llama-3.3-70b-versatile
+
+branding:
+  intro: true
+  intro_sec: 4
+  end_card: true
+  end_sec: 7
+
+youtube:
+  upload: true
+  privacy: private              # private | unlisted | public — keep private and review first
+  category_id: "24"             # Entertainment
+  made_for_kids: false

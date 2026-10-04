@@ -1,0 +1,66 @@
+"""Story bible: load, validate and pick from the queue."""
+import json
+from pathlib import Path
+
+from .common import ROOT
+
+QUEUE = ROOT / "queue"
+DONE = ROOT / "done"
+
+
+class BibleError(ValueError):
+    pass
+
+
+def validate(b: dict) -> dict:
+    for key in ("id", "title", "characters", "scenes"):
+        if key not in b:
+            raise BibleError(f"missing '{key}'")
+    char_ids = {c["id"] for c in b["characters"]}
+    for c in b["characters"]:
+        for k in ("id", "name", "look", "voice"):
+            if k not in c:
+                raise BibleError(f"character missing '{k}': {c}")
+    if not b["scenes"]:
+        raise BibleError("no scenes")
+    from .genres import GENRES
+    genre = b.get("genre", "horror")
+    if genre not in GENRES:
+        raise BibleError(f"unknown genre '{genre}'. Use one of: {', '.join(GENRES)}")
+    if GENRES[genre].get("true_story"):
+        src = [s for s in b.get("sources", []) if str(s).startswith("http")]
+        if not src:
+            raise BibleError("true_incident stories need a 'sources' list of links (news, court records, archives)")
+    for s in b["scenes"]:
+        if "setting" not in s or not s.get("lines"):
+            raise BibleError(f"scene {s.get('id')} needs 'setting' and 'lines'")
+        for cid in s.get("characters", []):
+            if cid not in char_ids:
+                raise BibleError(f"scene {s['id']} references unknown character '{cid}'")
+        for ln in s["lines"]:
+            if ln["speaker"] != "narrator" and ln["speaker"] not in char_ids:
+                raise BibleError(f"scene {s['id']}: unknown speaker '{ln['speaker']}'")
+    return b
+
+
+def load(path: Path) -> dict:
+    return validate(json.loads(path.read_text(encoding="utf-8")))
+
+
+def next_in_queue() -> Path | None:
+    """Priority stories first ("go"), then alphabetical order."""
+    items = sorted(QUEUE.glob("*.json"))
+    if not items:
+        return None
+    prio = [p for p in items if json.loads(p.read_text(encoding="utf-8")).get("priority")]
+    return (prio or items)[0]
+
+
+def mark_done(path: Path, result: dict) -> Path:
+    DONE.mkdir(exist_ok=True)
+    data = json.loads(path.read_text(encoding="utf-8"))
+    data["result"] = result
+    out = DONE / path.name
+    out.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+    path.unlink()
+    return out

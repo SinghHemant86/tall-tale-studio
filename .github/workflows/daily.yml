@@ -1,0 +1,90 @@
+name: Tall-Tale daily render
+
+on:
+  schedule:
+    - cron: "17 1 * * *"   # 06:47 IST every day (GitHub cron is UTC)
+  workflow_dispatch:        # "go" — run now from the Actions tab or the gh CLI
+    inputs:
+      story:
+        description: "Optional: path of a specific story, e.g. queue/002-x.json"
+        required: false
+      upload:
+        description: "Upload to YouTube?"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write           # lets the run move the story from queue/ to done/
+
+concurrency:
+  group: render
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Skip if queue is empty
+        id: q
+        run: |
+          if [ -z "${{ inputs.story }}" ] && [ -z "$(ls queue/*.json 2>/dev/null)" ]; then
+            echo "empty=true" >> "$GITHUB_OUTPUT"; echo "Queue empty, nothing to do."
+          fi
+
+      - name: Install ffmpeg + fonts
+        if: steps.q.outputs.empty != 'true'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-core fonts-dejavu-core
+
+      - name: Channel font (Cinzel, matches the logo)
+        if: steps.q.outputs.empty != 'true'
+        run: curl -sSL -o assets/fonts/Cinzel.ttf "https://github.com/google/fonts/raw/main/ofl/cinzel/Cinzel%5Bwght%5D.ttf" || true
+
+      - uses: actions/setup-python@v5
+        if: steps.q.outputs.empty != 'true'
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Python packages
+        if: steps.q.outputs.empty != 'true'
+        run: pip install -r requirements.txt
+
+      - name: Render (and upload)
+        if: steps.q.outputs.empty != 'true'
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: |
+          ARGS=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.upload }}" = "false" ]; then ARGS="--no-upload"; fi
+          python run.py ${{ inputs.story }} $ARGS
+
+      - name: Keep the video for 14 days (download from the run page)
+        if: steps.q.outputs.empty != 'true' && always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: render-${{ github.run_number }}
+          path: |
+            output/*/*.mp4
+            output/*/thumbnail.jpg
+            output/*/youtube.json
+            output/*/characters/*.png
+          retention-days: 14
+          if-no-files-found: ignore
+
+      - name: Move story to done/
+        if: steps.q.outputs.empty != 'true' && success()
+        run: |
+          git config user.name "story-studio-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A queue done
+          git commit -m "Rendered story $(date -u +%F)" || echo "nothing to commit"
+          git push
