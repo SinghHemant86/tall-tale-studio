@@ -1,6 +1,6 @@
 # Tall-Tale Studio - connect your YouTube channel (Windows, no Python needed)
 #
-# 1. Put this file in the same folder as client_secret.json
+# 1. Put this file in the same folder as the client_secret JSON downloaded from Google Cloud
 # 2. Right-click this file > "Run with PowerShell"
 #    (or in a terminal:  powershell -ExecutionPolicy Bypass -File get_youtube_token.ps1)
 # 3. Sign in with the Google account that owns the Tall-Tale channel and pick the channel.
@@ -8,11 +8,14 @@
 
 $ErrorActionPreference = 'Stop'
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$secretPath = Join-Path $here 'client_secret.json'
-if (-not (Test-Path $secretPath)) {
-    Write-Host "client_secret.json was not found next to this script ($here)." -ForegroundColor Red
+# Uses client_secret.json, or Google's long "client_secret_....json" name, whichever is newest.
+$secretFile = Get-ChildItem -Path $here -Filter 'client_secret*.json' | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+if (-not $secretFile) {
+    Write-Host "No client_secret*.json found next to this script ($here)." -ForegroundColor Red
     Read-Host "Press Enter to close"; exit 1
 }
+$secretPath = $secretFile.FullName
+Write-Host "Using $($secretFile.Name)"
 $info = (Get-Content $secretPath -Raw | ConvertFrom-Json).installed
 if (-not $info) {
     Write-Host "This JSON is not a 'Desktop app' client. Create a Desktop app client in Google Cloud." -ForegroundColor Red
@@ -114,4 +117,5 @@ Write-Host "YT_REFRESH_TOKEN  = $($token.refresh_token)"
 Write-Host ""
 Write-Host "Keep this window open until all three are saved in GitHub, then close it."
 Write-Host "Never paste these values into chat or commit them to the repo."
+Write-Host "After saving them, delete the client_secret JSON files from this folder."
 Read-Host "Press Enter to close"
