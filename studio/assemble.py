@@ -76,7 +76,19 @@ def scene_clip(scene: dict, image: Path, lines: list, work: Path, cfg: dict, sub
     return out
 
 
-def music_bed(segments: list[tuple[str, float]], work: Path, cfg: dict) -> Path:
+def pick_track(folder: Path, genre: str, mood: str, index: int) -> Path | None:
+    """Search order: music/<genre>/<mood>*, music/<mood>/ (intro, outro...), music/<genre>/,
+    then legacy music/<mood>_* names, then anything. Rotates through matches so scenes vary."""
+    def files(d: Path, prefix: str = "") -> list[Path]:
+        return sorted(p for p in d.glob(f"{prefix}*") if p.suffix.lower() in (".mp3", ".wav", ".ogg", ".m4a")) if d.is_dir() else []
+    for cands in (files(folder / genre, mood), files(folder / mood), files(folder / genre),
+                  files(folder, f"{mood}_"), [p for p in folder.rglob("*") if p.suffix.lower() in (".mp3", ".wav", ".ogg", ".m4a")]):
+        if cands:
+            return cands[index % len(cands)]
+    return None
+
+
+def music_bed(segments: list[tuple[str, float]], work: Path, cfg: dict, genre: str = "horror") -> Path:
     """One music segment per (mood, seconds) pair, each faded in and out, joined end to end."""
     mcfg = cfg["music"]
     folder = ROOT / mcfg["folder"]
@@ -84,7 +96,7 @@ def music_bed(segments: list[tuple[str, float]], work: Path, cfg: dict) -> Path:
     segs = []
     for i, (mood, dur) in enumerate(segments):
         mood = mood or mcfg["default_mood"]
-        track = _find_audio(folder, f"{mood}_") or _find_audio(folder, "")
+        track = pick_track(folder, genre, mood, i)
         seg = work / f"music_{i:02d}.wav"
         if track:
             offset = random.Random(i).uniform(0, max(0, duration(track) - dur - 1))

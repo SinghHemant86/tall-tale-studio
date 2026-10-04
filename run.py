@@ -70,7 +70,7 @@ def main() -> int:
         add(branding.card_clip("end", brand.get("end_sec", 7.0), work, cfg, note), "outro")
 
     log("5/6 music + final mix")
-    music = assemble.music_bed(music_plan, work, cfg)
+    music = assemble.music_bed(music_plan, work, cfg, genre["name"])
     final = work / f"{story['id']}.mp4"
     assemble.final_video(clips, music, subs, work, cfg, final)
     thumb = branding.thumbnail(story["title"], scene_imgs[story["scenes"][0]["id"]], work / "thumbnail.jpg")

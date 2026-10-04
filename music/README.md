@@ -1,17 +1,19 @@
 # Background music
 
-Drop your Pixabay downloads here, named by mood so each scene picks the right one:
+One folder per genre, plus `intro` and `outro` for the Tall-Tale cards:
 
-    dread_dark-ambient-01.mp3
-    dread_haunted-house.mp3
-    chase_heartbeat-tension.mp3
-    calm_eerie-piano.mp3
-    reveal_horror-sting.mp3
-    intro_tall-tale-sting.mp3
-    outro_soft-strings.mp3
+    music/
+      horror/          psychological/     true_incident/     intro/
+      thriller/        dark_drama/                            outro/
 
-Genres pick a default mood (horror `dread`, thriller `pulse`, psychological `drone`,
-dark drama `piano`, true incident `ambient`), and a scene's own `mood` overrides it.
-A scene with `"mood": "chase"` uses the first `chase_*` file. If none matches, any track is used;
-if the folder is empty, a synthetic low drone is generated so renders never fail.
-Mood names are free text — just keep them consistent between story files and file names.
+Drop Pixabay downloads into the folder of the genre they suit. No renaming needed.
+
+- A horror story takes its music from `horror/`, a thriller from `thriller/`, and so on.
+- The intro card uses `intro/`, the end card `outro/`.
+- If a genre folder is empty, any track in `music/` is used; if there are none at all, a synthetic
+  drone is generated so renders never fail.
+- Tracks rotate scene by scene, so add a few per genre for variety. Longer tracks (2+ minutes) loop
+  less noticeably.
+
+Optional: start a filename with a mood (`dread_`, `chase_`, `calm_`...) and scenes with that
+`"mood"` will prefer it. Without that, the first tracks in the folder are used in turn.
