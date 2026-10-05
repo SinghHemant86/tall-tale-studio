@@ -120,6 +120,13 @@ Write-Host "YT_CLIENT_ID      = $($info.client_id)"
 Write-Host "YT_CLIENT_SECRET  = $($info.client_secret)"
 Write-Host "YT_REFRESH_TOKEN  = $($token.refresh_token)"
 Write-Host ""
+Write-Host "To avoid copy mistakes, each value can go straight to the clipboard:" -ForegroundColor Cyan
+foreach ($pair in @(@("YT_CLIENT_ID", $info.client_id), @("YT_CLIENT_SECRET", $info.client_secret), @("YT_REFRESH_TOKEN", $token.refresh_token))) {
+    Read-Host ("Press Enter to copy " + $pair[0] + ", then paste it into that GitHub secret")
+    Set-Clipboard -Value ($pair[1].Trim())
+    Write-Host ("  " + $pair[0] + " copied.") -ForegroundColor Green
+}
+Write-Host ""
 Write-Host "Keep this window open until all three are saved in GitHub, then close it."
 Write-Host "Never paste these values into chat or commit them to the repo."
 Write-Host "After saving them, delete the client_secret JSON files from this folder."
