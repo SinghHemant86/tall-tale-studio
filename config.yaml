@@ -10,7 +10,7 @@ video:
   subtitle_font: Noto Sans      # Noto covers Hindi (Devanagari) too
 
 images:
-  engine: pollinations          # pollinations | placeholder
+  engine: cloudflare            # cloudflare (free 10k neurons/day) | pollinations (needs paid key) | placeholder
   model: flux
   # visual style comes from the story's genre (studio/genres.py)
   negative: "text, watermark, logo, cartoon, bright colors, smiling"

@@ -3,6 +3,8 @@
 Consistency trick: every prompt that shows a character repeats that character's exact
 'look' text and uses the character's fixed seed, so faces/outfits stay close across scenes.
 """
+import base64
+import io
 import os
 import urllib.parse
 from pathlib import Path
@@ -31,6 +33,48 @@ def _pollinations(prompt: str, out: Path, w: int, h: int, seed: int, model: str,
 
     retry(fetch)
     Image.open(out).convert("RGB").save(out)  # normalise to PNG/RGB
+
+
+CF_MODEL = "@cf/black-forest-labs/flux-1-schnell"
+
+
+def _fit(img: Image.Image, w: int, h: int) -> Image.Image:
+    """Centre-crop to the target aspect ratio, then resize (FLUX on Workers AI returns squares)."""
+    iw, ih = img.size
+    target = w / h
+    if iw / ih > target:
+        nw = int(ih * target)
+        img = img.crop(((iw - nw) // 2, 0, (iw - nw) // 2 + nw, ih))
+    else:
+        nh = int(iw / target)
+        img = img.crop((0, (ih - nh) // 2, iw, (ih - nh) // 2 + nh))
+    return img.resize((w, h), Image.LANCZOS)
+
+
+def _cloudflare(prompt: str, out: Path, w: int, h: int, seed: int) -> None:
+    """Cloudflare Workers AI, FLUX.1 schnell. Free plan: 10,000 neurons/day (~150 images)."""
+    acct, token = os.environ.get("CF_ACCOUNT_ID"), os.environ.get("CF_API_TOKEN")
+    if not (acct and token):
+        raise RuntimeError("CF_ACCOUNT_ID / CF_API_TOKEN not set")
+    url = f"https://api.cloudflare.com/client/v4/accounts/{acct}/ai/run/{CF_MODEL}"
+
+    def fetch():
+        r = requests.post(url, headers={"Authorization": f"Bearer {token}"},
+                          json={"prompt": prompt[:2000], "steps": 6, "seed": seed % 2_147_483_647},
+                          timeout=180)
+        if r.status_code == 429:
+            raise RuntimeError("Cloudflare rate limit (429)")
+        r.raise_for_status()
+        if r.headers.get("content-type", "").startswith("image"):
+            data = r.content
+        else:
+            body = r.json()
+            if not body.get("success", True):
+                raise RuntimeError(f"Cloudflare error: {body.get('errors')}")
+            data = base64.b64decode(body["result"]["image"])
+        _fit(Image.open(io.BytesIO(data)).convert("RGB"), w, h).save(out)
+
+    retry(fetch)
 
 
 def _placeholder(prompt: str, out: Path, w: int, h: int, seed: int) -> None:
@@ -63,7 +107,10 @@ def render(prompt: str, out: Path, cfg: dict, seed: int, w: int, h: int, style: 
         return out  # resume support: don't regenerate finished images
     icfg = cfg["images"]
     full = f"{prompt}, {style or icfg.get('style_suffix', '')}"
-    if icfg["engine"] == "pollinations":
+    engine = icfg["engine"]
+    if engine == "cloudflare":
+        _cloudflare(full, out, w, h, seed)
+    elif engine == "pollinations":
         _pollinations(full, out, w, h, seed, icfg.get("model", "flux"), icfg.get("negative", ""))
     else:
         _placeholder(full, out, w, h, seed)
