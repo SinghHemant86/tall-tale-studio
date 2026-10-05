@@ -23,6 +23,18 @@ def validate(b: dict) -> dict:
                 raise BibleError(f"character missing '{k}': {c}")
     if not b["scenes"]:
         raise BibleError("no scenes")
+    import re
+    dev = re.compile(r"[\u0900-\u097F]")
+    latin_words = re.compile(r"[A-Za-z]{2,}")
+    for s in b["scenes"]:
+        for ln in s["lines"]:
+            txt = ln["text"]
+            if dev.search(txt) and len(latin_words.findall(txt)) >= 3:
+                raise BibleError(f"scene {s['id']}: line mixes Hindi and English (\"{txt[:60]}\"). "
+                                 "Write each line in ONE language and never repeat it as a translation.")
+            if len(txt.split()) > 40:
+                raise BibleError(f"scene {s['id']}: line too long ({len(txt.split())} words); split it "
+                                 "so the picture can change every few seconds.")
     from .genres import GENRES
     genre = b.get("genre", "horror")
     if genre not in GENRES:

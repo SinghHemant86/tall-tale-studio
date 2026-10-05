@@ -1,0 +1,101 @@
+{
+  "id": "001b-the-last-tenant-v2",
+  "title": "The Last Tenant of Room 4B",
+  "genre": "horror",
+  "language": "hinglish",
+  "priority": false,
+  "logline": "A night watchman at an abandoned Pune chawl hears someone knocking from inside a room that was sealed thirty years ago.",
+  "characters": [
+    {
+      "id": "raghav",
+      "name": "Raghav",
+      "look": "Indian man in his fifties, grey stubble, tired deep-set eyes, faded khaki watchman uniform, holding an old brass torch",
+      "voice": "hi-IN-MadhurNeural",
+      "seed": 4101
+    },
+    {
+      "id": "voice_4b",
+      "name": "The Voice in 4B",
+      "look": "silhouette of a thin woman in a white saree behind frosted glass, face never visible, long wet black hair",
+      "voice": "en-IN-NeerjaNeural",
+      "rate": "-15%",
+      "pitch": "-12Hz",
+      "seed": 4102
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s1",
+      "setting": "an abandoned four-storey chawl corridor in old Pune at night, peeling green walls, a single flickering bulb, monsoon rain outside",
+      "characters": [
+        "raghav"
+      ],
+      "mood": "dread",
+      "motion": "zoom_in",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "Raghav had guarded the empty chawl for eleven years. Nothing ever happened there. That was the point."
+        },
+        {
+          "speaker": "narrator",
+          "text": "Then, on the first night of the monsoon, someone knocked."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "setting": "close-up of a wooden door painted with the number 4B, rusted padlock, wax seal from 1994, water seeping under it",
+      "characters": [],
+      "mood": "dread",
+      "motion": "pan_right",
+      "sfx": [
+        "knock"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "The knocking came from room 4B. The room the owners had sealed in 1994, after the fire."
+        },
+        {
+          "speaker": "raghav",
+          "text": "कौन है अंदर?"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "setting": "frosted glass window of the sealed door, a pale female silhouette pressed against it from inside, torch beam on the glass",
+      "characters": [
+        "raghav",
+        "voice_4b"
+      ],
+      "mood": "chase",
+      "motion": "zoom_in_fast",
+      "lines": [
+        {
+          "speaker": "voice_4b",
+          "text": "You locked the door, Raghav. You were here that night too."
+        },
+        {
+          "speaker": "narrator",
+          "text": "And for the first time in thirty years, Raghav remembered."
+        }
+      ]
+    }
+  ],
+  "youtube": {
+    "description": "",
+    "tags": [
+      "tall tale",
+      "horror story",
+      "indian horror",
+      "pune",
+      "hindi horror"
+    ]
+  },
+  "thumbnail": {
+    "prompt": "extreme close-up of a sealed wooden door marked 4B with a rusted padlock, a pale hand pressed against frosted glass beside it",
+    "text": "SEALED SINCE 1994"
+  }
+}

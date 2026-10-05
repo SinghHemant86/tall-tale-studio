@@ -7,11 +7,13 @@ video:
   scene_padding_sec: 1.2        # silence after the last line of each scene
   line_gap_sec: 0.45            # pause between lines inside a scene
   subtitles: true
+  max_shot_sec: 3.5             # new picture at least this often; stretched automatically to fit the image budget
   subtitle_font: Noto Sans      # Noto covers Hindi (Devanagari) too
 
 images:
   engine: cloudflare            # cloudflare (free 10k neurons/day) | pollinations (needs paid key) | placeholder
   model: flux
+  max_images: 110               # per video; Cloudflare free tier is ~130 images/day
   # visual style comes from the story's genre (studio/genres.py)
   negative: "text, watermark, logo, cartoon, bright colors, smiling"
 

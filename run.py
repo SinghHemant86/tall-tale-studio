@@ -44,12 +44,19 @@ def main() -> int:
     work.mkdir(parents=True, exist_ok=True)
     log(f"Story: {story['title']}  ({genre['name']}, {len(story['scenes'])} scenes)")
 
-    log("1/6 characters")
-    portraits = images.character_portraits(story, work, cfg, genre["style"])
-    log("2/6 scene images")
-    scene_imgs = images.scene_images(story, work, cfg, genre["style"])
-    log("3/6 voices")
+    log("1/6 voices")
     lines = voice.speak_all(story, work, cfg, genre)
+    log("2/6 shot plan + images")
+    plan = images.plan_shots(story, {sid: [c[1] for c in v] for sid, v in lines.items()}, cfg)
+    shot_imgs = images.shot_images(plan, work, cfg, genre["style"])
+    log("3/6 thumbnail image")
+    tcfg = story.get("thumbnail") or {}
+    if tcfg.get("prompt"):
+        thumb_img = images.render(tcfg["prompt"] + ", dramatic single subject, strong contrast, empty dark space on the left",
+                                  work / "thumbnail_base.png", cfg, 4242, 1280, 720, genre["style"])
+    else:
+        thumb_img = shot_imgs[story["scenes"][0]["id"]][0]
+    portraits = {}
 
     log("4/6 clips")
     clips, music_plan, subs, t = [], [], [], 0.0
@@ -66,7 +73,8 @@ def main() -> int:
     if genre.get("true_story"):
         add(branding.card_clip("disclaimer", 5.0, work, cfg, genres.DISCLAIMER), genre["mood"])
     for s in story["scenes"]:
-        clip = assemble.scene_clip(s, scene_imgs[s["id"]], lines[s["id"]], work, cfg, subs, t, genre["grade"])
+        clip = assemble.scene_clip(s, shot_imgs[s["id"]], lines[s["id"]], work, cfg, subs, t, genre["grade"],
+                                   shots=plan[s["id"]])
         add(clip, s.get("mood", genre["mood"]))
     if brand.get("end_card", True):
         note = "Sources are listed in the description" if genre.get("true_story") else ""
@@ -76,7 +84,7 @@ def main() -> int:
     music = assemble.music_bed(music_plan, work, cfg, genre["name"])
     final = work / f"{story['id']}.mp4"
     assemble.final_video(clips, music, subs, work, cfg, final)
-    thumb = branding.thumbnail(story["title"], scene_imgs[story["scenes"][0]["id"]], work / "thumbnail.jpg")
+    thumb = branding.thumbnail(tcfg.get("text") or story["title"], thumb_img, work / "thumbnail.jpg")
     log(f"   video: {final}  ({t / 60:.1f} min)")
 
     log("6/6 publish")

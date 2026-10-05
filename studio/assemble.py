@@ -25,8 +25,12 @@ def _find_audio(folder: Path, name: str) -> Path | None:
     return files[0] if files else None
 
 
-def scene_clip(scene: dict, image: Path, lines: list, work: Path, cfg: dict, subs: list, t0: float,
-               grade: str = "eq=saturation=0.75:contrast=1.08:brightness=-0.03") -> Path:
+SHOT_MOTIONS = ["zoom_in", "pan_right", "zoom_out", "pan_left", "drift_up", "zoom_in_fast"]
+
+
+def scene_clip(scene: dict, images: list, lines: list, work: Path, cfg: dict, subs: list, t0: float,
+               grade: str = "eq=saturation=0.75:contrast=1.08:brightness=-0.03",
+               shots: list | None = None) -> Path:
     v = cfg["video"]
     w, h, fps = v["width"], v["height"], v["fps"]
     gap, pad = v["line_gap_sec"], v["scene_padding_sec"]
@@ -57,18 +61,36 @@ def scene_clip(scene: dict, image: Path, lines: list, work: Path, cfg: dict, sub
     else:
         fc += ";[voice]anull[aout]"
 
-    # 2) video: Ken Burns motion on the still + horror grade (vignette, grain, slight desaturation)
-    frames = int(total * fps)
-    z, x, y = MOTIONS.get(scene.get("motion", "zoom_in"), MOTIONS["zoom_in"])
-    z, x, y = (e.replace("F", str(frames)) for e in (z, x, y))
-    img_idx = len(inputs) // 2
-    inputs += ["-i", str(image)]
-    fc += (
-        f";[{img_idx}:v]scale={w * 2}:-2,zoompan=z='{z}':x='{x}':y='{y}':d={frames}:s={w}x{h}:fps={fps},"
-        f"{grade},vignette=PI/4.5,noise=alls=7:allf=t,"
-        f"fade=t=in:st=0:d=0.5,fade=t=out:st={max(0, total - 0.5):.2f}:d=0.5,format=yuv420p[vout]"
-    )
+    # 2) video: one image per shot, each with its own camera move, hard-cut together, then graded
+    if isinstance(images, (str, Path)):
+        images, shots = [images], None
+    durs = []
+    if shots and len(shots) == len(images):
+        line_len = [secs + gap for (_, secs, _) in lines]
+        for sh in shots:
+            durs.append(line_len[sh["line"]] / sh["parts"])
+        durs[0] += 0.6                       # breath before the first line
+        durs[-1] += pad                      # tail of the scene
+    else:
+        durs = [total / len(images)] * len(images)
+    frames_each = [max(1, round(d * fps)) for d in durs]
+    frames_total = sum(frames_each)
+    first_motion = scene.get("motion")
+    for j, (img, fr) in enumerate(zip(images, frames_each)):
+        name = first_motion if (j == 0 and first_motion) else SHOT_MOTIONS[j % len(SHOT_MOTIONS)]
+        z, x, y = MOTIONS.get(name, MOTIONS["zoom_in"])
+        z, x, y = (e.replace("F", str(fr)) for e in (z, x, y))
+        idx = len(inputs) // 2
+        inputs += ["-i", str(img)]
+        fc += (f";[{idx}:v]scale={w * 2}:-2,zoompan=z='{z}':x='{x}':y='{y}':d={fr}:s={w}x{h}:fps={fps},"
+               f"setsar=1[s{j}]")
+    n_img = len(images)
+    total = frames_total / fps
+    fc += (";" + "".join(f"[s{j}]" for j in range(n_img)) + f"concat=n={n_img}:v=1:a=0[vc];"
+           f"[vc]{grade},vignette=PI/4.5,noise=alls=7:allf=t,"
+           f"fade=t=in:st=0:d=0.4,fade=t=out:st={max(0, total - 0.4):.2f}:d=0.4,format=yuv420p[vout]")
 
+    fc = fc.replace(f"apad=whole_dur={t + pad:.2f}[voice]", f"apad=whole_dur={total + 1:.2f}[voice]")
     run(["ffmpeg", "-y", *inputs, "-filter_complex", fc, "-map", "[vout]", "-map", "[aout]",
          "-t", f"{total:.2f}", "-c:v", "libx264", "-preset", "medium", "-crf", "21",
          "-c:a", "aac", "-b:a", "160k", "-ar", "44100", "-ac", "2", str(out)])

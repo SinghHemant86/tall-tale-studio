@@ -149,3 +149,77 @@ def scene_images(bible: dict, work: Path, cfg: dict, style: str = "") -> dict[st
         # render a bit larger than the frame so the Ken Burns motion has room to move
         out[s["id"]] = render(prompt, d / f"{s['id']}.png", cfg, seed, int(w * 1.25), int(h * 1.25), style)
     return out
+
+
+# Camera vocabulary used to vary consecutive shots (never two identical framings in a row).
+SHOT_TYPES = [
+    "wide establishing shot of {setting}",
+    "medium shot inside {setting}",
+    "detail close-up of an object in {setting}",
+    "low angle shot looking up, {setting}",
+    "over-the-shoulder shot, {setting}",
+    "high angle shot looking down, {setting}",
+]
+
+
+def plan_shots(bible: dict, line_durs: dict, cfg: dict) -> dict[str, list[dict]]:
+    """Split every scene into shots of at most `max_shot_sec`, one camera framing each.
+
+    Returns {scene_id: [{"prompt", "line", "part", "parts"}...]} in order.
+    A line may carry its own "shot" (string or list) to override the generated framing.
+    """
+    import math
+    v = cfg["video"]
+    max_shot = float(v.get("max_shot_sec", 3.5))
+    budget = int(cfg["images"].get("max_images", 110))
+    chars = {c["id"]: c for c in bible["characters"]}
+
+    def count(ms):
+        return sum(max(1, math.ceil(d / ms)) for sid in line_durs for d in line_durs[sid])
+
+    while count(max_shot) > budget:          # stay inside the free daily image allowance
+        max_shot += 0.5
+    plan = {}
+    for s in bible["scenes"]:
+        present = [chars[c] for c in s.get("characters", [])]
+        who = "; ".join("a faceless silhouette of a person, seen from behind" if c.get("real") else c["look"]
+                        for c in present)
+        base = s.get("image_prompt") or s["setting"]
+        shots, cycle = [], 0
+        for k, (ln, dur) in enumerate(zip(s["lines"], line_durs[s["id"]])):
+            parts = max(1, math.ceil(dur / max_shot))
+            custom = ln.get("shot")
+            custom = [custom] if isinstance(custom, str) else (custom or [])
+            spk = chars.get(ln["speaker"])
+            for j in range(parts):
+                if j < len(custom):
+                    prompt = f"{custom[j]}, {base}"
+                elif spk and j == 0:
+                    face = "a faceless silhouette of a person" if spk.get("real") else spk["look"]
+                    prompt = f"cinematic close-up of {face}, speaking, in {base}"
+                elif not shots:
+                    prompt = SHOT_TYPES[0].format(setting=base) + (f", featuring {who}" if who else "")
+                else:
+                    cycle = cycle % (len(SHOT_TYPES) - 1) + 1
+                    prompt = SHOT_TYPES[cycle].format(setting=base)
+                    if who and cycle in (1, 4):
+                        prompt += f", featuring {who}"
+                shots.append({"prompt": prompt, "line": k, "part": j, "parts": parts})
+        plan[s["id"]] = shots
+    total = sum(len(v) for v in plan.values())
+    log(f"  shot plan: {total} shots, max {max_shot:.1f}s each")
+    return plan
+
+
+def shot_images(plan: dict, work: Path, cfg: dict, style: str = "") -> dict[str, list[Path]]:
+    d = work / "shots"
+    d.mkdir(parents=True, exist_ok=True)
+    w, h = cfg["video"]["width"], cfg["video"]["height"]
+    out = {}
+    for sid, shots in plan.items():
+        out[sid] = []
+        for i, sh in enumerate(shots):
+            log(f"  shot image: {sid} #{i + 1}/{len(shots)}")
+            out[sid].append(render(sh["prompt"], d / f"{sid}_{i:02d}.png", cfg,
+                                   abs(hash((sid, i))) % 100000, int(w * 1.25), int(h * 1.25), style))
+    return out

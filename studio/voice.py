@@ -25,6 +25,24 @@ def _placeholder(text: str, out: Path) -> None:
          "-af", "volume=0.15", str(out)])
 
 
+import re
+
+DEVANAGARI = re.compile(r"[\u0900-\u097F]")
+# English voice -> matching Hindi voice when a line is written in Hindi (Devanagari)
+HINDI_TWIN = {"en-IN-PrabhatNeural": "hi-IN-MadhurNeural", "en-IN-NeerjaNeural": "hi-IN-SwaraNeural"}
+
+
+def voice_for_text(voice: str, text: str) -> str:
+    """Hindi lines must be spoken by a Hindi voice, English lines by an English one."""
+    is_hindi = bool(DEVANAGARI.search(text))
+    if is_hindi and not voice.startswith("hi-"):
+        return HINDI_TWIN.get(voice, "hi-IN-MadhurNeural" if "Prabhat" in voice or "Male" in voice else "hi-IN-SwaraNeural")
+    if not is_hindi and voice.startswith("hi-"):
+        rev = {v: k for k, v in HINDI_TWIN.items()}
+        return rev.get(voice, voice)       # Hindi voices read Roman-script English reasonably; keep if unknown
+    return voice
+
+
 def speak_all(bible: dict, work: Path, cfg: dict, genre: dict | None = None) -> dict[str, list[tuple[Path, float, str]]]:
     """Returns {scene_id: [(audio_path, seconds, text), ...]}."""
     vcfg = cfg["voice"]
@@ -45,7 +63,8 @@ def speak_all(bible: dict, work: Path, cfg: dict, genre: dict | None = None) -> 
                 else:
                     c = chars[ln["speaker"]]
                     voice, rate, pitch = c["voice"], c.get("rate", "+0%"), c.get("pitch", "+0Hz")
-                log(f"  voice: {s['id']} line {j} ({ln['speaker']})")
+                voice = voice_for_text(voice, ln["text"])
+                log(f"  voice: {s['id']} line {j} ({ln['speaker']}, {voice})")
                 if vcfg["engine"] == "edge":
                     _edge(ln["text"], voice, rate, pitch, out)
                 else:
