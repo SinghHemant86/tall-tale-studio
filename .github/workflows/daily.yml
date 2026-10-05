@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   render:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
@@ -65,7 +65,18 @@ jobs:
         run: |
           ARGS=""
           if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.upload }}" = "false" ]; then ARGS="--no-upload"; fi
-          python run.py ${{ inputs.story }} $ARGS
+          set -o pipefail
+          python -u run.py ${{ inputs.story }} $ARGS 2>&1 | tee render.log
+
+      - name: Show the error
+        if: failure() && steps.q.outputs.empty != 'true'
+        run: |
+          echo "## Render failed - last lines of the log" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          tail -n 40 render.log >> "$GITHUB_STEP_SUMMARY" || true
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          MSG=$(tail -n 15 render.log 2>/dev/null | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')
+          echo "::error title=Render failed::${MSG}"
 
       - name: Keep the video for 14 days (download from the run page)
         if: steps.q.outputs.empty != 'true' && always()
