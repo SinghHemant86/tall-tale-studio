@@ -60,7 +60,7 @@ def _cloudflare(prompt: str, out: Path, w: int, h: int, seed: int) -> None:
 
     def fetch():
         r = requests.post(url, headers={"Authorization": f"Bearer {token}"},
-                          json={"prompt": prompt[:2000], "steps": 6, "seed": seed % 2_147_483_647},
+                          json={"prompt": prompt[:2000], "steps": 6},  # this model rejects "seed"
                           timeout=180)
         if r.status_code == 429:
             raise RuntimeError("Cloudflare rate limit (429)")
