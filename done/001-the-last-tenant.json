@@ -93,5 +93,14 @@
       "pune",
       "hindi horror"
     ]
+  },
+  "result": {
+    "video": "output/001-the-last-tenant/001-the-last-tenant.mp4",
+    "seconds": 60.0,
+    "youtube_id": "UO_Xl5TyFv4",
+    "portraits": [
+      "output/001-the-last-tenant/characters/raghav.png",
+      "output/001-the-last-tenant/characters/voice_4b.png"
+    ]
   }
 }
