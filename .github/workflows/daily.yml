@@ -12,6 +12,11 @@ on:
         description: "Upload to YouTube?"
         type: boolean
         default: true
+      image_engine:
+        description: "Image engine (placeholder = test without AI images)"
+        type: choice
+        options: [cloudflare, placeholder]
+        default: cloudflare
 
 permissions:
   contents: write           # lets the run move the story from queue/ to done/
@@ -61,6 +66,7 @@ jobs:
           POLLINATIONS_TOKEN: ${{ secrets.POLLINATIONS_TOKEN }}
           CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          IMAGE_ENGINE: ${{ inputs.image_engine }}
           YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
           YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
           YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}

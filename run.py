@@ -7,6 +7,7 @@
 """
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -23,6 +24,8 @@ def main() -> int:
     args = ap.parse_args()
 
     cfg = load_config()
+    if os.environ.get("IMAGE_ENGINE"):
+        cfg["images"]["engine"] = os.environ["IMAGE_ENGINE"]
     if args.offline:
         cfg["images"]["engine"] = "placeholder"
         cfg["voice"]["engine"] = "placeholder"
