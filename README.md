@@ -14,7 +14,7 @@ YouTube video every day, laptop off. Total cost: ₹0.
 |---|---|
 | Story, characters, dialogue | Claude, in chat — you decide, then "lock it" |
 | Images | Cloudflare Workers AI (FLUX.1 schnell, free 10k neurons/day), fixed seed per character |
-| Voices | Edge-TTS (Microsoft neural voices, Hindi + Indian English) |
+| Voices | ElevenLabs (your subscription; Hindi + English, natural acting), falls back to free Edge-TTS |
 | Motion | ffmpeg zoom/pan, vignette, film grain, fades |
 | Music / SFX | Your Pixabay downloads in `music/` and `sfx/`, auto-ducked under voices |
 | Titles, descriptions | Free LLMs with fallback: OpenRouter → Gemini → Groq |
@@ -40,6 +40,7 @@ Each run's video, thumbnail and character portraits are also downloadable from t
    - `OPENROUTER_API_KEY` — openrouter.ai (no card needed)
    - `GEMINI_API_KEY` — aistudio.google.com (optional fallback)
    - `GROQ_API_KEY` — console.groq.com (optional fallback)
+   - `ELEVENLABS_API_KEY` — elevenlabs.io → Developers → API keys (Text to Speech + User read)
    - `CF_ACCOUNT_ID` and `CF_API_TOKEN` — Cloudflare (free): images. Token template "Workers AI"
 3. **YouTube upload**: follow the steps at the top of `scripts/get_youtube_token.py`, run it once on
    your laptop, and add `YT_CLIENT_ID`, `YT_CLIENT_SECRET`, `YT_REFRESH_TOKEN` as secrets.

@@ -24,3 +24,11 @@ story that breaks them.
 
 ## True incidents
 - `"sources"` with links is required; real people get `"real": true` (faceless only).
+
+## Voices (ElevenLabs)
+- Narrator voice ID lives in `config.yaml` (`voice.elevenlabs.narrator`); a story may override with
+  `"narrator_eleven"`.
+- Each character can set `"eleven_voice": "<voice id>"` and optional `"eleven_settings"`
+  (`stability` lower = more emotional, `style` higher = more dramatic). `"gender"` picks the default.
+- If the month's ElevenLabs characters can't cover the whole story, the story uses the free voices
+  instead (never a mix inside one video).

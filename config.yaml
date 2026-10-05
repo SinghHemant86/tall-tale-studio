@@ -18,7 +18,13 @@ images:
   negative: "text, watermark, logo, cartoon, bright colors, smiling"
 
 voice:
-  engine: edge                  # edge | placeholder
+  engine: elevenlabs            # elevenlabs (needs ELEVENLABS_API_KEY; falls back to edge) | edge | placeholder
+  elevenlabs:
+    model: eleven_multilingual_v2      # handles Hindi + English; try eleven_v3 for more acting
+    narrator: JBFqnCBsd6RMkjVDRZzb     # placeholder (George). Replace with your chosen narrator's voice ID
+    default_male: JBFqnCBsd6RMkjVDRZzb
+    default_female: XB0fDUnXU5powFXDhCwa
+    voice_settings: {stability: 0.45, similarity_boost: 0.8, style: 0.35}
   narrator: en-IN-PrabhatNeural # channel narrator (a story can set "narrator_voice")
   # narrator speed/pitch below are fallbacks; each genre sets its own
   narrator_rate: "-8%"
