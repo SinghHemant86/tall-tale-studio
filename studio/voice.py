@@ -139,7 +139,10 @@ def speak_all(bible: dict, work: Path, cfg: dict, genre: dict | None = None) -> 
                         settings = None
                     else:
                         c = chars[ln["speaker"]]
-                        vid = c.get("eleven_voice") or ecfg.get("default_" + c.get("gender", "male"), ecfg["narrator"])
+                        cast = ecfg.get("cast") or {}
+                        vid = (c.get("eleven_voice")
+                               or cast.get(c.get("role", ""))
+                               or ecfg.get("default_" + c.get("gender", "male"), ecfg["narrator"]))
                         settings = c.get("eleven_settings")
                     log(f"    elevenlabs voice {vid}")
                     _eleven(ln["text"], vid, out, ecfg, settings)

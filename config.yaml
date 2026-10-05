@@ -27,6 +27,15 @@ voice:
     narrator: JBFqnCBsd6RMkjVDRZzb     # placeholder (George). Replace with your chosen narrator's voice ID
     default_male: JBFqnCBsd6RMkjVDRZzb
     default_female: XB0fDUnXU5powFXDhCwa
+    cast:                              # reusable character voices; a character sets "role": "<name>"
+      old_man: ""                      # fill with ElevenLabs voice IDs (empty = default_male/female)
+      young_man: ""
+      woman: ""
+      young_woman: ""
+      child: ""
+      ghost: ""                        # breathy / eerie
+      villain: ""                      # cold, menacing
+      officer: ""                      # police / official, for true incidents
     voice_settings: {stability: 0.45, similarity_boost: 0.8, style: 0.35}
   narrator: en-IN-PrabhatNeural # channel narrator (a story can set "narrator_voice")
   # narrator speed/pitch below are fallbacks; each genre sets its own

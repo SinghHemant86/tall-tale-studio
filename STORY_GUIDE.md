@@ -28,7 +28,9 @@ story that breaks them.
 ## Voices (ElevenLabs)
 - Narrator voice ID lives in `config.yaml` (`voice.elevenlabs.narrator`); a story may override with
   `"narrator_eleven"`.
-- Each character can set `"eleven_voice": "<voice id>"` and optional `"eleven_settings"`
+- Each character gets a `"role"` from the cast in `config.yaml` (old_man, young_man, woman,
+  young_woman, child, ghost, villain, officer), or a specific `"eleven_voice": "<voice id>"`,
+  plus optional `"eleven_settings"`
   (`stability` lower = more emotional, `style` higher = more dramatic). `"gender"` picks the default.
 - If the month's ElevenLabs characters can't cover the whole story, the story uses the free voices
   instead (never a mix inside one video).
