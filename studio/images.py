@@ -64,7 +64,8 @@ def _cloudflare(prompt: str, out: Path, w: int, h: int, seed: int) -> None:
                           timeout=180)
         if r.status_code == 429:
             raise RuntimeError("Cloudflare rate limit (429)")
-        r.raise_for_status()
+        if r.status_code >= 400:
+            raise RuntimeError(f"Cloudflare HTTP {r.status_code}: {r.text[:400]}")
         if r.headers.get("content-type", "").startswith("image"):
             data = r.content
         else:
