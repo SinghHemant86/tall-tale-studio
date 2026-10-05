@@ -34,23 +34,34 @@ def _eleven(text: str, voice_id: str, out: Path, ecfg: dict, settings: dict | No
     retry(fetch)
 
 
-def eleven_available(bible: dict, ecfg: dict) -> bool:
-    """True if a key is set and the month's remaining characters cover this whole story.
-    Checking up front keeps one consistent voice set per video (no mid-story switch to Edge)."""
+def eleven_model_for(bible: dict, ecfg: dict) -> str | None:
+    """Pick the best ElevenLabs model the remaining credits can pay for, for the WHOLE story.
+
+    Order comes from config `models` (best first) with their credit cost per character.
+    Keeps `reserve` credits untouched. Returns None -> use the free voices instead.
+    Deciding up front keeps one consistent voice set per video (no mid-story switch)."""
     key = os.environ.get("ELEVENLABS_API_KEY", "").strip()
     if not key:
-        return False
-    need = sum(len(ln["text"]) for s in bible["scenes"] for ln in s["lines"])
+        return None
+    chars = sum(len(ln["text"]) for s in bible["scenes"] for ln in s["lines"])
+    models = ecfg.get("models") or {ecfg.get("model", "eleven_multilingual_v2"): 1.0}
+    reserve = int(ecfg.get("reserve", 0))
     try:
         r = requests.get(f"{ELEVEN}/user/subscription", headers={"xi-api-key": key}, timeout=30)
         r.raise_for_status()
         sub = r.json()
-        left = sub["character_limit"] - sub["character_count"]
-        log(f"  elevenlabs: {left:,} characters left this month, story needs {need:,}")
-        return left >= need * 1.05
+        left = sub["character_limit"] - sub["character_count"] - reserve
     except Exception as e:  # noqa: BLE001
-        log(f"  elevenlabs: could not check quota ({e!s:.120}); trying anyway")
-        return True
+        log(f"  elevenlabs: could not read balance ({e!s:.120}); using {next(iter(models))}")
+        return next(iter(models))
+    for model, cost in models.items():
+        need = int(chars * float(cost) * 1.05)
+        if left >= need:
+            log(f"  elevenlabs: {left:,} credits usable (after {reserve:,} reserve); "
+                f"{model} needs ~{need:,} -> using it")
+            return model
+    log(f"  elevenlabs: only {left:,} usable credits, story needs more than any model allows")
+    return None
 
 
 def _edge(text: str, voice: str, rate: str, pitch: str, out: Path) -> None:
@@ -92,9 +103,17 @@ def speak_all(bible: dict, work: Path, cfg: dict, genre: dict | None = None) -> 
     vcfg = cfg["voice"]
     ecfg = vcfg.get("elevenlabs") or {}
     engine = vcfg["engine"]
-    if engine == "elevenlabs" and not eleven_available(bible, ecfg):
-        log("  elevenlabs not available for this story -> using free Edge voices")
-        engine = "edge"
+    already = all((work / "voice" / f"{s['id']}_{j:02d}.mp3").exists()
+                  for s in bible["scenes"] for j in range(len(s["lines"])))
+    if engine == "elevenlabs" and not already:
+        model = eleven_model_for(bible, ecfg)
+        if model is None:
+            log("  elevenlabs not available for this story -> using free Edge voices")
+            engine = "edge"
+        else:
+            ecfg = {**ecfg, "model": model}
+    elif already:
+        log("  voices already made for this story (reusing, no credits spent)")
     chars = {c["id"]: c for c in bible["characters"]}
     d = work / "voice"
     d.mkdir(parents=True, exist_ok=True)

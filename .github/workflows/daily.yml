@@ -53,6 +53,17 @@ jobs:
           python-version: "3.12"
           cache: pip
 
+      - name: Reuse voices/images from an earlier attempt at the same story (no credits spent twice)
+        if: steps.q.outputs.empty != 'true'
+        uses: actions/cache@v4
+        with:
+          path: |
+            output/*/voice
+            output/*/shots
+            output/*/thumbnail_base.png
+          key: render-${{ hashFiles('queue/*.json') }}-${{ github.run_id }}
+          restore-keys: render-${{ hashFiles('queue/*.json') }}-
+
       - name: Install Python packages
         if: steps.q.outputs.empty != 'true'
         run: pip install -r requirements.txt

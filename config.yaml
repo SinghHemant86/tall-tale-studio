@@ -20,7 +20,10 @@ images:
 voice:
   engine: elevenlabs            # elevenlabs (needs ELEVENLABS_API_KEY; falls back to edge) | edge | placeholder
   elevenlabs:
-    model: eleven_multilingual_v2      # handles Hindi + English; try eleven_v3 for more acting
+    models:                            # best first, with credit cost per character
+      eleven_multilingual_v2: 1.0      # most expressive; Hindi + English
+      eleven_flash_v2_5: 0.5           # used automatically when credits run low
+    reserve: 5000                      # credits never spent by the daily run
     narrator: JBFqnCBsd6RMkjVDRZzb     # placeholder (George). Replace with your chosen narrator's voice ID
     default_male: JBFqnCBsd6RMkjVDRZzb
     default_female: XB0fDUnXU5powFXDhCwa
