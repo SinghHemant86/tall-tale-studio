@@ -34,7 +34,7 @@ voice:
       woman: ""
       young_woman: ""
       child: ""
-      ghost: ""                        # breathy / eerie
+      ghost: mrqRjBf64FNHRBZ9tPdQ      # Anushri - creepy, intimate horror voice
       villain: ""                      # cold, menacing
       officer: ""                      # police / official, for true incidents
     voice_settings: {stability: 0.45, similarity_boost: 0.8, style: 0.35}
