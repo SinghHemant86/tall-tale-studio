@@ -29,6 +29,7 @@ voice:
     default_female: XB0fDUnXU5powFXDhCwa
     cast:                              # reusable character voices; a character sets "role": "<name>"
       old_man: YWaBwjubozVSPD1RgnRa    # Reyaansh - deep Hindi (other roles empty = default_male/female)
+      friend: 7b9mYhmnp0y2qSH1FnBL     # Bunty - desi best friend, comic timing (comic relief only)
       young_man: ""
       woman: ""
       young_woman: ""
