@@ -102,5 +102,11 @@
     "prompt": "extreme close-up of a sealed wooden door marked 4B with a rusted padlock, a pale hand pressed against frosted glass beside it",
     "text": "1994 से बंद"
   },
-  "logline_hi": "पुणे की एक वीरान चॉल का चौकीदार, तीस साल से सील पड़े कमरे के अंदर से किसी के दरवाज़ा खटखटाने की आवाज़ सुनता है।"
+  "logline_hi": "पुणे की एक वीरान चॉल का चौकीदार, तीस साल से सील पड़े कमरे के अंदर से किसी के दरवाज़ा खटखटाने की आवाज़ सुनता है।",
+  "result": {
+    "video": "output/001d-the-last-tenant-hindi/001d-the-last-tenant-hindi.mp4",
+    "seconds": 52.4,
+    "youtube_id": "aQKcWrqObDM",
+    "portraits": []
+  }
 }
