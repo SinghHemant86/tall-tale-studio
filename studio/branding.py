@@ -15,6 +15,31 @@ GOLD_DIM = (160, 130, 80)
 ASSETS = ROOT / "assets"
 
 
+DEVA_FONTS = [str(ASSETS / "fonts" / "RozhaOne.ttf"),  # dramatic Hindi display face (downloaded in the workflow)
+              "/usr/share/fonts/truetype/noto/NotoSerifDevanagari-Bold.ttf",
+              "/usr/share/fonts/truetype/noto/NotoSansDevanagari-Bold.ttf",
+              "NotoSerifDevanagari-Bold.ttf", "NotoSansDevanagari-Bold.ttf",
+              "/usr/share/fonts/truetype/freefont/FreeSerifBold.ttf"]
+
+
+def _has_deva(text: str) -> bool:
+    return any("\u0900" <= ch <= "\u097F" for ch in text)
+
+
+def _font_for(text: str, size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
+    """Cinzel for English; a Devanagari face for Hindi (Cinzel has no Hindi letters)."""
+    if _has_deva(text):
+        for name in DEVA_FONTS:
+            try:
+                return ImageFont.truetype(name, size, layout_engine=ImageFont.Layout.RAQM)
+            except (OSError, ImportError, KeyError):
+                try:
+                    return ImageFont.truetype(name, size)
+                except OSError:
+                    continue
+    return _font(size, bold)
+
+
 def _font(size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
     # Cinzel (downloaded in the workflow) matches the logo's lettering; fall back to a serif.
     for name in ([str(ASSETS / "fonts" / "Cinzel.ttf")] +
@@ -48,24 +73,26 @@ def _center_text(d: ImageDraw.ImageDraw, w: int, y: int, text: str, font, fill) 
     return y + th
 
 
-def _card_png(kind: str, w: int, h: int, out: Path, text: str = "") -> Path:
+def _card_png(kind: str, w: int, h: int, out: Path, text: str = "", lang: str = "en") -> Path:
+    from .genres import TEXT
+    T = TEXT[lang]
     img = _ground(w, h)
     d = ImageDraw.Draw(img)
     logo = Image.open(ASSETS / "logo.png").convert("RGBA")
     if kind == "intro":
         s = int(h * 0.62)
         img.paste(logo.resize((s, s), Image.LANCZOS), ((w - s) // 2, int(h * 0.12)), logo.resize((s, s)))
-        _center_text(d, w, int(h * 0.80), "A TALL-TALE PRESENTATION", _font(int(h * 0.035)), GOLD_DIM)
+        _center_text(d, w, int(h * 0.80), T["presents"], _font_for(T["presents"], int(h * 0.035)), GOLD_DIM)
     elif kind == "disclaimer":
-        _center_text(d, w, int(h * 0.38), text, _font(int(h * 0.045), bold=False), GOLD)
+        _center_text(d, w, int(h * 0.38), text, _font_for(text, int(h * 0.045), bold=False), GOLD)
     elif kind == "end":
         s = int(h * 0.42)
         img.paste(logo.resize((s, s), Image.LANCZOS), ((w - s) // 2, int(h * 0.08)), logo.resize((s, s)))
-        y = _center_text(d, w, int(h * 0.56), "Thank you for listening", _font(int(h * 0.055)), GOLD)
-        y = _center_text(d, w, y + int(h * 0.04), "Subscribe to Tall-Tale for the next story",
-                         _font(int(h * 0.038), bold=False), GOLD_DIM)
+        y = _center_text(d, w, int(h * 0.56), T["thanks"], _font_for(T["thanks"], int(h * 0.055)), GOLD)
+        y = _center_text(d, w, y + int(h * 0.04), T["subscribe"],
+                         _font_for(T["subscribe"], int(h * 0.038), bold=False), GOLD_DIM)
         if text:
-            _center_text(d, w, y + int(h * 0.05), text, _font(int(h * 0.028), bold=False), GOLD_DIM)
+            _center_text(d, w, y + int(h * 0.05), text, _font_for(text, int(h * 0.028), bold=False), GOLD_DIM)
     img.save(out)
     return out
 
@@ -76,7 +103,7 @@ def card_clip(kind: str, seconds: float, work: Path, cfg: dict, text: str = "") 
     w, h, fps = v["width"], v["height"], v["fps"]
     d = work / "clips"
     d.mkdir(parents=True, exist_ok=True)
-    png = _card_png(kind, w * 2, h * 2, work / f"card_{kind}.png", text)
+    png = _card_png(kind, w * 2, h * 2, work / f"card_{kind}.png", text, cfg.get("story_language", "en"))
     out = d / f"_{kind}.mp4"
     frames = int(seconds * fps)
     run(["ffmpeg", "-y", "-i", str(png), "-f", "lavfi", "-i", f"anullsrc=r=44100:cl=stereo:d={seconds}",
@@ -99,7 +126,7 @@ def thumbnail(title: str, scene_img: Path, out: Path) -> Path:
         sd.line([(0, y), (W, y)], fill=int(235 * max(0, (y - H * 0.35) / (H * 0.65))))
     img = Image.composite(Image.new("RGB", (W, H), NAVY), img, shade)
     d = ImageDraw.Draw(img)
-    font = _font(86)
+    font = _font_for(title, 96 if _has_deva(title) else 86)
     words, lines, cur = title.upper().split(), [], ""
     for wd in words:
         if len(cur) + len(wd) > 18:

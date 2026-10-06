@@ -41,11 +41,13 @@ jobs:
 
       - name: Install ffmpeg + fonts
         if: steps.q.outputs.empty != 'true'
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-core fonts-dejavu-core
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-noto-core fonts-dejavu-core libraqm0 libfribidi0
 
       - name: Channel font (Cinzel, matches the logo)
         if: steps.q.outputs.empty != 'true'
-        run: curl -sSL -o assets/fonts/Cinzel.ttf "https://github.com/google/fonts/raw/main/ofl/cinzel/Cinzel%5Bwght%5D.ttf" || true
+        run: |
+          curl -sSL -o assets/fonts/Cinzel.ttf "https://github.com/google/fonts/raw/main/ofl/cinzel/Cinzel%5Bwght%5D.ttf" || true
+          curl -sSL -o assets/fonts/RozhaOne.ttf "https://github.com/google/fonts/raw/main/ofl/rozhaone/RozhaOne-Regular.ttf" || true
 
       - uses: actions/setup-python@v5
         if: steps.q.outputs.empty != 'true'

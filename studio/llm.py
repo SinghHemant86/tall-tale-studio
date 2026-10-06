@@ -1,5 +1,6 @@
 """Free-tier LLM with fallback across OpenRouter / Gemini / Groq (all OpenAI-compatible)."""
 import os
+import re
 
 import requests
 
@@ -43,20 +44,27 @@ def youtube_metadata(bible: dict) -> dict:
     yt = dict(bible.get("youtube") or {})
     if not yt.get("description"):
         story = " ".join(ln["text"] for s in bible["scenes"] for ln in s["lines"])
+        from .genres import language
+        lang = ("Write it in Hindi, in Devanagari script only (no English words). "
+                if language(bible) == "hi" else "")
         desc = chat(
-            "Write a gripping 3-sentence YouTube description for this horror short. "
+            "Write a gripping 3-sentence YouTube description for this story. " + lang +
             "No spoilers for the ending, no hashtags, no emojis.\n\n"
             f"Title: {bible['title']}\nStory: {story[:3000]}",
             max_tokens=300,
         )
+        if language(bible) == "hi":
+            # must really be Hindi; otherwise use the story's own opening lines
+            if not desc or len(re.findall(r"[A-Za-z]{2,}", desc)) > 2:
+                desc = bible.get("logline_hi") or " ".join(
+                    ln["text"] for s in bible["scenes"] for ln in s["lines"] if ln["speaker"] == "narrator")[:280]
         yt["description"] = desc or bible.get("logline", bible["title"])
-    from .genres import DISCLAIMER, get as genre_of
+    from .genres import get as genre_of, text
     parts = [yt["description"].strip()]
     if genre_of(bible).get("true_story"):
-        parts.append(DISCLAIMER.replace("\n", " "))
-        parts.append("Sources:\n" + "\n".join(f"- {s}" for s in bible.get("sources", [])))
-    parts.append("Tall-Tale: thrillers, dark dramas, horror and true stories, narrated.\n"
-                 "Visuals and voices are AI-generated.")
+        parts.append(text(bible, "disclaimer").replace("\n", " "))
+        parts.append(text(bible, "sources_head") + "\n" + "\n".join(f"- {s}" for s in bible.get("sources", [])))
+    parts.append(text(bible, "footer"))
     yt["description"] = "\n\n".join(parts)
     yt.setdefault("tags", ["tall tale", "story", bible.get("genre", "horror").replace("_", " ")])
     return yt

@@ -4,11 +4,14 @@ Claude follows these when you say **"lock it"**; the render checks the critical 
 story that breaks them.
 
 ## Language
-- Every line is in **one language**. Never say a line and then its translation
-  ("कौन है अंदर? Who is in there?" is wrong).
-- Hindi is written in **Devanagari** (`कौन है अंदर?`), never Roman Hindi (`Kaun hai andar`).
-  Devanagari lines are automatically spoken by a Hindi voice, English lines by an English one.
-- Story `language`: `en`, `hi`, or `hinglish` (mix allowed **between** lines, never inside one).
+- **The channel is Hindi.** Default `language` is `hi`: every spoken line, the title, the thumbnail
+  text, the cards and the description are in Hindi, written in **Devanagari**. No English line at all.
+- Names and everyday English loanwords are also written in Devanagari (राघव, मानसून, सील, मोबाइल).
+  The render rejects any Hindi story line containing Roman letters (digits like 1994 or 4-बी are fine).
+- Never Roman Hindi (`Kaun hai andar`), never a line followed by its translation.
+- Only image prompts (`setting`, `look`, `thumbnail.prompt`) stay in English; nobody sees them.
+- Give a Hindi `logline_hi` (one or two sentences, no spoilers): it becomes the YouTube description if the free LLM is unavailable.
+- An English-only story is possible with `"language": "en"` (then no Hindi lines).
 
 ## Pacing
 - One idea per line; aim for 8–20 words. Lines over 40 words are rejected.

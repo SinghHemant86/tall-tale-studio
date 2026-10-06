@@ -145,7 +145,8 @@ def final_video(clips: list[Path], music: Path, subs: list, work: Path, cfg: dic
             if mcfg.get("duck", True) else "[m]anull[md]")
     vf = "[0:v]null[v]"
     if cfg["video"].get("subtitles", True):
-        font = cfg["video"].get("subtitle_font", "Noto Sans")
+        font = cfg["video"].get("subtitle_font_hi" if cfg.get("story_language") == "hi" else "subtitle_font",
+                                "Noto Sans")
         style = (f"FontName={font},FontSize=20,PrimaryColour=&H00E6E6E6,OutlineColour=&H00000000,"
                  "BorderStyle=1,Outline=2,Shadow=0,MarginV=40")
         vf = f"[0:v]subtitles='{srt.as_posix()}':force_style='{style}'[v]"

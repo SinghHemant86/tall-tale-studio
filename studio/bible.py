@@ -26,9 +26,18 @@ def validate(b: dict) -> dict:
     import re
     dev = re.compile(r"[\u0900-\u097F]")
     latin_words = re.compile(r"[A-Za-z]{2,}")
+    from .genres import language
+    hindi = language(b) == "hi"
+    if hindi:
+        for what, val in (("title", b["title"]), ("thumbnail text", (b.get("thumbnail") or {}).get("text", ""))):
+            if latin_words.search(val):
+                raise BibleError(f"Hindi story: {what} must be in Devanagari, no English (\"{val}\")")
     for s in b["scenes"]:
         for ln in s["lines"]:
             txt = ln["text"]
+            if hindi and latin_words.search(txt):
+                raise BibleError(f"scene {s['id']}: Hindi story, but this line has English/Roman letters "
+                                 f"(\"{txt[:60]}\"). Write every line in Devanagari (names and loanwords too).")
             if dev.search(txt) and len(latin_words.findall(txt)) >= 3:
                 raise BibleError(f"scene {s['id']}: line mixes Hindi and English (\"{txt[:60]}\"). "
                                  "Write each line in ONE language and never repeat it as a translation.")

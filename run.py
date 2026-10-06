@@ -40,6 +40,7 @@ def main() -> int:
     story = bib.load(path)
     genre = genres.get(story)
     brand = cfg.get("branding", {})
+    cfg["story_language"] = genres.language(story)
     work = ROOT / "output" / story["id"]
     work.mkdir(parents=True, exist_ok=True)
     log(f"Story: {story['title']}  ({genre['name']}, {len(story['scenes'])} scenes)")
@@ -71,13 +72,13 @@ def main() -> int:
     if brand.get("intro", True):
         add(branding.card_clip("intro", brand.get("intro_sec", 4.0), work, cfg), "intro")
     if genre.get("true_story"):
-        add(branding.card_clip("disclaimer", 5.0, work, cfg, genres.DISCLAIMER), genre["mood"])
+        add(branding.card_clip("disclaimer", 5.0, work, cfg, genres.text(story, "disclaimer")), genre["mood"])
     for s in story["scenes"]:
         clip = assemble.scene_clip(s, shot_imgs[s["id"]], lines[s["id"]], work, cfg, subs, t, genre["grade"],
                                    shots=plan[s["id"]])
         add(clip, s.get("mood", genre["mood"]))
     if brand.get("end_card", True):
-        note = "Sources are listed in the description" if genre.get("true_story") else ""
+        note = genres.text(story, "sources") if genre.get("true_story") else ""
         add(branding.card_clip("end", brand.get("end_sec", 7.0), work, cfg, note), "outro")
 
     log("5/6 music + final mix")

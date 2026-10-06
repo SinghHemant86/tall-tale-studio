@@ -44,6 +44,30 @@ GENRES = {
 
 DEFAULT = "horror"
 DISCLAIMER = "Based on true events.\nSome scenes are dramatised and some names have been changed."
+DISCLAIMER_HI = "सच्ची घटनाओं पर आधारित।\nकुछ दृश्य नाटकीय रूप में दिखाए गए हैं और कुछ नाम बदल दिए गए हैं।"
+
+# fixed on-screen / description text per language
+TEXT = {
+    "en": {"disclaimer": DISCLAIMER, "presents": "A TALL-TALE PRESENTATION", "thanks": "Thank you for listening",
+           "subscribe": "Subscribe to Tall-Tale for the next story", "sources": "Sources are listed in the description",
+           "sources_head": "Sources:",
+           "footer": "Tall-Tale: thrillers, dark dramas, horror and true stories, narrated.\nVisuals and voices are AI-generated."},
+    "hi": {"disclaimer": DISCLAIMER_HI, "presents": "एक टॉल-टेल प्रस्तुति", "thanks": "सुनने के लिए धन्यवाद",
+           "subscribe": "अगली कहानी के लिए टॉल-टेल को सब्सक्राइब करें", "sources": "स्रोत विवरण में दिए गए हैं",
+           "sources_head": "स्रोत:",
+           "footer": "टॉल-टेल: थ्रिलर, डार्क ड्रामा, हॉरर और सच्ची घटनाओं की कहानियाँ।\nदृश्य और आवाज़ें AI से बनाई गई हैं।"},
+}
+
+
+def language(bible: dict) -> str:
+    """'hi' (channel default) or 'en'. 'hinglish' is no longer used: a story is all Hindi or all English."""
+    from .common import load_config
+    lang = bible.get("language") or load_config().get("language", "hi")
+    return "en" if lang == "en" else "hi"
+
+
+def text(bible: dict, key: str) -> str:
+    return TEXT[language(bible)][key]
 
 
 def get(bible: dict) -> dict:
