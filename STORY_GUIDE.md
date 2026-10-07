@@ -53,3 +53,15 @@ story that breaks them.
   close-ups and hands included.
 - A ghost who is sad, gentle, or not yet revealed looks ordinary or simply pale; a story can stay
   quiet and real-looking and let the narration do the work. Decide per character, per scene.
+
+## Real people and real cases
+- Report, never conclude. State the official position first and clearly (court, police, CBI), then any
+  claims, labelled as claims with who made them ("the family alleged", "a staff member told a news
+  channel"). No verdict of our own.
+- Never name or hint at a living person as guilty of anything a court has not convicted them of,
+  even "as per reports" (repeating an accusation is still the accusation).
+- No private or medical details beyond what official records made public; no body or surgery talk.
+- Sources: official records and established news outlets only, listed in the description.
+- Title and thumbnail ask questions, they do not answer them ("What the CBI found, and what is still
+  asked"), never "MURDER EXPOSED". Real people stay faceless or stylised, never photo-real.
+- Expect limited ads on real deaths; that is the price of the topic.
