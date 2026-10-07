@@ -48,6 +48,8 @@ story that breaks them.
   instead (never a mix inside one video).
 
 ## Look
-- Hands are welcome, close-ups included. For ghosts and other supernatural characters, write the
-  wrongness into the `look`: long, bony, twisted or too-many-jointed fingers, grey skin, cracked
-  nails. Living humans get normal hands.
+- Scariness follows the story, not a rule. A ghost who should be frightening in that moment gets
+  the wrongness written into the `look` (long, bony, twisted fingers, grey skin, cracked nails),
+  close-ups and hands included.
+- A ghost who is sad, gentle, or not yet revealed looks ordinary or simply pale; a story can stay
+  quiet and real-looking and let the narration do the work. Decide per character, per scene.
