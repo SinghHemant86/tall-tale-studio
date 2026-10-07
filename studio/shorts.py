@@ -164,7 +164,7 @@ def render(win: dict, story: dict, scene_times: dict, subs: list, work: Path, cf
     flashes = "+".join(f"between(t,{c:.2f},{c + 0.07:.2f})" for j, c in enumerate(cuts) if j % 3 == 1) or "0"
     fc.append("".join(f"[p{i}]" for i in range(k)) + f"concat=n={k}:v=1:a=0,{grade},"
               f"drawbox=x=0:y=0:w=iw:h=ih:color=white@0.85:t=fill:enable='{flashes}',"
-              f"vignette=PI/4,noise=alls=8:allf=t[sq]")
+              f"vignette=PI/4,noise=alls=4:allf=t[sq]")
     fc.append("[sq]split=2[s1][s2]")
     fc.append(f"[s1]scale={H}:{H},crop={W}:{H},boxblur=30:2,eq=brightness=-0.18:saturation=0.7[bg]")
     fc.append(f"[bg][s2]overlay=0:{SQ_Y}[v1]")
@@ -179,7 +179,8 @@ def render(win: dict, story: dict, scene_times: dict, subs: list, work: Path, cf
          "-loop", "1", "-i", str(ROOT / "assets" / "logo.png"),
          "-filter_complex", ";".join(fc), "-map", "[v]", "-map", f"{k}:a",
          "-af", f"afade=t=out:st={dur - 1.2:.2f}:d=1.2",
-         "-t", f"{dur:.2f}", "-r", str(FPS), "-c:v", "libx264", "-preset", "medium", "-crf", "21",
+         "-t", f"{dur:.2f}", "-r", str(FPS), "-c:v", "libx264", "-preset", "medium", "-crf", "23", "-maxrate", "8M",
+         "-bufsize", "16M",
          "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", str(out)])
     log(f"  short {win['n']}: {dur:.0f}s, {k} pictures -> {out.name}")
     return out
