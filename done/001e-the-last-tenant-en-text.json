@@ -111,5 +111,11 @@
   "thumbnail": {
     "prompt": "extreme close-up of a sealed wooden door marked 4B with a rusted padlock, a pale hand pressed against frosted glass beside it",
     "text": "कौन है अंदर?"
+  },
+  "result": {
+    "video": "output/001e-the-last-tenant-en-text/001e-the-last-tenant-en-text.mp4",
+    "seconds": 51.5,
+    "youtube_id": "o9Q0R-avV0g",
+    "portraits": []
   }
 }
