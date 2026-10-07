@@ -9,7 +9,9 @@ from pathlib import Path
 from .common import log
 
 
-def upload(video: Path, thumb: Path | None, title: str, meta: dict, cfg: dict) -> str | None:
+def upload(video: Path, thumb: Path | None, title: str, meta: dict, cfg: dict,
+           publish_at: str | None = None) -> str | None:
+    """Upload; with publish_at (RFC 3339 UTC) the video stays private and goes public at that time."""
     need = ("YT_CLIENT_ID", "YT_CLIENT_SECRET", "YT_REFRESH_TOKEN")
     if not all(os.environ.get(k) for k in need):
         log("  youtube: credentials not set, skipping upload")
@@ -52,6 +54,9 @@ def upload(video: Path, thumb: Path | None, title: str, meta: dict, cfg: dict) -
             "containsSyntheticMedia": True,  # AI-generated visuals/voices must be disclosed
         },
     }
+    if publish_at:
+        body["status"]["privacyStatus"] = "private"   # required for scheduled publishing
+        body["status"]["publishAt"] = publish_at
     req = yt.videos().insert(part="snippet,status", body=body,
                              media_body=MediaFileUpload(str(video), chunksize=8 * 1024 * 1024, resumable=True))
     resp = None
@@ -65,5 +70,6 @@ def upload(video: Path, thumb: Path | None, title: str, meta: dict, cfg: dict) -
             yt.thumbnails().set(videoId=vid, media_body=MediaFileUpload(str(thumb))).execute()
         except Exception as e:  # noqa: BLE001  (custom thumbnails need a verified channel)
             log(f"  youtube: thumbnail not set ({e!s:.100})")
-    log(f"  youtube: uploaded https://youtu.be/{vid} ({body['status']['privacyStatus']})")
+    when = f", goes public {publish_at}" if publish_at else ""
+    log(f"  youtube: uploaded https://youtu.be/{vid} ({body['status']['privacyStatus']}{when})")
     return vid

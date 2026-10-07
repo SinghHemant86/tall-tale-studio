@@ -107,6 +107,7 @@ jobs:
           name: render-${{ github.run_number }}
           path: |
             output/*/*.mp4
+            output/*/shorts/*.mp4
             output/*/thumbnail.jpg
             output/*/youtube.json
             output/*/characters/*.png

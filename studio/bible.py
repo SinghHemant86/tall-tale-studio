@@ -53,6 +53,13 @@ def validate(b: dict) -> dict:
             if len(txt.split()) > 40:
                 raise BibleError(f"scene {s['id']}: line too long ({len(txt.split())} words); split it "
                                  "so the picture can change every few seconds.")
+    scene_ids = {s["id"] for s in b["scenes"]}
+    for i, sh in enumerate(b.get("shorts") or []):
+        bad = [x for x in sh.get("scenes", []) if x not in scene_ids]
+        if not sh.get("scenes") or bad:
+            raise BibleError(f"short {i + 1}: needs 'scenes' from this story (unknown: {bad})")
+        if dev.search(sh.get("title", "")):
+            raise BibleError(f"short {i + 1}: title must be English")
     from .genres import GENRES
     genre = b.get("genre", "horror")
     if genre not in GENRES:

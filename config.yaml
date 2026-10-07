@@ -85,3 +85,14 @@ youtube:
   privacy: private              # private | unlisted | public — keep private and review first
   category_id: "24"             # Entertainment
   made_for_kids: false
+  schedule:                     # publish on a calendar instead of leaving videos private
+    enabled: false              # turn on once the YouTube API audit is approved (see README)
+    timezone: Asia/Kolkata
+    long_days: [mon, fri]
+    long_time: "20:00"
+    short_time: "19:30"         # one Short a day, from the day after the long video
+    min_lead_hours: 6
+
+shorts:
+  enabled: true                 # vertical Shorts/Reels cut from each long video ("shorts" in the story)
+  upload: true                  # also upload them to YouTube (files are always kept for Instagram)

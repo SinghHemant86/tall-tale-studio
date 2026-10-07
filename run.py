@@ -11,7 +11,7 @@ import os
 import sys
 from pathlib import Path
 
-from studio import assemble, bible as bib, branding, genres, images, llm, upload, voice
+from studio import assemble, bible as bib, branding, genres, images, llm, schedule, shorts, upload, voice
 from studio.common import ROOT, load_config, log
 
 
@@ -61,6 +61,7 @@ def main() -> int:
 
     log("4/6 clips")
     clips, music_plan, subs, t = [], [], [], 0.0
+    scene_times = {}
 
     def add(clip: Path, mood: str):
         nonlocal t
@@ -76,7 +77,9 @@ def main() -> int:
     for s in story["scenes"]:
         clip = assemble.scene_clip(s, shot_imgs[s["id"]], lines[s["id"]], work, cfg, subs, t, genre["grade"],
                                    shots=plan[s["id"]])
+        start = t
         add(clip, s.get("mood", genre["mood"]))
+        scene_times[s["id"]] = (start, t)
     if brand.get("end_card", True):
         note = genres.text(story, "sources") if genre.get("true_story") else ""
         add(branding.card_clip("end", brand.get("end_sec", 7.0), work, cfg, note), "outro")
@@ -87,17 +90,41 @@ def main() -> int:
     assemble.final_video(clips, music, subs, work, cfg, final)
     thumb = branding.thumbnail(tcfg.get("text") or story["title"], thumb_img, work / "thumbnail.jpg")
     log(f"   video: {final}  ({t / 60:.1f} min)")
+    short_list = []
+    if cfg.get("shorts", {}).get("enabled", True) and story.get("shorts"):
+        log("   shorts")
+        short_list = shorts.make_all(story, scene_times, subs, work)
 
     log("6/6 publish")
     meta = llm.youtube_metadata(story)
     (work / "youtube.json").write_text(json.dumps({"title": story["title"], **meta}, indent=2, ensure_ascii=False))
-    vid = upload.upload(final, thumb, story["title"], meta, cfg) if cfg["youtube"]["upload"] else None
+    scfg = cfg["youtube"].get("schedule", {})
+    long_slot, short_slots = (schedule.plan(scfg, len(short_list)) if scfg.get("enabled") else (None, []))
+    vid = None
+    if cfg["youtube"]["upload"]:
+        vid = upload.upload(final, thumb, story["title"], meta, cfg,
+                            schedule.rfc3339_utc(long_slot) if long_slot else None)
+    short_ids = []
+    if vid and short_list and cfg.get("shorts", {}).get("upload", True):
+        tags_line = " ".join((meta.get("hashtags") or [])[:3])
+        for k, sh in enumerate(short_list):
+            smeta = {**meta, "description": f"Full story ▶ https://youtu.be/{vid}\n\n{tags_line} #Shorts\n\n"
+                                            "Visuals and voices are AI-generated."}
+            slot = schedule.rfc3339_utc(short_slots[k]) if short_slots else None
+            short_ids.append(upload.upload(sh["file"], None, f"{sh['title'].split('|')[0].strip()[:90]} #Shorts",
+                                           smeta, cfg, slot))
+    if vid and long_slot:
+        schedule.commit(long_slot, short_slots[:len(short_ids)])
 
     # keep a copy of the thumbnail in the repo, so it can be checked without downloading the video
     import shutil
     (bib.DONE / "thumbs").mkdir(parents=True, exist_ok=True)
     shutil.copy(thumb, bib.DONE / "thumbs" / f"{story['id']}.jpg")
     result = {"video": str(final.relative_to(ROOT)), "seconds": round(t, 1), "youtube_id": vid,
+              "publish_at": long_slot.isoformat() if long_slot else None,
+              "shorts": [{"file": str(s["file"].relative_to(ROOT)), "youtube_id": short_ids[i] if i < len(short_ids) else None,
+                          "publish_at": short_slots[i].isoformat() if i < len(short_slots) else None}
+                         for i, s in enumerate(short_list)],
               "portraits": [str(p.relative_to(ROOT)) for p in portraits.values()]}
     if not args.keep_in_queue and path.parent.resolve() == bib.QUEUE.resolve():
         bib.mark_done(path, result)
