@@ -145,7 +145,10 @@ def speak_all(bible: dict, work: Path, cfg: dict, genre: dict | None = None) -> 
                                or ecfg.get("default_" + c.get("gender", "male"), ecfg["narrator"]))
                         settings = c.get("eleven_settings")
                     log(f"    elevenlabs voice {vid}")
-                    _eleven(ln["text"], vid, out, ecfg, settings)
+                    lcfg = ecfg
+                    if ln["speaker"] == "narrator" and ecfg.get("narrator_model"):
+                        lcfg = {**ecfg, "model": ecfg["narrator_model"]}   # cheaper model for narration
+                    _eleven(ln["text"], vid, out, lcfg, settings)
                 elif engine == "edge":
                     _edge(ln["text"], voice, rate, pitch, out)
                 else:

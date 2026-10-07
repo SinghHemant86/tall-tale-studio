@@ -7,6 +7,7 @@ close-ups, eyes, hands, objects), each with a fast push-in or a shake, a white f
 an opening hook shot, captions that pop in three words at a time, and a closing card.
 If the image engine runs out (daily quota), a shot falls back to a frame of the long video.
 """
+import json
 import math
 from pathlib import Path
 
@@ -94,8 +95,38 @@ def _shot_list(win: dict, story: dict, scene_times: dict, dur: float) -> list[di
     return shots
 
 
+def prepare(story: dict, scene_times: dict, subs: list, work: Path, cfg: dict, style: str) -> int:
+    """Plan every Short's pictures and make them (run before the long video is rendered, so the
+    images can be built over several mornings). Raises images.QuotaExhausted when the day's
+    allowance runs out; finished pictures are kept."""
+    made = 0
+    for win in windows(story, scene_times, subs):
+        d = work / "shorts" / f"s{win['n']:02d}"
+        d.mkdir(parents=True, exist_ok=True)
+        plan_file = d / "plan.json"
+        if plan_file.exists():
+            plan = json.loads(plan_file.read_text())
+        else:
+            plan = {"body": win["end"] - win["start"],
+                    "shots": _shot_list(win, story, scene_times, win["end"] - win["start"])}
+            plan_file.write_text(json.dumps(plan, indent=1))
+        for i, sh in enumerate(plan["shots"]):
+            p = d / f"img_{i:02d}.png"
+            if not p.exists():
+                log(f"  short {win['n']} image {i + 1}/{len(plan['shots'])}")
+                images.render(sh["prompt"], p, cfg, 500 + i, SQ, SQ, style)
+            made += 1
+    return made
+
+
+def count(story: dict, scene_times: dict, subs: list) -> int:
+    return sum(max(3, math.ceil((w["end"] - w["start"]) / SHOT_SEC)) for w in windows(story, scene_times, subs))
+
+
 def _picture(shot: dict, i: int, d: Path, cfg: dict, style: str, joined: Path) -> Path:
     p = d / f"img_{i:02d}.png"
+    if p.exists():
+        return p
     try:
         return images.render(shot["prompt"], p, cfg, 500 + i, SQ, SQ, style)
     except Exception as e:  # noqa: BLE001  (quota out: use the long video's own frame)
@@ -144,7 +175,13 @@ def render(win: dict, story: dict, scene_times: dict, subs: list, work: Path, cf
     dur = body + END_SEC
     out = work / "shorts" / f"short_{win['n']:02d}.mp4"
 
-    shots = _shot_list(win, story, scene_times, body)
+    plan_file = d / "plan.json"
+    if plan_file.exists():                       # pictures were planned and made in advance
+        plan = json.loads(plan_file.read_text())
+        scale = body / plan["body"] if plan["body"] else 1.0
+        shots = [{**sh, "sec": sh["sec"] * scale} for sh in plan["shots"]]
+    else:
+        shots = _shot_list(win, story, scene_times, body)
     pics = [_picture(sh, i, d, cfg, style, joined) for i, sh in enumerate(shots)]
     rows = [(max(0.0, s - a), min(body, e - a), t) for (s, e, t) in subs if e > a and s < b]
     ass = _captions(rows, d, win["n"], win["title"].split("|")[0].strip(), body)

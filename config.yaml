@@ -16,7 +16,7 @@ video:
 images:
   engine: cloudflare            # cloudflare (free 10k neurons/day) | pollinations (needs paid key) | placeholder
   model: flux
-  max_images: 110               # per video; Cloudflare free tier is ~130 images/day
+  max_images: 420               # per video; made over several mornings (~130/day free), the story waits in the queue
   # visual style comes from the story's genre (studio/genres.py)
   negative: "text, watermark, logo, cartoon, bright colors, smiling"
 
@@ -27,6 +27,7 @@ voice:
       eleven_multilingual_v2: 1.0      # most expressive; Hindi + English
       eleven_flash_v2_5: 0.5           # used automatically when credits run low
     reserve: 5000                      # credits never spent by the daily run
+    narrator_model: ""                 # e.g. eleven_flash_v2_5 = half-price narration (characters keep the best model)
     narrator: aSbn2iItLXLBz5EjbVhS     # Harsh - deep, whisper, steady
     default_male: d0grukerEzs069eKIauC   # Ranga (Hindi) for small male parts
     default_female: kdkz0RPvRYjuZ1OqDPeY # Devi (Hindi) for small female parts

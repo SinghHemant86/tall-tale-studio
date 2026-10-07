@@ -15,6 +15,25 @@ from studio import assemble, bible as bib, branding, genres, images, llm, schedu
 from studio.common import ROOT, load_config, log
 
 
+def _estimate_timeline(story: dict, lines: dict, cfg: dict, brand: dict, genre: dict):
+    """Where every scene and line will sit in the finished video (same arithmetic as the render),
+    worked out from the voice lengths, so the Shorts' pictures can be made before rendering."""
+    v = cfg["video"]
+    gap, pad = v["line_gap_sec"], v["scene_padding_sec"]
+    t = brand.get("intro_sec", 4.0) if brand.get("intro", True) else 0.0
+    if genre.get("true_story"):
+        t += 5.0
+    times, subs = {}, []
+    for s in story["scenes"]:
+        start, u = t, t + 0.6
+        for (_, secs, text) in lines[s["id"]]:
+            subs.append((u, u + secs, text))
+            u += secs + gap
+        t = u + pad
+        times[s["id"]] = (start, t)
+    return times, subs
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("story", nargs="?")
@@ -49,14 +68,33 @@ def main() -> int:
     lines = voice.speak_all(story, work, cfg, genre)
     log("2/6 shot plan + images")
     plan = images.plan_shots(story, {sid: [c[1] for c in v] for sid, v in lines.items()}, cfg)
-    shot_imgs = images.shot_images(plan, work, cfg, genre["style"])
-    log("3/6 thumbnail image")
+    est_times, est_subs = _estimate_timeline(story, lines, cfg, brand, genre)
+    want_shorts = cfg.get("shorts", {}).get("enabled", True) and story.get("shorts")
     tcfg = story.get("thumbnail") or {}
-    if tcfg.get("prompt"):
-        thumb_img = images.render(tcfg["prompt"] + ", dramatic single subject, strong contrast, empty dark space on the left",
-                                  work / "thumbnail_base.png", cfg, 4242, 1280, 720, genre["style"])
-    else:
-        thumb_img = shot_imgs[story["scenes"][0]["id"]][0]
+    try:
+        # thumbnail first (it matters most), then the long video's shots, then the Shorts' pictures
+        if tcfg.get("prompt"):
+            log("   thumbnail image")
+            images.render(tcfg["prompt"] + ", dramatic single subject, strong contrast, empty dark space on the left",
+                          work / "thumbnail_base.png", cfg, 4242, 1280, 720, genre["style"])
+        shot_imgs = images.shot_images(plan, work, cfg, genre["style"])
+        if want_shorts:
+            log("   shorts pictures")
+            shorts.prepare(story, est_times, est_subs, work, cfg, genre["style"])
+    except (images.ImagesPending, images.QuotaExhausted) as e:
+        total = sum(len(v) for v in plan.values()) + (shorts.count(story, est_times, est_subs) if want_shorts else 0) + 1
+        have = (len(list((work / "shots").glob("*.png"))) + len(list((work / "shorts").glob("s*/img_*.png")))
+                + (work / "thumbnail_base.png").exists())
+        msg = (f"Images for '{story['title']}': {have}/{total} ready. Today's free image allowance is used up; "
+               f"the rest are made on the next daily run(s). The story stays in the queue.")
+        log("   " + msg)
+        summary = os.environ.get("GITHUB_STEP_SUMMARY")
+        if summary:
+            with open(summary, "a", encoding="utf-8") as f:
+                f.write(f"### Images in progress\n{msg}\n")
+        (bib.QUEUE / "PROGRESS.md").write_text(f"{story['id']}: {have}/{total} images ready ({e})\n")
+        return 0
+    thumb_img = work / "thumbnail_base.png" if tcfg.get("prompt") else shot_imgs[story["scenes"][0]["id"]][0]
     portraits = {}
 
     log("4/6 clips")

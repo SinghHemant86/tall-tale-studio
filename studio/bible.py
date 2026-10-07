@@ -86,7 +86,7 @@ def load(path: Path) -> dict:
 
 def next_in_queue() -> Path | None:
     """Priority stories first ("go"), then alphabetical order."""
-    items = sorted(QUEUE.glob("*.json"))
+    items = sorted(p for p in QUEUE.glob("*.json"))
     if not items:
         return None
     prio = [p for p in items if json.loads(p.read_text(encoding="utf-8")).get("priority")]
@@ -100,4 +100,5 @@ def mark_done(path: Path, result: dict) -> Path:
     out = DONE / path.name
     out.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
     path.unlink()
+    (QUEUE / "PROGRESS.md").unlink(missing_ok=True)
     return out

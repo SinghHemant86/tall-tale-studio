@@ -63,8 +63,10 @@ jobs:
             output/*/voice
             output/*/shots
             output/*/thumbnail_base.png
-          key: render-${{ hashFiles('queue/*.json') }}-${{ github.run_id }}
-          restore-keys: render-${{ hashFiles('queue/*.json') }}-
+            output/*/shorts/s*/img_*.png
+            output/*/shorts/s*/plan.json
+          key: render-${{ github.run_id }}
+          restore-keys: render-
 
       - name: Install Python packages
         if: steps.q.outputs.empty != 'true'
@@ -113,6 +115,11 @@ jobs:
             output/*/characters/*.png
           retention-days: 14
           if-no-files-found: ignore
+
+      - name: Forget finished stories' working files (keeps the cache small)
+        if: steps.q.outputs.empty != 'true' && always()
+        run: |
+          for f in done/*.json; do id=$(basename "$f" .json); rm -rf "output/$id"; done
 
       - name: Move story to done/
         if: steps.q.outputs.empty != 'true' && success()

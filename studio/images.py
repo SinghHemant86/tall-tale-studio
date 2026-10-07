@@ -51,6 +51,16 @@ def _fit(img: Image.Image, w: int, h: int) -> Image.Image:
     return img.resize((w, h), Image.LANCZOS)
 
 
+class QuotaExhausted(RuntimeError):
+    """The image engine's free daily allowance is used up; carry on tomorrow."""
+
+
+class ImagesPending(RuntimeError):
+    def __init__(self, done: int, total: int):
+        super().__init__(f"{done}/{total} images ready")
+        self.done, self.total = done, total
+
+
 def _cloudflare(prompt: str, out: Path, w: int, h: int, seed: int) -> None:
     """Cloudflare Workers AI, FLUX.1 schnell. Free plan: 10,000 neurons/day (~150 images)."""
     acct, token = os.environ.get("CF_ACCOUNT_ID"), os.environ.get("CF_API_TOKEN")
@@ -62,8 +72,8 @@ def _cloudflare(prompt: str, out: Path, w: int, h: int, seed: int) -> None:
         r = requests.post(url, headers={"Authorization": f"Bearer {token}"},
                           json={"prompt": prompt[:2000], "steps": 6},  # this model rejects "seed"
                           timeout=180)
-        if r.status_code == 429:
-            raise RuntimeError("Cloudflare rate limit (429)")
+        if r.status_code == 429 or "4006" in r.text[:300]:
+            raise QuotaExhausted("Cloudflare daily image allowance used up (429)")
         if r.status_code >= 400:
             raise RuntimeError(f"Cloudflare HTTP {r.status_code}: {r.text[:400]}")
         if r.headers.get("content-type", "").startswith("image"):
@@ -75,7 +85,14 @@ def _cloudflare(prompt: str, out: Path, w: int, h: int, seed: int) -> None:
             data = base64.b64decode(body["result"]["image"])
         _fit(Image.open(io.BytesIO(data)).convert("RGB"), w, h).save(out)
 
-    retry(fetch)
+    try:
+        retry(fetch, attempts=3, base_wait=10.0)
+    except QuotaExhausted:
+        raise
+    except RuntimeError as e:
+        if "429" in str(e):
+            raise QuotaExhausted(str(e)) from e
+        raise
 
 
 def _placeholder(prompt: str, out: Path, w: int, h: int, seed: int) -> None:
@@ -216,10 +233,20 @@ def shot_images(plan: dict, work: Path, cfg: dict, style: str = "") -> dict[str,
     d.mkdir(parents=True, exist_ok=True)
     w, h = cfg["video"]["width"], cfg["video"]["height"]
     out = {}
+    total = sum(len(v) for v in plan.values())
+    done = sum(1 for sid, shots in plan.items() for i in range(len(shots)) if (d / f"{sid}_{i:02d}.png").exists())
+    if done < total:
+        log(f"  shot images: {done}/{total} already made, making the rest")
     for sid, shots in plan.items():
         out[sid] = []
         for i, sh in enumerate(shots):
-            log(f"  shot image: {sid} #{i + 1}/{len(shots)}")
-            out[sid].append(render(sh["prompt"], d / f"{sid}_{i:02d}.png", cfg,
-                                   abs(hash((sid, i))) % 100000, int(w * 1.25), int(h * 1.25), style))
+            p = d / f"{sid}_{i:02d}.png"
+            if not p.exists():
+                log(f"  shot image: {sid} #{i + 1}/{len(shots)}")
+            try:
+                out[sid].append(render(sh["prompt"], p, cfg, (i * 7919 + len(sid) * 104729) % 100000,
+                                       int(w * 1.25), int(h * 1.25), style))
+            except QuotaExhausted:
+                made = sum(1 for s2, sh2 in plan.items() for k in range(len(sh2)) if (d / f"{s2}_{k:02d}.png").exists())
+                raise ImagesPending(made, total)
     return out
