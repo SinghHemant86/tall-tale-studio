@@ -44,19 +44,27 @@ GENRES = {
 
 DEFAULT = "horror"
 DISCLAIMER = "Based on true events.\nSome scenes are dramatised and some names have been changed."
-DISCLAIMER_HI = "सच्ची घटनाओं पर आधारित।\nकुछ दृश्य नाटकीय रूप में दिखाए गए हैं और कुछ नाम बदल दिए गए हैं।"
+# All on-screen and YouTube text is English; only the audio is Hindi.
+TEXT = {"disclaimer": DISCLAIMER, "presents": "A TALL-TALE PRESENTATION", "thanks": "Thank you for listening",
+        "subscribe": "Subscribe to Tall-Tale for the next story", "sources": "Sources are listed in the description",
+        "sources_head": "Sources:",
+        "footer": "Tall-Tale: thrillers, dark dramas, horror and true stories, narrated in Hindi.\n"
+                  "Visuals and voices are AI-generated."}
 
-# fixed on-screen / description text per language
-TEXT = {
-    "en": {"disclaimer": DISCLAIMER, "presents": "A TALL-TALE PRESENTATION", "thanks": "Thank you for listening",
-           "subscribe": "Subscribe to Tall-Tale for the next story", "sources": "Sources are listed in the description",
-           "sources_head": "Sources:",
-           "footer": "Tall-Tale: thrillers, dark dramas, horror and true stories, narrated.\nVisuals and voices are AI-generated."},
-    "hi": {"disclaimer": DISCLAIMER_HI, "presents": "एक टॉल-टेल प्रस्तुति", "thanks": "सुनने के लिए धन्यवाद",
-           "subscribe": "अगली कहानी के लिए टॉल-टेल को सब्सक्राइब करें", "sources": "स्रोत विवरण में दिए गए हैं",
-           "sources_head": "स्रोत:",
-           "footer": "टॉल-टेल: थ्रिलर, डार्क ड्रामा, हॉरर और सच्ची घटनाओं की कहानियाँ।\nदृश्य और आवाज़ें AI से बनाई गई हैं।"},
+# Genre-level search terms, added to each story's own (story-specific ones come first).
+SEO = {
+    "horror": {"hashtags": ["#HindiHorrorStory", "#HorrorStories"],
+               "tags": ["hindi horror story", "horror story in hindi", "bhoot ki kahani", "scary story", "ghost story"]},
+    "thriller": {"hashtags": ["#HindiThriller", "#ThrillerStory"],
+                 "tags": ["hindi thriller story", "suspense story in hindi", "thriller story", "mystery story"]},
+    "psychological": {"hashtags": ["#PsychologicalThriller", "#HindiStory"],
+                      "tags": ["psychological thriller hindi", "dark psychological story", "mind bending story"]},
+    "dark_drama": {"hashtags": ["#DarkDrama", "#HindiStory"],
+                   "tags": ["dark drama hindi", "emotional dark story", "hindi kahani"]},
+    "true_incident": {"hashtags": ["#TrueStory", "#TrueCrimeHindi"],
+                      "tags": ["true story hindi", "real incident", "true crime hindi", "sacchi ghatna"]},
 }
+CHANNEL_TAGS = ["tall tale", "tall-tale stories", "hindi story"]
 
 
 def language(bible: dict) -> str:
@@ -67,7 +75,7 @@ def language(bible: dict) -> str:
 
 
 def text(bible: dict, key: str) -> str:
-    return TEXT[language(bible)][key]
+    return TEXT[key]
 
 
 def get(bible: dict) -> dict:

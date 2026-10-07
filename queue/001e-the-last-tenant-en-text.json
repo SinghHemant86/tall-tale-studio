@@ -1,0 +1,115 @@
+{
+  "id": "001e-the-last-tenant-en-text",
+  "title": "Someone Knocked From Inside a Sealed Room | Hindi Horror Story",
+  "genre": "horror",
+  "language": "hi",
+  "priority": false,
+  "logline": "A night watchman guarding an abandoned chawl hears knocking from a room sealed since a fire in 1994.",
+  "characters": [
+    {
+      "id": "raghav",
+      "name": "Raghav",
+      "look": "Indian man in his fifties, grey stubble, tired deep-set eyes, faded khaki watchman uniform, holding an old brass torch",
+      "voice": "hi-IN-MadhurNeural",
+      "seed": 4101,
+      "role": "old_man",
+      "gender": "male"
+    },
+    {
+      "id": "voice_4b",
+      "name": "The Voice in 4B",
+      "look": "silhouette of a thin woman in a white saree behind frosted glass, face never visible, long wet black hair",
+      "voice": "hi-IN-SwaraNeural",
+      "rate": "-15%",
+      "pitch": "-12Hz",
+      "seed": 4102,
+      "role": "ghost",
+      "gender": "female"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s1",
+      "setting": "an abandoned four-storey chawl corridor in old Pune at night, peeling green walls, a single flickering bulb, monsoon rain outside",
+      "characters": [
+        "raghav"
+      ],
+      "mood": "dread",
+      "motion": "zoom_in",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "ग्यारह साल से राघव उस खाली चॉल की रखवाली कर रहा था। वहाँ कभी कुछ नहीं होता था।",
+          "en": "For eleven years, Raghav had guarded the empty chawl. Nothing ever happened there."
+        },
+        {
+          "speaker": "narrator",
+          "text": "फिर मानसून की पहली रात, किसी ने दरवाज़ा खटखटाया।",
+          "en": "Then, on the first night of the monsoon, someone knocked."
+        }
+      ]
+    },
+    {
+      "id": "s2",
+      "setting": "close-up of a wooden door painted with the number 4B, rusted padlock, wax seal from 1994, water seeping under it",
+      "characters": [],
+      "mood": "dread",
+      "motion": "pan_right",
+      "sfx": [
+        "knock"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "खटखटाहट कमरा नंबर 4-बी से आ रही थी। वही कमरा, जिसे 1994 की आग के बाद सील कर दिया गया था।",
+          "en": "The knocking came from Room 4B. The room sealed after the fire of 1994."
+        },
+        {
+          "speaker": "raghav",
+          "text": "कौन है अंदर?",
+          "en": "Who's in there?"
+        }
+      ]
+    },
+    {
+      "id": "s3",
+      "setting": "frosted glass window of the sealed door, a pale female silhouette pressed against it from inside, torch beam on the glass",
+      "characters": [
+        "raghav",
+        "voice_4b"
+      ],
+      "mood": "chase",
+      "motion": "zoom_in_fast",
+      "lines": [
+        {
+          "speaker": "voice_4b",
+          "text": "दरवाज़ा तुमने बंद किया था, राघव। उस रात तुम भी यहीं थे।",
+          "en": "You locked that door, Raghav. You were here that night too."
+        },
+        {
+          "speaker": "narrator",
+          "text": "और तीस साल में पहली बार, राघव को सब याद आ गया।",
+          "en": "And for the first time in thirty years, Raghav remembered everything."
+        }
+      ]
+    }
+  ],
+  "youtube": {
+    "description": "A night watchman guarding an abandoned chawl hears knocking from Room 4B, a room that has been sealed since a fire in 1994. A short Hindi horror story about the night he can't forget, and the one he tried to.",
+    "hashtags": [
+      "#HauntedChawl"
+    ],
+    "tags": [
+      "sealed room horror story",
+      "haunted chawl",
+      "watchman horror story",
+      "night watchman ghost story",
+      "monsoon horror story",
+      "chawl horror story hindi"
+    ]
+  },
+  "thumbnail": {
+    "prompt": "extreme close-up of a sealed wooden door marked 4B with a rusted padlock, a pale hand pressed against frosted glass beside it",
+    "text": "कौन है अंदर?"
+  }
+}

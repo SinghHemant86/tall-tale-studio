@@ -29,6 +29,10 @@ def _has_deva(text: str) -> bool:
 def _font_for(text: str, size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
     """Cinzel for English; a Devanagari face for Hindi (Cinzel has no Hindi letters)."""
     if _has_deva(text):
+        from PIL import features
+        if not features.check("raqm"):
+            print("::warning title=Hindi text::Pillow has no complex text layout (raqm); "
+                  "Hindi letters on the thumbnail may join wrongly", flush=True)
         for name in DEVA_FONTS:
             try:
                 return ImageFont.truetype(name, size, layout_engine=ImageFont.Layout.RAQM)
@@ -74,8 +78,7 @@ def _center_text(d: ImageDraw.ImageDraw, w: int, y: int, text: str, font, fill) 
 
 
 def _card_png(kind: str, w: int, h: int, out: Path, text: str = "", lang: str = "en") -> Path:
-    from .genres import TEXT
-    T = TEXT[lang]
+    from .genres import TEXT as T
     img = _ground(w, h)
     d = ImageDraw.Draw(img)
     logo = Image.open(ASSETS / "logo.png").convert("RGBA")

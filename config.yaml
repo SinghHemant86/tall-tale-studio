@@ -1,6 +1,7 @@
 # Tall-Tale Studio — pipeline settings. Change engines here, not in code.
 
-language: hi                    # channel default: every line, title, card and description in Hindi
+language: hi                    # spoken language. Everything written (title, description, tags,
+                                # subtitles, cards) is English; only the thumbnail text may be Hindi
 
 video:
   width: 1280
@@ -10,8 +11,7 @@ video:
   line_gap_sec: 0.45            # pause between lines inside a scene
   subtitles: true
   max_shot_sec: 3.5             # new picture at least this often; stretched automatically to fit the image budget
-  subtitle_font: Noto Sans      # English stories
-  subtitle_font_hi: Noto Sans Devanagari
+  subtitle_font: Noto Sans      # subtitles are the English translation of each line
 
 images:
   engine: cloudflare            # cloudflare (free 10k neurons/day) | pollinations (needs paid key) | placeholder

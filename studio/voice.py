@@ -150,6 +150,6 @@ def speak_all(bible: dict, work: Path, cfg: dict, genre: dict | None = None) -> 
                     _edge(ln["text"], voice, rate, pitch, out)
                 else:
                     _placeholder(ln["text"], out)
-            clips.append((out, duration(out), ln["text"]))
+            clips.append((out, duration(out), ln.get("en") or ln["text"]))  # subtitle = English
         result[s["id"]] = clips
     return result

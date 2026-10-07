@@ -43,6 +43,8 @@ def upload(video: Path, thumb: Path | None, title: str, meta: dict, cfg: dict) -
             "description": meta.get("description", "")[:4900],
             "tags": meta.get("tags", [])[:30],
             "categoryId": ycfg.get("category_id", "24"),
+            "defaultLanguage": meta.get("text_language", "en"),
+            "defaultAudioLanguage": meta.get("audio_language", "hi"),
         },
         "status": {
             "privacyStatus": ycfg.get("privacy", "private"),

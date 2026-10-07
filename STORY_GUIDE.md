@@ -4,14 +4,23 @@ Claude follows these when you say **"lock it"**; the render checks the critical 
 story that breaks them.
 
 ## Language
-- **The channel is Hindi.** Default `language` is `hi`: every spoken line, the title, the thumbnail
-  text, the cards and the description are in Hindi, written in **Devanagari**. No English line at all.
-- Names and everyday English loanwords are also written in Devanagari (राघव, मानसून, सील, मोबाइल).
-  The render rejects any Hindi story line containing Roman letters (digits like 1994 or 4-बी are fine).
-- Never Roman Hindi (`Kaun hai andar`), never a line followed by its translation.
-- Only image prompts (`setting`, `look`, `thumbnail.prompt`) stay in English; nobody sees them.
-- Give a Hindi `logline_hi` (one or two sentences, no spoilers): it becomes the YouTube description if the free LLM is unavailable.
-- An English-only story is possible with `"language": "en"` (then no Hindi lines).
+- **Audio is Hindi; everything written is English.** Narration and dialogue are Hindi in
+  **Devanagari** (names and loanwords too: राघव, मानसून). The title, description, tags, hashtags,
+  subtitles and the intro/end cards are English. Only the **thumbnail text** may be Hindi.
+- Every Hindi line carries `"en"`: its English translation, shown as the subtitle. Written by
+  Claude when the story is locked, not machine-translated at render time.
+- Never Roman Hindi in a spoken line (`Kaun hai andar`), never a line followed by its translation.
+- Image prompts (`setting`, `look`, `thumbnail.prompt`) are English; nobody sees them.
+- The render refuses a story that breaks these rules.
+
+## Search (SEO), written when the story is locked
+- `title`: English, under ~60 characters, the hook first, then `| Hindi Horror Story` (or the genre).
+- `youtube.description`: 2-3 English sentences, the most searchable phrase in the first sentence,
+  no spoilers. The render adds the AI-disclosure line, sources (true incidents) and hashtags.
+- `youtube.hashtags`: 1-2 story-specific ones (place, theme), e.g. `#HauntedHaveli`. The render adds
+  the genre's and `#TallTale`; YouTube shows the first three above the title.
+- `youtube.tags`: 5-8 English phrases a viewer would type, specific to this story (setting, creature,
+  situation). Genre and channel tags are added automatically; any geography, only if the story has one.
 
 ## Pacing
 - One idea per line; aim for 8–20 words. Lines over 40 words are rejected.
@@ -22,7 +31,7 @@ story that breaks them.
 
 ## Thumbnail
 - `"thumbnail": {"prompt": "...", "text": "..."}`
-- `text`: **3 words max**, must not repeat the title (use `/yt-package` rules).
+- `text`: **3 words max**, Hindi allowed (e.g. `कौन है अंदर?`), must not repeat the title (use `/yt-package` rules).
 - `prompt`: one subject, close, high contrast, dark empty space on the left for the text.
 
 ## True incidents

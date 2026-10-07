@@ -39,32 +39,65 @@ def chat(prompt: str, system: str = "You are a concise assistant.", max_tokens: 
     return None
 
 
+DEVA = re.compile(r"[\u0900-\u097F]")
+
+
+def _english(text: str | None) -> bool:
+    return bool(text) and not DEVA.search(text)
+
+
 def youtube_metadata(bible: dict) -> dict:
-    """Fill description/tags if the bible left them empty. Falls back to plain text."""
+    """English description, hashtags and tags.
+
+    The description, tags and hashtags are written per story when it is locked (Claude, with the
+    yt-seo rules). This only fills gaps: the free LLM writes a description from the English
+    subtitles if none was given, else the English logline is used. Genre and channel terms are added.
+    """
+    from .genres import CHANNEL_TAGS, SEO, get as genre_of, text
     yt = dict(bible.get("youtube") or {})
-    if not yt.get("description"):
-        story = " ".join(ln["text"] for s in bible["scenes"] for ln in s["lines"])
-        from .genres import language
-        lang = ("Write it in Hindi, in Devanagari script only (no English words). "
-                if language(bible) == "hi" else "")
+    genre = bible.get("genre", "horror")
+    if not _english(yt.get("description")):
+        story = " ".join(ln.get("en") or ln["text"] for s in bible["scenes"] for ln in s["lines"])
         desc = chat(
-            "Write a gripping 3-sentence YouTube description for this story. " + lang +
-            "No spoilers for the ending, no hashtags, no emojis.\n\n"
+            "Write a gripping 2-3 sentence YouTube description in English for this Hindi-narrated story. "
+            "Put the most searchable phrase in the first sentence. No spoilers, no hashtags, no emojis.\n\n"
             f"Title: {bible['title']}\nStory: {story[:3000]}",
             max_tokens=300,
         )
-        if language(bible) == "hi":
-            # must really be Hindi; otherwise use the story's own opening lines
-            if not desc or len(re.findall(r"[A-Za-z]{2,}", desc)) > 2:
-                desc = bible.get("logline_hi") or " ".join(
-                    ln["text"] for s in bible["scenes"] for ln in s["lines"] if ln["speaker"] == "narrator")[:280]
-        yt["description"] = desc or bible.get("logline", bible["title"])
-    from .genres import get as genre_of, text
+        yt["description"] = desc if _english(desc) else bible.get("logline", bible["title"])
+
+    # hashtags: the story's own first (place, theme), then genre, then the channel. YouTube shows
+    # the first three above the title; more than 15 makes it ignore them all, so keep it short.
+    tags_h = list(yt.get("hashtags") or []) + SEO.get(genre, {}).get("hashtags", []) + ["#TallTale"]
+    hashtags, seen = [], set()
+    for h in tags_h:
+        h = "#" + re.sub(r"[^A-Za-z0-9]", "", h.lstrip("#"))
+        if len(h) > 2 and h.lower() not in seen:
+            seen.add(h.lower())
+            hashtags.append(h)
+    hashtags = hashtags[:6]
+
     parts = [yt["description"].strip()]
     if genre_of(bible).get("true_story"):
         parts.append(text(bible, "disclaimer").replace("\n", " "))
         parts.append(text(bible, "sources_head") + "\n" + "\n".join(f"- {s}" for s in bible.get("sources", [])))
     parts.append(text(bible, "footer"))
+    parts.append(" ".join(hashtags))
     yt["description"] = "\n\n".join(parts)
-    yt.setdefault("tags", ["tall tale", "story", bible.get("genre", "horror").replace("_", " ")])
+
+    # tags: story-specific first, then genre, then channel; English only, YouTube's 500-char limit
+    tags, total, seen = [], 0, set()
+    for t in list(yt.get("tags") or []) + SEO.get(genre, {}).get("tags", []) + CHANNEL_TAGS:
+        t = t.strip()
+        if not t or DEVA.search(t) or t.lower() in seen:
+            continue
+        cost = len(t) + (2 if " " in t else 0) + 1
+        if total + cost > 480:
+            break
+        seen.add(t.lower())
+        tags.append(t)
+        total += cost
+    yt["tags"] = tags
+    yt["hashtags"] = hashtags
+    yt["text_language"], yt["audio_language"] = "en", ("en" if bible.get("language") == "en" else "hi")
     return yt

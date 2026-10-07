@@ -28,16 +28,25 @@ def validate(b: dict) -> dict:
     latin_words = re.compile(r"[A-Za-z]{2,}")
     from .genres import language
     hindi = language(b) == "hi"
-    if hindi:
-        for what, val in (("title", b["title"]), ("thumbnail text", (b.get("thumbnail") or {}).get("text", ""))):
-            if latin_words.search(val):
-                raise BibleError(f"Hindi story: {what} must be in Devanagari, no English (\"{val}\")")
+    # Everything written is English (title, description, tags, hashtags, subtitles); only the audio is
+    # Hindi, and the thumbnail text may be either.
+    yt = b.get("youtube") or {}
+    written = [("title", b["title"]), ("description", yt.get("description", ""))]
+    written += [("tag", t) for t in yt.get("tags", [])] + [("hashtag", h) for h in yt.get("hashtags", [])]
+    for what, val in written:
+        if dev.search(val or ""):
+            raise BibleError(f"{what} must be in English (\"{val[:60]}\"); only the audio is Hindi")
     for s in b["scenes"]:
         for ln in s["lines"]:
             txt = ln["text"]
             if hindi and latin_words.search(txt):
                 raise BibleError(f"scene {s['id']}: Hindi story, but this line has English/Roman letters "
                                  f"(\"{txt[:60]}\"). Write every line in Devanagari (names and loanwords too).")
+            if hindi and not (ln.get("en") or "").strip():
+                raise BibleError(f"scene {s['id']}: Hindi line needs an \"en\" translation for the English "
+                                 f"subtitles (\"{txt[:60]}\")")
+            if dev.search(ln.get("en") or ""):
+                raise BibleError(f"scene {s['id']}: \"en\" subtitle must be English (\"{ln['en'][:60]}\")")
             if dev.search(txt) and len(latin_words.findall(txt)) >= 3:
                 raise BibleError(f"scene {s['id']}: line mixes Hindi and English (\"{txt[:60]}\"). "
                                  "Write each line in ONE language and never repeat it as a translation.")

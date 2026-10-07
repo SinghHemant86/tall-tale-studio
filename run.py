@@ -93,6 +93,10 @@ def main() -> int:
     (work / "youtube.json").write_text(json.dumps({"title": story["title"], **meta}, indent=2, ensure_ascii=False))
     vid = upload.upload(final, thumb, story["title"], meta, cfg) if cfg["youtube"]["upload"] else None
 
+    # keep a copy of the thumbnail in the repo, so it can be checked without downloading the video
+    import shutil
+    (bib.DONE / "thumbs").mkdir(parents=True, exist_ok=True)
+    shutil.copy(thumb, bib.DONE / "thumbs" / f"{story['id']}.jpg")
     result = {"video": str(final.relative_to(ROOT)), "seconds": round(t, 1), "youtube_id": vid,
               "portraits": [str(p.relative_to(ROOT)) for p in portraits.values()]}
     if not args.keep_in_queue and path.parent.resolve() == bib.QUEUE.resolve():
