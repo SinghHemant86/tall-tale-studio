@@ -9,10 +9,12 @@ import traceback
 
 src = Path(sys.argv[1])
 try:
-    wav = Path("/tmp/audio.wav")
-    subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(src), "-ac", "1", "-ar", "16000", str(wav)], check=True)
+    import numpy as np
+    raw = subprocess.run(["ffmpeg", "-v", "error", "-i", str(src), "-ac", "1", "-ar", "16000", "-f", "f32le", "-"],
+                         capture_output=True, check=True).stdout
+    audio = np.frombuffer(raw, dtype=np.float32)  # decoded here: avoids PyAV version issues
     model = WhisperModel("small", device="cpu", compute_type="int8")
-    segs, info = model.transcribe(str(wav), vad_filter=True, beam_size=1)
+    segs, info = model.transcribe(audio, vad_filter=True, beam_size=1)
     segs = list(segs)
 except Exception as e:  # noqa: BLE001
     print("::error title=transcribe::" + (repr(e) + " " + traceback.format_exc().splitlines()[-1])[:400])
