@@ -75,3 +75,7 @@ story that breaks them.
   "Watch the full story on Tall-Tale". About 20-35 new images per Short.
 - Pick moments that work alone and end on a cliffhanger. Under a minute (trimmed at a line end).
 - Uploaded to YouTube with "Full story ▶ <long video link>"; files kept in the run's download for Reels.
+
+## Settings
+- Prefer remote, lesser-known places (villages, hill hamlets, desert outposts, forest rest houses,
+  closed railway stations), and rotate states from story to story. Avoid repeating big cities.
