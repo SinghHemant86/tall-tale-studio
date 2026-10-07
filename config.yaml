@@ -28,18 +28,22 @@ voice:
       eleven_flash_v2_5: 0.5           # used automatically when credits run low
     reserve: 5000                      # credits never spent by the daily run
     narrator: aSbn2iItLXLBz5EjbVhS     # Harsh - deep, whisper, steady
-    default_male: JBFqnCBsd6RMkjVDRZzb
-    default_female: XB0fDUnXU5powFXDhCwa
+    default_male: d0grukerEzs069eKIauC   # Ranga (Hindi) for small male parts
+    default_female: kdkz0RPvRYjuZ1OqDPeY # Devi (Hindi) for small female parts
     cast:                              # reusable character voices; a character sets "role": "<name>"
-      old_man: YWaBwjubozVSPD1RgnRa    # Reyaansh - deep Hindi (other roles empty = default_male/female)
+      old_man: YWaBwjubozVSPD1RgnRa    # Reyaansh - deep Hindi
+      elder: ZjpoNq7arSoRlQKCzAEL      # Arun - devotional, expressive older man (village uncle)
+      authority: d0grukerEzs069eKIauC  # Ranga - powerful, commanding Hindi (thakur, sarpanch)
       friend: 7b9mYhmnp0y2qSH1FnBL     # Bunty - desi best friend, comic timing (comic relief only)
       young_man: ""
       woman: ""
-      young_woman: ""
-      child: ""
+      young_woman: kdkz0RPvRYjuZ1OqDPeY  # Devi - confident, energetic woman
+      child_girl: BT0SH7Hb8NRPpT5xbCgg   # Lulu - little girl ("cute little witch")
+      child_boy: d9BvEI0bp2Tmdpqnjwn0    # Saanu - energetic kid
+      child: BT0SH7Hb8NRPpT5xbCgg
       ghost: mrqRjBf64FNHRBZ9tPdQ      # Anushri - creepy, intimate horror voice
-      villain: ""                      # cold, menacing
-      officer: ""                      # police / official, for true incidents
+      villain: eWmswbut7I70CIuRsFwP    # Frankie Slim - slick, mischievous
+      officer: kdkz0RPvRYjuZ1OqDPeY    # police / official, for true incidents
     voice_settings: {stability: 0.45, similarity_boost: 0.8, style: 0.35}
   narrator: en-IN-PrabhatNeural # channel narrator (a story can set "narrator_voice")
   # narrator speed/pitch below are fallbacks; each genre sets its own

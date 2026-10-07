@@ -40,7 +40,7 @@ story that breaks them.
 ## Voices (ElevenLabs)
 - Narrator voice ID lives in `config.yaml` (`voice.elevenlabs.narrator`); a story may override with
   `"narrator_eleven"`.
-- Each character gets a `"role"` from the cast in `config.yaml` (old_man, friend, young_man, woman,
+- Each character gets a `"role"` from the cast in `config.yaml` (old_man, elder, authority, friend, young_man, woman, child_girl, child_boy,
   young_woman, child, ghost, villain, officer), or a specific `"eleven_voice": "<voice id>"`,
   plus optional `"eleven_settings"`
   (`stability` lower = more emotional, `style` higher = more dramatic). `"gender"` picks the default.
