@@ -13,5 +13,9 @@ cfg = load_config()
 for name, prompt in json.loads(src.read_text()).items():
     for seed in (11, 23):
         p = src.parent / f"{name}_{seed}.png"
-        images.render(prompt, p, cfg, seed, size, size, " ")
+        try:
+            images.render(prompt, p, cfg, seed, size, size, " ")
+        except Exception as e:  # noqa: BLE001
+            print(f"::error title=render {name}::{str(e)[:400]}")
+            raise
         print("rendered", p.name)
