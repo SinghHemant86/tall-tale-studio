@@ -46,3 +46,8 @@ story that breaks them.
   (`stability` lower = more emotional, `style` higher = more dramatic). `"gender"` picks the default.
 - If the month's ElevenLabs characters can't cover the whole story, the story uses the free voices
   instead (never a mix inside one video).
+
+## Look
+- Hands are welcome, close-ups included. For ghosts and other supernatural characters, write the
+  wrongness into the `look`: long, bony, twisted or too-many-jointed fingers, grey skin, cracked
+  nails. Living humans get normal hands.
