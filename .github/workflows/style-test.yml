@@ -1,0 +1,26 @@
+name: Art style test
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  styles:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r requirements.txt
+      - run: python -u scripts/style_test.py
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      - name: Save
+        run: |
+          git config user.name "tall-tale-bot"
+          git config user.email "actions@users.noreply.github.com"
+          for f in research/styles/*.png; do python -c "from PIL import Image;import sys;Image.open(sys.argv[1]).convert('RGB').save(sys.argv[1][:-4]+'.jpg',quality=82)" "$f" && rm "$f"; done
+          git add research/styles
+          git commit -m "Art style samples" || echo nothing
+          for i in 1 2 3 4 5; do git pull --rebase -q && git push && break; sleep $((i * 5)); done

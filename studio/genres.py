@@ -78,8 +78,31 @@ def text(bible: dict, key: str) -> str:
     return TEXT[key]
 
 
+# Art styles a story can pick with "art_style" (overrides the genre's look; grade/music stay).
+ART_STYLES = {
+    "cinematic": None,  # the genre's own film-still look (default)
+    "creepy_comic": "creepy graphic novel illustration, bold black ink outlines, flat muted colors, "
+                    "heavy shadows, unsettling expressions, horror comic panel, detailed background",
+    "dark_fantasy": "dark fantasy digital painting, dramatic rim light, torchlight and deep shadows, "
+                    "epic scale, painterly texture, ominous atmosphere",
+    "painting": "oil painting, visible brush strokes, rich muted colors, dramatic chiaroscuro lighting, "
+                "classical composition",
+    "folk_myth": "Indian folk-myth illustration, ornate details, storm-lit sky, mythic and ancient, "
+                 "painterly, dramatic lighting",
+    "polaroid": "old faded polaroid photograph, flash photography, washed-out colors, light leaks, "
+                "found-footage feel, slightly blurred",
+}
+
+
 def get(bible: dict) -> dict:
     g = bible.get("genre", DEFAULT)
     if g not in GENRES:
         raise ValueError(f"unknown genre '{g}'. Use one of: {', '.join(GENRES)}")
-    return {"name": g, **GENRES[g]}
+    out = {"name": g, **GENRES[g]}
+    art = bible.get("art_style", "cinematic")
+    if art not in ART_STYLES:
+        raise ValueError(f"unknown art_style '{art}'. Use one of: {', '.join(ART_STYLES)}")
+    if ART_STYLES[art]:
+        extra = ", faces obscured or turned away, no identifiable people" if out.get("true_story") else ""
+        out["style"] = ART_STYLES[art] + extra
+    return out
