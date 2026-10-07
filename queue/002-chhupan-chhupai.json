@@ -1,0 +1,1304 @@
+{
+  "id": "002-chhupan-chhupai",
+  "title": "The Village Where Hide and Seek Is Banned | Hindi Horror Story",
+  "genre": "horror",
+  "art_style": "creepy_comic",
+  "language": "hi",
+  "priority": true,
+  "logline": "In a remote Bundelkhand village where hide and seek is forbidden, a ghost girl has been waiting forty years for the boy who never came to find her.",
+  "characters": [
+    {
+      "id": "madho",
+      "name": "Madho",
+      "role": "old_man",
+      "gender": "male",
+      "voice": "hi-IN-MadhurNeural",
+      "look": "thin Indian man about 50, grey stubble, tired kind eyes, faded brown kurta and a wool shawl"
+    },
+    {
+      "id": "madho_child",
+      "name": "Little Madho (1986)",
+      "role": "child_boy",
+      "gender": "male",
+      "voice": "hi-IN-MadhurNeural",
+      "look": "8-year-old Indian village boy, thin, messy hair, torn half-sleeve shirt and shorts, big eyes"
+    },
+    {
+      "id": "gauri",
+      "name": "Gauri (ghost)",
+      "role": "child_girl",
+      "gender": "female",
+      "voice": "hi-IN-SwaraNeural",
+      "eleven_settings": {
+        "stability": 0.72,
+        "style": 0.15
+      },
+      "look": "8-year-old Indian girl ghost in a faded red lehenga and silver anklets, long dusty black hair, pale grey skin, dark hollow eyes, thin long grey fingers"
+    },
+    {
+      "id": "gauri_young",
+      "name": "Gauri (1986)",
+      "role": "child_girl",
+      "gender": "female",
+      "voice": "hi-IN-SwaraNeural",
+      "eleven_settings": {
+        "stability": 0.6,
+        "style": 0.3
+      },
+      "look": "cheerful 8-year-old Indian girl in a bright red lehenga, braided hair with red ribbons, silver anklets"
+    },
+    {
+      "id": "banwari",
+      "name": "Banwari",
+      "role": "elder",
+      "gender": "male",
+      "voice": "hi-IN-MadhurNeural",
+      "look": "round-faced Indian cook in his 60s, white moustache, vest and apron, towel on his shoulder"
+    },
+    {
+      "id": "meenakshi",
+      "name": "Meenakshi Rathore",
+      "role": "young_woman",
+      "gender": "female",
+      "voice": "hi-IN-SwaraNeural",
+      "look": "confident Indian woman about 30, district officer, crisp cotton saree, glasses, holding files"
+    },
+    {
+      "id": "harilal",
+      "name": "Munim Harilal",
+      "role": "villain",
+      "gender": "male",
+      "voice": "hi-IN-MadhurNeural",
+      "look": "thin sly Indian accountant in his 50s, black cap, round spectacles, ledger under his arm, 1980s"
+    },
+    {
+      "id": "thakur",
+      "name": "Thakur",
+      "role": "authority",
+      "gender": "male",
+      "voice": "hi-IN-MadhurNeural",
+      "look": "stern Indian landlord in his 50s, thick moustache, white turban, silk sherwani, 1980s"
+    },
+    {
+      "id": "ramdeen",
+      "name": "Ramdeen (the gardener)",
+      "role": "elder",
+      "gender": "male",
+      "voice": "hi-IN-MadhurNeural",
+      "look": "poor thin Indian gardener in a dhoti, frightened, 1980s"
+    },
+    {
+      "id": "sarpanch",
+      "name": "Sarpanch",
+      "role": "authority",
+      "gender": "male",
+      "voice": "hi-IN-MadhurNeural",
+      "look": "elderly village headman, white beard, white dhoti kurta, angry, holding a burning torch"
+    },
+    {
+      "id": "kallu",
+      "name": "Kallu",
+      "role": "friend",
+      "gender": "male",
+      "voice": "hi-IN-MadhurNeural",
+      "look": "skinny drunk village man in a checked lungi, messy hair"
+    },
+    {
+      "id": "golu",
+      "name": "Golu",
+      "role": "child_boy",
+      "gender": "male",
+      "voice": "hi-IN-MadhurNeural",
+      "look": "8-year-old village boy in striped pyjamas, eyes closed, sleepwalking"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s01",
+      "setting": "a narrow dark lane in the remote Bundelkhand village of Sunarpur, rocky hills, mud and stone houses at night, every doorframe marked with a hundred small white chalk lines",
+      "characters": [],
+      "mood": "dread",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "बुंदेलखंड के सुनारपुर गाँव में, अमावस की रातों को कोई दरवाज़ा नहीं खोलता।",
+          "en": "In the village of Sunarpur in Bundelkhand, nobody opens a door on moonless nights."
+        },
+        {
+          "speaker": "narrator",
+          "text": "हर घर की चौखट पर चॉक से सौ छोटी-छोटी लकीरें खिंची रहती हैं।",
+          "en": "On every doorframe, a hundred little chalk lines are drawn.",
+          "shot": "extreme close-up of a hundred small white chalk tally lines on an old wooden doorframe"
+        },
+        {
+          "speaker": "narrator",
+          "text": "और इस गाँव में एक खेल पर पूरी तरह पाबंदी है… छुपन-छुपाई।",
+          "en": "And one game is completely forbidden here… hide and seek."
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "setting": "empty village lane at night in the remote Bundelkhand village of Sunarpur, rocky hills, mud and stone houses, a drunk man staggering, a lantern on a wall",
+      "characters": [
+        "kallu"
+      ],
+      "mood": "dread",
+      "sfx": [
+        "anklet"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "उस रात कल्लू ताड़ी के ठेके से लड़खड़ाता हुआ घर लौट रहा था।",
+          "en": "That night, Kallu was staggering home from the toddy shop."
+        },
+        {
+          "speaker": "narrator",
+          "text": "गली सुनसान थी। कुत्ते भी चुप थे।",
+          "en": "The lane was deserted. Even the dogs were silent."
+        },
+        {
+          "speaker": "narrator",
+          "text": "तभी पीछे से पायल की आवाज़ आई। छम… छम… छम।",
+          "en": "Then, behind him, anklets. Chham… chham… chham.",
+          "shot": "close-up of small bare feet with silver anklets walking on a dusty lane at night"
+        },
+        {
+          "speaker": "gauri",
+          "text": "माधो… बाहर आओ… खेलें?",
+          "en": "Madho… come out… shall we play?"
+        },
+        {
+          "speaker": "kallu",
+          "text": "माधो? अरे मैं माधो नहीं हूँ। पर चल, खेलते हैं! हाँ!",
+          "en": "Madho? I'm not Madho. But fine, let's play! Yes!"
+        },
+        {
+          "speaker": "narrator",
+          "text": "उसने हँसते हुए हाँ कह दिया।",
+          "en": "Laughing, he said yes."
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "setting": "the courtyard of the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors at dawn, a man facing the wall with eyes shut",
+      "characters": [
+        "kallu"
+      ],
+      "mood": "drone",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "सुबह गाँव वालों ने उसे पुरानी हवेली के आँगन में पाया।",
+          "en": "At dawn, the villagers found him in the courtyard of the old haveli."
+        },
+        {
+          "speaker": "narrator",
+          "text": "दीवार की तरफ़ मुँह करके, आँखें बंद, धीरे-धीरे गिनते हुए।",
+          "en": "Facing the wall, eyes shut, slowly counting."
+        },
+        {
+          "speaker": "kallu",
+          "text": "अट्ठानवे… निन्यानवे… सौ।",
+          "en": "Ninety-eight… ninety-nine… a hundred."
+        },
+        {
+          "speaker": "narrator",
+          "text": "उस दिन के बाद कल्लू ने कभी एक शब्द नहीं बोला।",
+          "en": "After that day, Kallu never spoke another word."
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "setting": "a battered state bus stopping at dusk on a dusty road near the remote Bundelkhand village of Sunarpur, rocky hills, mud and stone houses, a lone man stepping down with a cloth bag",
+      "characters": [
+        "madho"
+      ],
+      "mood": "calm",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "चालीस साल। इतने बरसों से सुनारपुर इस खेल के साथ जी रहा था।",
+          "en": "Forty years. For forty years Sunarpur had lived with this game."
+        },
+        {
+          "speaker": "narrator",
+          "text": "और उसी हफ़्ते, शाम की आख़िरी बस से एक अजनबी गाँव में उतरा।",
+          "en": "And that same week, a stranger stepped off the last evening bus."
+        },
+        {
+          "speaker": "narrator",
+          "text": "नाम था माधो। उम्र पचास के आसपास। ना कोई घर, ना कोई परिवार।",
+          "en": "His name was Madho. About fifty. No home, no family."
+        },
+        {
+          "speaker": "narrator",
+          "text": "ज़िला दफ़्तर ने उसे रौनकपुर हवेली का चौकीदार बनाकर भेजा था।",
+          "en": "The district office had sent him as the caretaker of Raunakpur Haveli."
+        },
+        {
+          "speaker": "madho",
+          "text": "बस एक कमरा, दो वक़्त की रोटी, और थोड़ी शांति। और क्या चाहिए।",
+          "en": "Just a room, two meals a day and a little peace. What more does a man need?"
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "setting": "the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors at sunset, its east wing dark with a rusted lock and chains",
+      "characters": [],
+      "mood": "dread",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "रौनकपुर हवेली कभी ठाकुरों की शान थी।",
+          "en": "Raunakpur Haveli was once the pride of the Thakurs."
+        },
+        {
+          "speaker": "narrator",
+          "text": "तीस साल पहले सरकार ने इसे सर्किट हाउस बना दिया।",
+          "en": "Thirty years ago, the government made it a circuit house."
+        },
+        {
+          "speaker": "narrator",
+          "text": "पर इतने दूर गाँव में अफ़सर कम ही आते थे। हवेली ज़्यादातर ख़ाली पड़ी रहती।",
+          "en": "But officials rarely came to so remote a village. The haveli mostly stood empty."
+        },
+        {
+          "speaker": "narrator",
+          "text": "और उसका पूरब वाला हिस्सा… उस पर तब से ताला लगा था, जब से किसी को याद है।",
+          "en": "And its east wing… had been locked for as long as anyone could remember.",
+          "shot": "close-up of a huge rusted padlock and chains on a carved wooden door"
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "setting": "smoky old kitchen of the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors, clay stove, brass pots, lantern light",
+      "characters": [
+        "banwari",
+        "madho"
+      ],
+      "mood": "calm",
+      "lines": [
+        {
+          "speaker": "banwari",
+          "text": "आ गए भैया? मैं बनवारी, यहाँ का रसोइया। चालीस साल से इसी हवेली में रोटियाँ बेल रहा हूँ।",
+          "en": "You're here, brother? I'm Banwari, the cook. Forty years I've been rolling rotis in this haveli."
+        },
+        {
+          "speaker": "madho",
+          "text": "इतनी बड़ी हवेली, और इतनी ख़ामोश?",
+          "en": "Such a big haveli, and so silent?"
+        },
+        {
+          "speaker": "banwari",
+          "text": "ख़ामोश ही अच्छी है भैया। बस एक बात याद रखना।",
+          "en": "Silent is good, brother. Just remember one thing."
+        },
+        {
+          "speaker": "banwari",
+          "text": "पूरब वाले हिस्से की तरफ़ मत जाना। और रात को कोई तुम्हारा नाम पुकारे, तो जवाब मत देना।",
+          "en": "Don't go near the east wing. And if someone calls your name at night, don't answer."
+        },
+        {
+          "speaker": "madho",
+          "text": "और गाँव के दरवाज़ों पर ये लकीरें? ये कैसा टोटका है?",
+          "en": "And those lines on every door in the village? What superstition is that?"
+        },
+        {
+          "speaker": "banwari",
+          "text": "टोटका नहीं भैया, जान बचाने का तरीका है। सौ लकीरें मतलब गिनती पूरी।",
+          "en": "Not superstition, brother. It's how we stay alive. A hundred lines means the count is done."
+        },
+        {
+          "speaker": "banwari",
+          "text": "वो समझती है कि यहाँ कोई नहीं छुपा, और आगे बढ़ जाती है।",
+          "en": "She thinks nobody is hiding there, and moves on."
+        },
+        {
+          "speaker": "madho",
+          "text": "वो? कौन वो?",
+          "en": "She? Who is she?"
+        },
+        {
+          "speaker": "banwari",
+          "text": "ठाकुर साहब की बिटिया… गौरी।",
+          "en": "The Thakur's little daughter… Gauri."
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "setting": "Banwari telling a story by lantern light in the kitchen of the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors, shadows on the wall",
+      "characters": [
+        "banwari",
+        "madho"
+      ],
+      "mood": "dread",
+      "lines": [
+        {
+          "speaker": "banwari",
+          "text": "चालीस साल पहले, एक रात गौरी बिटिया ग़ायब हो गई। उसी रात ठकुराइन के गहने भी।",
+          "en": "Forty years ago, little Gauri vanished one night. The Thakurain's jewels vanished the same night."
+        },
+        {
+          "speaker": "banwari",
+          "text": "सबने कहा, माली और उसका परिवार चोरी करके बिटिया को भी उठा ले गए।",
+          "en": "Everyone said the gardener's family stole them and took the girl too."
+        },
+        {
+          "speaker": "banwari",
+          "text": "गाँव वालों ने उन्हें उसी रात मार-पीट कर गाँव से निकाल दिया।",
+          "en": "The villagers beat them and threw them out of the village that same night."
+        },
+        {
+          "speaker": "banwari",
+          "text": "बिटिया फिर कभी नहीं मिली। पर उसकी आवाज़… वो आज भी गलियों में घूमती है।",
+          "en": "The girl was never found. But her voice… it still walks the lanes."
+        },
+        {
+          "speaker": "narrator",
+          "text": "माधो हँस दिया। पर पता नहीं क्यों, उसके हाथ ठंडे पड़ गए थे।",
+          "en": "Madho laughed. But somehow, his hands had gone cold."
+        },
+        {
+          "speaker": "narrator",
+          "text": "और हवेली की सीढ़ियों पर उसे पहले से पता था कि कौन सी सीढ़ी चरमराएगी।",
+          "en": "And on the haveli stairs, he already knew which step would creak."
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "setting": "a white government jeep arriving in the dusty forecourt of the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors in the morning",
+      "characters": [
+        "meenakshi",
+        "banwari"
+      ],
+      "mood": "pulse",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "अगली सुबह हवेली में महीनों बाद कोई मेहमान आया।",
+          "en": "The next morning, the haveli had its first guest in months."
+        },
+        {
+          "speaker": "meenakshi",
+          "text": "मैं मीनाक्षी राठौर, ज़िला प्रशासन से। ये हवेली सात दिन बाद नीलाम होनी है।",
+          "en": "I'm Meenakshi Rathore, district administration. This haveli goes to auction in seven days."
+        },
+        {
+          "speaker": "meenakshi",
+          "text": "मुझे इसका हर कमरा देखना है। पूरब वाला हिस्सा भी।",
+          "en": "I need to see every room. The east wing too."
+        },
+        {
+          "speaker": "banwari",
+          "text": "मैडम जी, वो हिस्सा तो चालीस साल से बंद है। चाबी भी किसी के पास नहीं।",
+          "en": "Madam, that wing has been shut for forty years. Nobody even has the key."
+        },
+        {
+          "speaker": "meenakshi",
+          "text": "तो ताला तोड़ेंगे। सात दिन में सब ख़ाली चाहिए।",
+          "en": "Then we'll break the lock. Everything must be cleared in seven days."
+        },
+        {
+          "speaker": "narrator",
+          "text": "सात दिन। और सातवीं रात… अमावस थी।",
+          "en": "Seven days. And the seventh night… was a moonless night."
+        }
+      ]
+    },
+    {
+      "id": "s09",
+      "setting": "a long dark corridor of the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors at night, a man with a kerosene lantern near a locked wall",
+      "characters": [
+        "madho"
+      ],
+      "mood": "dread",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "पहली रात। माधो लालटेन लेकर गलियारे का आख़िरी चक्कर लगा रहा था।",
+          "en": "The first night. Madho was doing his last round of the corridor with a lantern."
+        },
+        {
+          "speaker": "narrator",
+          "text": "पूरब वाले हिस्से की दीवार के पीछे से एक बच्ची की आवाज़ आई।",
+          "en": "From behind the east wing's wall came a little girl's voice."
+        },
+        {
+          "speaker": "gauri",
+          "text": "एक… दो… तीन… चार…",
+          "en": "One… two… three… four…"
+        },
+        {
+          "speaker": "narrator",
+          "text": "कोई गिन रहा था। धीरे-धीरे। बहुत धीरे।",
+          "en": "Someone was counting. Slowly. Very slowly."
+        },
+        {
+          "speaker": "madho",
+          "text": "कौन है वहाँ?",
+          "en": "Who's there?"
+        },
+        {
+          "speaker": "narrator",
+          "text": "गिनती रुक गई। और फिर हवा की सीटी के सिवा कुछ नहीं।",
+          "en": "The counting stopped. Then nothing but the whistle of the wind."
+        },
+        {
+          "speaker": "madho",
+          "text": "हवा है। पुरानी हवेली है, हवा तो बोलेगी ही।",
+          "en": "Just the wind. It's an old haveli, the wind will talk."
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "setting": "the stone courtyard of the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors in morning light, a freshly drawn chalk hopscotch with small wet footprints",
+      "characters": [
+        "banwari",
+        "madho"
+      ],
+      "mood": "dread",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "दूसरी सुबह आँगन में किसी ने चॉक से लंगड़ी टाँग का खेल बनाया था।",
+          "en": "On the second morning, someone had drawn a hopscotch in chalk in the courtyard.",
+          "shot": "top-down view of a fresh chalk hopscotch on old stone tiles"
+        },
+        {
+          "speaker": "narrator",
+          "text": "चॉक एकदम ताज़ी थी। और खानों के बीच छोटे-छोटे गीले पैरों के निशान थे।",
+          "en": "The chalk was fresh. And between the squares were small wet footprints."
+        },
+        {
+          "speaker": "banwari",
+          "text": "हे भगवान… ये तो वही खेल है। बिटिया यही खेलती थी।",
+          "en": "Oh God… that's the same game. The little one used to play it."
+        },
+        {
+          "speaker": "banwari",
+          "text": "भैया, आज से मैं अंधेरा होने से पहले घर चला जाऊँगा। माफ़ करना।",
+          "en": "Brother, from today I'm going home before dark. Forgive me."
+        },
+        {
+          "speaker": "madho",
+          "text": "किसी गाँव के बच्चे की शरारत होगी, बनवारी।",
+          "en": "Must be some village kid's prank, Banwari."
+        },
+        {
+          "speaker": "banwari",
+          "text": "इस गाँव के बच्चे शाम को घर से बाहर नहीं निकलते, भैया।",
+          "en": "Children in this village don't step out after dusk, brother."
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "setting": "village children being pulled indoors by their mothers at dusk in the remote Bundelkhand village of Sunarpur, rocky hills, mud and stone houses, doors with chalk lines",
+      "characters": [],
+      "mood": "drone",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "सुनारपुर में बच्चों को पहला सबक यही सिखाया जाता है।",
+          "en": "In Sunarpur, this is the first lesson every child learns."
+        },
+        {
+          "speaker": "narrator",
+          "text": "अंधेरे में अपना नाम सुनो, तो जवाब मत दो।",
+          "en": "If you hear your name in the dark, don't answer."
+        },
+        {
+          "speaker": "narrator",
+          "text": "दरवाज़ा कोई खटखटाए, तो खोलो मत।",
+          "en": "If someone knocks, don't open the door."
+        },
+        {
+          "speaker": "narrator",
+          "text": "और कभी, कभी भी, छुपन-छुपाई मत खेलो।",
+          "en": "And never, ever play hide and seek."
+        },
+        {
+          "speaker": "narrator",
+          "text": "क्योंकि इस गाँव में एक खिलाड़ी आज भी अपनी बारी का इंतज़ार कर रही है।",
+          "en": "Because in this village, one player is still waiting for her turn."
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "setting": "the flat roof and dark staircase of the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors on the third night, moonlight, a small shadow running",
+      "characters": [
+        "madho"
+      ],
+      "mood": "chase",
+      "sfx": [
+        "anklet"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "तीसरी रात छत पर किसी के भागने की आवाज़ आई। छम… छम… छम।",
+          "en": "On the third night, something ran across the roof. Chham… chham… chham."
+        },
+        {
+          "speaker": "gauri",
+          "text": "पकड़ो! पकड़ो ना!",
+          "en": "Catch me! Come on, catch me!"
+        },
+        {
+          "speaker": "narrator",
+          "text": "फिर एक बच्ची की खिलखिलाहट। ठीक उसके कमरे के ऊपर।",
+          "en": "Then a little girl's giggle. Right above his room."
+        },
+        {
+          "speaker": "narrator",
+          "text": "माधो भागकर अपने कमरे में पहुँचा। उसके बिस्तर पर कुछ रखा था।",
+          "en": "Madho ran back to his room. Something was lying on his bed."
+        },
+        {
+          "speaker": "narrator",
+          "text": "एक लाल रंग का लकड़ी का लट्टू। पुराना, घिसा हुआ।",
+          "en": "A red wooden spinning top. Old, worn smooth.",
+          "shot": "close-up of an old red wooden spinning top lying on a white bedsheet in lantern light"
+        },
+        {
+          "speaker": "narrator",
+          "text": "उसे हाथ में लेते ही माधो के हाथ काँपने लगे। क्यों, ये उसे ख़ुद नहीं पता था।",
+          "en": "The moment he held it, his hands began to shake. He didn't know why."
+        },
+        {
+          "speaker": "gauri",
+          "text": "माधो… तुम आ गए!",
+          "en": "Madho… you came back!"
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "setting": "village lanes of the remote Bundelkhand village of Sunarpur, rocky hills, mud and stone houses at night, a pale girl's silhouette skipping between houses",
+      "characters": [],
+      "mood": "dread",
+      "sfx": [
+        "anklet"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "उस रात गाँव में भी कुछ बदल गया।",
+          "en": "That night, something changed in the village too."
+        },
+        {
+          "speaker": "narrator",
+          "text": "अब गलियों में घूमती आवाज़ सवाल नहीं पूछ रही थी। अब वो ख़ुश थी।",
+          "en": "The voice in the lanes was no longer asking. Now it was happy."
+        },
+        {
+          "speaker": "gauri",
+          "text": "माधो आ गया! माधो आ गया!",
+          "en": "Madho is back! Madho is back!"
+        },
+        {
+          "speaker": "narrator",
+          "text": "सुबह सरपंच का आठ साल का पोता गोलू अपने बिस्तर से ग़ायब था।",
+          "en": "By morning, the sarpanch's eight-year-old grandson Golu was missing from his bed."
+        },
+        {
+          "speaker": "narrator",
+          "text": "उसे हवेली के आँगन में पाया गया। दीवार की तरफ़ मुँह, आँखें बंद।",
+          "en": "He was found in the haveli courtyard. Facing the wall, eyes shut."
+        },
+        {
+          "speaker": "golu",
+          "text": "सत्तानवे… अट्ठानवे… निन्यानवे…",
+          "en": "Ninety-seven… ninety-eight… ninety-nine…"
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "setting": "village council under a huge banyan tree in the remote Bundelkhand village of Sunarpur, rocky hills, mud and stone houses, angry villagers, an outsider standing alone",
+      "characters": [
+        "sarpanch",
+        "madho",
+        "banwari"
+      ],
+      "mood": "pulse",
+      "lines": [
+        {
+          "speaker": "sarpanch",
+          "text": "जब से ये अजनबी आया है, वो बेचैन है। पहले कभी बच्चों को नहीं ले गई!",
+          "en": "Ever since this stranger came, she's restless. She never took children before!"
+        },
+        {
+          "speaker": "sarpanch",
+          "text": "अमावस से पहले ये आदमी गाँव छोड़ दे। वरना हम ख़ुद निकालेंगे।",
+          "en": "This man leaves the village before the dark moon. Or we throw him out ourselves."
+        },
+        {
+          "speaker": "madho",
+          "text": "मैंने क्या किया है? मैं तो इस गाँव को जानता भी नहीं।",
+          "en": "What have I done? I don't even know this village."
+        },
+        {
+          "speaker": "banwari",
+          "text": "भैया, चालीस साल पहले भी इसी चौपाल पर एक परिवार को ऐसे ही निकाला गया था।",
+          "en": "Brother, forty years ago a family was thrown out from this very spot, just like this."
+        },
+        {
+          "speaker": "narrator",
+          "text": "माधो के सिर में तेज़ दर्द उठा। जैसे कोई भूली हुई याद अंदर से दरवाज़ा पीट रही हो।",
+          "en": "A sharp pain split Madho's head. As if a forgotten memory was banging on a door inside."
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "setting": "a dusty district records room, stacks of old files, a woman reading a yellowed 1986 police report",
+      "characters": [
+        "meenakshi"
+      ],
+      "mood": "drone",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "उधर मीनाक्षी ज़िला दफ़्तर की पुरानी फ़ाइलें पलट रही थी।",
+          "en": "Meanwhile, Meenakshi was going through the district office's old files."
+        },
+        {
+          "speaker": "meenakshi",
+          "text": "1986 की पुलिस रिपोर्ट। ठाकुर की बेटी गौरी लापता। ठकुराइन के गहने चोरी।",
+          "en": "A 1986 police report. The Thakur's daughter Gauri missing. The Thakurain's jewels stolen.",
+          "shot": "close-up of a yellowed typed police report with a faded photo of a little girl"
+        },
+        {
+          "speaker": "meenakshi",
+          "text": "शक माली रामदीन पर। उसी रात परिवार को गाँव से निकाला गया।",
+          "en": "Suspect: Ramdeen, the gardener. His family thrown out of the village that night."
+        },
+        {
+          "speaker": "meenakshi",
+          "text": "रामदीन, उसकी पत्नी… और एक आठ साल का बेटा।",
+          "en": "Ramdeen, his wife… and an eight-year-old son."
+        },
+        {
+          "speaker": "meenakshi",
+          "text": "बेटे का नाम… माधो।",
+          "en": "The son's name… Madho."
+        }
+      ]
+    },
+    {
+      "id": "s16",
+      "setting": "the veranda of the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors at dusk, a woman with files confronting a tired caretaker",
+      "characters": [
+        "meenakshi",
+        "madho"
+      ],
+      "mood": "drone",
+      "lines": [
+        {
+          "speaker": "meenakshi",
+          "text": "माधो जी, आप कहाँ के रहने वाले हैं? आपके पिता का नाम क्या था?",
+          "en": "Madho ji, where are you from? What was your father's name?"
+        },
+        {
+          "speaker": "madho",
+          "text": "मुझे याद नहीं, मैडम। बचपन का कुछ भी याद नहीं।",
+          "en": "I don't remember, madam. Nothing from my childhood."
+        },
+        {
+          "speaker": "madho",
+          "text": "बस इतना याद है कि एक रात बहुत शोर था। मशालें थीं। कोई रो रहा था।",
+          "en": "Only that one night there was a lot of noise. Burning torches. Someone was crying."
+        },
+        {
+          "speaker": "meenakshi",
+          "text": "आप इसी गाँव के हैं, माधो जी। आप रामदीन माली के बेटे हैं।",
+          "en": "You're from this village, Madho ji. You're Ramdeen the gardener's son."
+        }
+      ]
+    },
+    {
+      "id": "s17",
+      "setting": "1986 flashback, warm faded colours: two children playing in the sunlit east wing of the haveli, a small storeroom door",
+      "characters": [
+        "madho_child",
+        "gauri_young"
+      ],
+      "mood": "calm",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "उस रात माधो को सपना आया। या शायद… याद।",
+          "en": "That night Madho had a dream. Or perhaps… a memory."
+        },
+        {
+          "speaker": "madho_child",
+          "text": "गौरी, जल्दी छुप जा! मैं सौ तक गिनूँगा, फिर ढूँढूँगा!",
+          "en": "Gauri, hide quickly! I'll count to a hundred, then I'll find you!"
+        },
+        {
+          "speaker": "gauri_young",
+          "text": "मुझे कोई नहीं ढूँढ पाएगा!",
+          "en": "Nobody can ever find me!"
+        },
+        {
+          "speaker": "narrator",
+          "text": "छोटा माधो गौरी को पूरब वाले हिस्से की एक छोटी सी कोठरी में छुपाता है।",
+          "en": "Little Madho hides Gauri in a tiny storeroom in the east wing."
+        },
+        {
+          "speaker": "madho_child",
+          "text": "रुक, मैं बाहर से कुंडी लगा देता हूँ। फिर तो कोई नहीं ढूँढ पाएगा!",
+          "en": "Wait, I'll latch it from outside. Then nobody will ever find you!"
+        },
+        {
+          "speaker": "narrator",
+          "text": "कुंडी लगी। माधो गिनने लगा। एक… दो… तीन…",
+          "en": "The latch clicked shut. Madho began to count. One… two… three…",
+          "shot": "extreme close-up of a small child's hand sliding an old iron latch shut"
+        },
+        {
+          "speaker": "narrator",
+          "text": "और तभी नीचे से चीख़ें आईं।",
+          "en": "And then the screaming started downstairs."
+        }
+      ]
+    },
+    {
+      "id": "s18",
+      "setting": "1986 flashback, warm faded colours: a sly accountant opening an iron safe in the haveli at night, gold jewellery glinting",
+      "characters": [
+        "harilal",
+        "thakur",
+        "ramdeen"
+      ],
+      "mood": "pulse",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "उसी शाम मुनीम हरिलाल ने ठकुराइन की तिजोरी से सारे गहने निकाल लिए थे।",
+          "en": "That same evening, Munim Harilal had emptied the Thakurain's safe."
+        },
+        {
+          "speaker": "harilal",
+          "text": "चोरी हुई है तो चोर भी चाहिए। और माली से अच्छा चोर कौन?",
+          "en": "If there's a theft, there must be a thief. And who better than the gardener?"
+        },
+        {
+          "speaker": "harilal",
+          "text": "ठाकुर साहब, गहने तो माली के परिवार ने चुराए हैं। मैंने अपनी आँखों से देखा।",
+          "en": "Thakur sahib, the gardener's family stole the jewels. I saw it with my own eyes."
+        },
+        {
+          "speaker": "thakur",
+          "text": "रामदीन! हमारे नमक का ये बदला?",
+          "en": "Ramdeen! Is this how you repay us?"
+        },
+        {
+          "speaker": "ramdeen",
+          "text": "मैंने चोरी नहीं की, ठाकुर साहब! भगवान की क़सम!",
+          "en": "I didn't steal anything, Thakur sahib! I swear to God!"
+        },
+        {
+          "speaker": "thakur",
+          "text": "और बिटिया कहाँ है? गौरी कहाँ है?",
+          "en": "And where is my daughter? Where is Gauri?"
+        },
+        {
+          "speaker": "harilal",
+          "text": "वो भी इन्हीं के साथ थी, हुज़ूर। ज़रूर इन्होंने ही…",
+          "en": "She was with them, sir. They must have…"
+        }
+      ]
+    },
+    {
+      "id": "s19",
+      "setting": "1986 flashback, warm faded colours: an angry mob with burning torches and sticks dragging a poor family out of the village at night",
+      "characters": [
+        "madho_child"
+      ],
+      "mood": "chase",
+      "sfx": [
+        "crowd"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "किसी ने एक नहीं सुनी। लाठियाँ उठीं। मशालें जलीं।",
+          "en": "No one listened. Sticks were raised. Torches were lit."
+        },
+        {
+          "speaker": "narrator",
+          "text": "रामदीन, उसकी पत्नी और रोता हुआ छोटा माधो आधी रात को गाँव से धकेल दिए गए।",
+          "en": "Ramdeen, his wife and a sobbing little Madho were driven out of the village at midnight."
+        },
+        {
+          "speaker": "madho_child",
+          "text": "बापू! गौरी… गौरी ऊपर है! मुझे उसे ढूँढना है!",
+          "en": "Father! Gauri… Gauri is upstairs! I have to find her!"
+        },
+        {
+          "speaker": "narrator",
+          "text": "पर उस शोर में एक बच्चे की आवाज़ कौन सुनता।",
+          "en": "But who hears a child in that kind of noise?"
+        },
+        {
+          "speaker": "narrator",
+          "text": "और ऊपर, अंधेरी कोठरी में, एक बच्ची चुपचाप इंतज़ार कर रही थी।",
+          "en": "And upstairs, in a dark storeroom, a little girl waited quietly."
+        },
+        {
+          "speaker": "gauri_young",
+          "text": "माधो… सौ हो गया? ढूँढो ना…",
+          "en": "Madho… is it a hundred yet? Come find me…"
+        }
+      ]
+    },
+    {
+      "id": "s20",
+      "setting": "1986 flashback, warm faded colours: villagers searching a well, fields and a river bank with lanterns, the haveli east wing dark behind",
+      "characters": [],
+      "mood": "piano",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "गौरी को हर जगह ढूँढा गया। कुएँ में, खेतों में, नदी के किनारे।",
+          "en": "They searched for Gauri everywhere. The well, the fields, the riverbank."
+        },
+        {
+          "speaker": "narrator",
+          "text": "पर उस कोठरी में किसी ने नहीं झाँका, जिसकी कुंडी बाहर से लगी थी।",
+          "en": "But no one looked into the storeroom latched from outside."
+        },
+        {
+          "speaker": "narrator",
+          "text": "महीने भर बाद ठकुराइन दुख में चल बसीं। और ठाकुर ने पूरब वाला हिस्सा हमेशा के लिए बंद करवा दिया।",
+          "en": "A month later the Thakurain died of grief. And the Thakur had the east wing sealed forever."
+        },
+        {
+          "speaker": "narrator",
+          "text": "उस रात के डर और मार में छोटा माधो सब भूल गया। गौरी को भी। उस कुंडी को भी।",
+          "en": "In the terror and beatings of that night, little Madho forgot everything. Gauri. And that latch."
+        }
+      ]
+    },
+    {
+      "id": "s21",
+      "setting": "a man waking up crying in a dark room of the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors, holding a red wooden spinning top",
+      "characters": [
+        "madho"
+      ],
+      "mood": "piano",
+      "lines": [
+        {
+          "speaker": "madho",
+          "text": "मैंने कुंडी लगाई थी… मैंने ही…",
+          "en": "I latched that door… it was me…"
+        },
+        {
+          "speaker": "madho",
+          "text": "गौरी… चालीस साल से तुम वहीं…",
+          "en": "Gauri… for forty years you've been in there…"
+        },
+        {
+          "speaker": "narrator",
+          "text": "माधो फूट-फूटकर रोने लगा। बाहर, गलियों में, पायल फिर बज रही थी।",
+          "en": "Madho broke down sobbing. Outside, in the lanes, the anklets were ringing again."
+        }
+      ]
+    },
+    {
+      "id": "s22",
+      "setting": "moonless night, villagers with burning torches marching towards the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors",
+      "characters": [
+        "sarpanch"
+      ],
+      "mood": "chase",
+      "sfx": [
+        "crowd"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "सातवीं रात। अमावस।",
+          "en": "The seventh night. The dark moon."
+        },
+        {
+          "speaker": "narrator",
+          "text": "गाँव वाले मशालें लेकर हवेली की तरफ़ बढ़ रहे थे। माधो को निकालने।",
+          "en": "The villagers marched on the haveli with torches. To throw Madho out."
+        },
+        {
+          "speaker": "sarpanch",
+          "text": "निकालो इसे! आज रात ये गाँव में नहीं रहेगा!",
+          "en": "Throw him out! He won't stay in this village tonight!"
+        },
+        {
+          "speaker": "narrator",
+          "text": "बिल्कुल वैसे ही, जैसे चालीस साल पहले।",
+          "en": "Exactly like forty years ago."
+        }
+      ]
+    },
+    {
+      "id": "s23",
+      "setting": "doors swinging open by themselves in the remote Bundelkhand village of Sunarpur, rocky hills, mud and stone houses at night, chalk lines fading, sleepwalking children in a line walking towards the haveli",
+      "characters": [
+        "golu",
+        "sarpanch",
+        "gauri"
+      ],
+      "mood": "chase",
+      "sfx": [
+        "anklet"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "पर उसी रात गौरी भी गाँव में आई। पहली बार, पूरे ग़ुस्से में।",
+          "en": "But that same night, Gauri came to the village. For the first time, in full fury."
+        },
+        {
+          "speaker": "narrator",
+          "text": "चॉक की लकीरें अपने आप मिटने लगीं। दरवाज़े अपने आप खुलने लगे।",
+          "en": "The chalk lines began to wipe themselves away. Doors swung open on their own.",
+          "shot": "close-up of chalk tally lines on a doorframe dissolving into dust"
+        },
+        {
+          "speaker": "narrator",
+          "text": "और घरों से बच्चे निकलने लगे। नींद में चलते हुए। आँखें बंद। गिनते हुए।",
+          "en": "And children walked out of their homes. Asleep. Eyes shut. Counting."
+        },
+        {
+          "speaker": "golu",
+          "text": "एक… दो… तीन…",
+          "en": "One… two… three…"
+        },
+        {
+          "speaker": "sarpanch",
+          "text": "रोको इन्हें! कोई रोको!",
+          "en": "Stop them! Someone stop them!"
+        },
+        {
+          "speaker": "narrator",
+          "text": "पर बड़ों के पैर ज़मीन से चिपक गए थे। कोई हिल नहीं पा रहा था।",
+          "en": "But the grown-ups' feet were stuck to the ground. No one could move."
+        },
+        {
+          "speaker": "gauri",
+          "text": "किसी ने मुझे नहीं ढूँढा। अब कोई घर नहीं जाएगा।",
+          "en": "Nobody came to find me. Now nobody goes home."
+        }
+      ]
+    },
+    {
+      "id": "s24",
+      "setting": "a man and a woman breaking a rusted lock on the sealed east wing of the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors, dust exploding in torchlight",
+      "characters": [
+        "madho",
+        "meenakshi"
+      ],
+      "mood": "chase",
+      "lines": [
+        {
+          "speaker": "madho",
+          "text": "मीनाक्षी जी, पूरब वाला हिस्सा! मुझे पता है वो कहाँ है!",
+          "en": "Meenakshi ji, the east wing! I know where she is!"
+        },
+        {
+          "speaker": "narrator",
+          "text": "माधो और मीनाक्षी ने ताला तोड़ा। चालीस साल की धूल उड़ी।",
+          "en": "Madho and Meenakshi broke the lock. Forty years of dust rose up."
+        },
+        {
+          "speaker": "narrator",
+          "text": "गलियारे के आख़िर में एक छोटी सी कोठरी। दरवाज़े पर कुंडी, अब भी बाहर से लगी।",
+          "en": "At the end of the corridor, a tiny storeroom. Its latch still shut from the outside.",
+          "shot": "close-up of an old iron latch shut from outside on a small dusty wooden door"
+        }
+      ]
+    },
+    {
+      "id": "s25",
+      "setting": "inside a tiny dusty storeroom, a faded red child's lehenga and a silver anklet on the floor, scratch marks on the back of the door",
+      "characters": [
+        "madho",
+        "meenakshi"
+      ],
+      "mood": "reveal",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "माधो के हाथ काँप रहे थे। उसने कुंडी खोली।",
+          "en": "Madho's hands were shaking. He opened the latch."
+        },
+        {
+          "speaker": "narrator",
+          "text": "अंदर एक छोटा सा लाल लहँगा पड़ा था। और एक पायल।",
+          "en": "Inside lay a small red lehenga. And one anklet."
+        },
+        {
+          "speaker": "narrator",
+          "text": "और दरवाज़े के अंदर की तरफ़… नाख़ूनों से खुरची हुई लकीरें।",
+          "en": "And on the inside of the door… lines scratched with fingernails.",
+          "shot": "extreme close-up of a hundred thin tally lines scratched into old wood by small fingernails"
+        },
+        {
+          "speaker": "meenakshi",
+          "text": "ये गिनती है। सौ लकीरें।",
+          "en": "It's a count. A hundred lines."
+        },
+        {
+          "speaker": "narrator",
+          "text": "सौ लकीरें। ठीक वैसी ही, जैसी चालीस साल से गाँव हर दरवाज़े पर बना रहा था।",
+          "en": "A hundred lines. Exactly like the ones the village had drawn on every door for forty years."
+        },
+        {
+          "speaker": "narrator",
+          "text": "बिना जाने कि वो किसकी गिनती थी।",
+          "en": "Without ever knowing whose count it was."
+        }
+      ]
+    },
+    {
+      "id": "s26",
+      "setting": "the dark storeroom, a small pale ghost girl standing in the corner with dust in her hair, a kneeling man",
+      "characters": [
+        "gauri",
+        "madho"
+      ],
+      "mood": "reveal",
+      "sfx": [
+        "anklet"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "कोठरी में ठंडी हवा का झोंका आया। और कोने में वो खड़ी थी।",
+          "en": "A cold gust swept the storeroom. And there she stood, in the corner."
+        },
+        {
+          "speaker": "narrator",
+          "text": "एक छोटी सी बच्ची। बालों में धूल। आँखों में चालीस साल का इंतज़ार।",
+          "en": "A little girl. Dust in her hair. Forty years of waiting in her eyes."
+        },
+        {
+          "speaker": "gauri",
+          "text": "तुम बहुत देर से आए, माधो। मैं कब से छुपी थी।",
+          "en": "You came so late, Madho. I've been hiding for so long."
+        },
+        {
+          "speaker": "madho",
+          "text": "मुझे माफ़ कर दे, गौरी। मैं भूल गया था। मैं बच्चा था।",
+          "en": "Forgive me, Gauri. I forgot. I was just a child."
+        },
+        {
+          "speaker": "gauri",
+          "text": "सब भूल गए। किसी ने मुझे नहीं ढूँढा।",
+          "en": "Everyone forgot. Nobody came to find me."
+        }
+      ]
+    },
+    {
+      "id": "s27",
+      "setting": "a man kneeling before a little ghost girl in a dusty storeroom, first light of dawn through a crack",
+      "characters": [
+        "madho",
+        "gauri"
+      ],
+      "mood": "piano",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "माधो घुटनों के बल बैठ गया। चालीस साल पुरानी गिनती आख़िर पूरी हुई।",
+          "en": "Madho sank to his knees. A forty-year-old count was finally complete."
+        },
+        {
+          "speaker": "madho",
+          "text": "मिल गई, गौरी। मैंने तुम्हें ढूँढ लिया।",
+          "en": "Found you, Gauri. I found you."
+        },
+        {
+          "speaker": "narrator",
+          "text": "गौरी के चेहरे पर पहली बार मुस्कान आई।",
+          "en": "For the first time, Gauri smiled."
+        },
+        {
+          "speaker": "gauri",
+          "text": "तुम जीत गए, माधो।",
+          "en": "You win, Madho."
+        },
+        {
+          "speaker": "narrator",
+          "text": "और वो धीरे-धीरे सुबह की रोशनी में घुल गई। पायल की आख़िरी छम-छम के साथ।",
+          "en": "And she slowly dissolved into the morning light, with one last chime of her anklets."
+        }
+      ]
+    },
+    {
+      "id": "s28",
+      "setting": "dawn in the remote Bundelkhand village of Sunarpur, rocky hills, mud and stone houses, children waking up in the lanes and running to their mothers, torches burnt out",
+      "characters": [],
+      "mood": "piano",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "उसी पल गाँव की गलियों में बच्चों की आँखें खुल गईं।",
+          "en": "At that very moment, the children in the lanes opened their eyes."
+        },
+        {
+          "speaker": "narrator",
+          "text": "कोई रो रहा था, कोई अपनी माँ से लिपटा था। गोलू भी घर लौट आया था।",
+          "en": "Some were crying, some clung to their mothers. Golu was home too."
+        },
+        {
+          "speaker": "narrator",
+          "text": "मशालें बुझ चुकी थीं। किसी में माधो की तरफ़ देखने की हिम्मत नहीं थी।",
+          "en": "The torches had burned out. No one had the courage to look Madho in the eye."
+        }
+      ]
+    },
+    {
+      "id": "s29",
+      "setting": "a woman officer handing a stamped government letter to a teary caretaker on the steps of the old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors",
+      "characters": [
+        "meenakshi",
+        "madho"
+      ],
+      "mood": "piano",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "मीनाक्षी की रिपोर्ट ने चालीस साल पुराना सच बाहर ला दिया।",
+          "en": "Meenakshi's report brought a forty-year-old truth into the light."
+        },
+        {
+          "speaker": "narrator",
+          "text": "ठकुराइन के गहने मुनीम हरिलाल के पुश्तैनी संदूक में मिले।",
+          "en": "The Thakurain's jewels were found in Munim Harilal's family chest."
+        },
+        {
+          "speaker": "meenakshi",
+          "text": "रामदीन माली बेक़सूर थे, माधो जी। सरकार ये बात लिखकर देगी।",
+          "en": "Ramdeen the gardener was innocent, Madho ji. The government will put it in writing."
+        },
+        {
+          "speaker": "madho",
+          "text": "बापू को ये सुनना था, मैडम। चालीस साल देर हो गई।",
+          "en": "My father needed to hear this, madam. Forty years too late."
+        },
+        {
+          "speaker": "narrator",
+          "text": "उस सुबह सुनारपुर ने पहली बार अपने दरवाज़ों से चॉक की लकीरें धो डालीं।",
+          "en": "That morning, for the first time, Sunarpur washed the chalk lines off its doors."
+        }
+      ]
+    },
+    {
+      "id": "s30",
+      "setting": "months later, village children playing hide and seek at dusk near the renovated old Raunakpur haveli turned government circuit house, carved sandstone arches, long corridors, one boy counting against a tree",
+      "characters": [
+        "golu",
+        "gauri"
+      ],
+      "mood": "dread",
+      "sfx": [
+        "laugh"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "कुछ महीने बाद। हवेली अब होटल बनने जा रही है।",
+          "en": "A few months later. The haveli is becoming a hotel."
+        },
+        {
+          "speaker": "narrator",
+          "text": "और सुनारपुर के बच्चे फिर से छुपन-छुपाई खेलने लगे हैं।",
+          "en": "And the children of Sunarpur play hide and seek again."
+        },
+        {
+          "speaker": "narrator",
+          "text": "एक शाम एक छोटा लड़का पेड़ से मुँह सटाकर गिन रहा था।",
+          "en": "One evening, a little boy was counting with his face pressed to a tree."
+        },
+        {
+          "speaker": "golu",
+          "text": "अट्ठानवे… निन्यानवे… सौ!",
+          "en": "Ninety-eight… ninety-nine… a hundred!"
+        },
+        {
+          "speaker": "narrator",
+          "text": "उसने आँखें खोलीं। सामने एक लड़की खड़ी थी, जिसे उसने पहले कभी नहीं देखा था।",
+          "en": "He opened his eyes. A girl he had never seen before stood in front of him."
+        },
+        {
+          "speaker": "gauri",
+          "text": "अब मेरी बारी… आँखें बंद करो।",
+          "en": "My turn now… close your eyes."
+        }
+      ]
+    }
+  ],
+  "thumbnail": {
+    "prompt": "a small pale ghost girl in a faded red lehenga peeking from behind a carved sandstone pillar in a dark haveli corridor, one hollow eye visible, long grey fingers on the pillar, a hundred chalk lines on the wall beside her, lantern glow",
+    "text": "मत बोलना हाँ"
+  },
+  "shorts": [
+    {
+      "scenes": [
+        "s02",
+        "s03"
+      ],
+      "title": "Never say yes when she calls your name",
+      "hook": "close-up of small bare feet with silver anklets on a dark village lane, a man's shadow behind"
+    },
+    {
+      "scenes": [
+        "s11"
+      ],
+      "title": "The one game this village has banned for 40 years",
+      "hook": "a hundred chalk lines on an old wooden door, a small grey hand touching them"
+    },
+    {
+      "scenes": [
+        "s12"
+      ],
+      "title": "She left a toy on his bed. He doesn't know why he's shaking",
+      "hook": "an old red wooden spinning top on a white bedsheet, a pale child's hand placing it"
+    },
+    {
+      "scenes": [
+        "s25"
+      ],
+      "title": "What they found behind the latched door",
+      "hook": "an old iron latch on a small dusty door, scratch marks glowing faintly"
+    }
+  ],
+  "youtube": {
+    "description": "In Sunarpur, a remote village in Bundelkhand, every door carries a hundred chalk lines and one game is forbidden: hide and seek. For forty years a little girl's voice has walked its lanes on moonless nights, calling one name. Then a stranger called Madho arrives as the new caretaker of the old haveli, and the game begins again.",
+    "hashtags": [
+      "#BundelkhandHorror",
+      "#HideAndSeek"
+    ],
+    "tags": [
+      "hide and seek horror story",
+      "haunted haveli story",
+      "village ghost story hindi",
+      "bundelkhand horror",
+      "ghost girl horror story",
+      "chhupan chhupai horror",
+      "haveli horror story hindi",
+      "village horror story hindi"
+    ]
+  }
+}
