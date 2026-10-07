@@ -25,7 +25,12 @@ def run(cmd, **kw):
 
 
 # 1) metadata + download (720p is plenty)
-meta = json.loads(run(["yt-dlp", "-J", "--no-warnings", url]).stdout)
+r = run(["yt-dlp", "-J", "--no-warnings", url])
+if r.returncode != 0:
+    msg = r.stderr.strip().splitlines()[-1] if r.stderr.strip() else "unknown"
+    print(f"::error title=yt-dlp::{msg[:400]}")
+    sys.exit(1)
+meta = json.loads(r.stdout)
 keep = {k: meta.get(k) for k in ("title", "description", "duration", "view_count", "like_count", "comment_count",
                                  "upload_date", "tags", "categories", "channel", "width", "height", "fps",
                                  "chapters", "language", "availability")}
@@ -33,7 +38,8 @@ keep = {k: meta.get(k) for k in ("title", "description", "duration", "view_count
 r = run(["yt-dlp", "-f", "bv*[height<=720]+ba/b[height<=720]/b", "--merge-output-format", "mp4",
          "-o", str(video), "--no-warnings", url])
 if not video.exists():
-    sys.exit("download failed: " + r.stderr[-500:])
+    print("::error title=download::" + r.stderr.strip().replace("\n", " ")[-400:])
+    sys.exit(1)
 dur = float(run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", str(video)]).stdout)
 print(f"downloaded {dur:.0f}s")
 
