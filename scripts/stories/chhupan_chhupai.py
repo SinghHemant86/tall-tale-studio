@@ -397,7 +397,7 @@ scenes = [
 
 story = {
     "id": "002-chhupan-chhupai",
-    "title": "The Village Where Hide and Seek Is Banned | Hindi Horror Story",
+    "title": "She Is Still Counting to 100 | Hindi Horror Story",
     "genre": "horror",
     "art_style": "creepy_comic",
     "language": "hi",
