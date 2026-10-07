@@ -93,7 +93,7 @@ def main() -> int:
     short_list = []
     if cfg.get("shorts", {}).get("enabled", True) and story.get("shorts"):
         log("   shorts")
-        short_list = shorts.make_all(story, scene_times, subs, work)
+        short_list = shorts.make_all(story, scene_times, subs, work, cfg, genre)
 
     log("6/6 publish")
     meta = llm.youtube_metadata(story)

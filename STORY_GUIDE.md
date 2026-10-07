@@ -66,10 +66,12 @@ story that breaks them.
   asked"), never "MURDER EXPOSED". Real people stay faceless or stylised, never photo-real.
 - Expect limited ads on real deaths; that is the price of the topic.
 
-## Shorts (cut from the long video)
-- `"shorts": [{"scenes": ["s2", "s3"], "title": "English hook title"}, ...]`: 3-4 per long video.
-- Pick moments that work alone: the hook lands in the first 2 seconds, it ends on a cliffhanger.
-- Under a minute (longer picks are trimmed at the end of a line). Vertical 1080x1920, picture in the
-  middle, title on top, English subtitles under it, closing card "Watch the full story on Tall-Tale".
-- Uploaded to YouTube with "Full story ▶ <long video link>" in the description; files are also kept
-  in the run's download for Instagram Reels.
+## Shorts (trailer-style, from the long video)
+- `"shorts": [{"scenes": ["s2", "s3"], "title": "English hook title", "hook": "image prompt"}, ...]`,
+  3-4 per long video. `hook` = the most striking picture in the story, shown first (optional).
+- Sound: the long video's own narration and music for those scenes (no extra voice credits).
+- Picture: new square images every ~1.5 s (close-ups, eyes, hands, objects) with fast push-ins,
+  shakes and white flashes; captions pop in 3 words at a time; title on top; closing card
+  "Watch the full story on Tall-Tale". About 20-35 new images per Short.
+- Pick moments that work alone and end on a cliffhanger. Under a minute (trimmed at a line end).
+- Uploaded to YouTube with "Full story ▶ <long video link>"; files kept in the run's download for Reels.
