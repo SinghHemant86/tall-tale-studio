@@ -56,8 +56,8 @@ class QuotaExhausted(RuntimeError):
 
 
 class ImagesPending(RuntimeError):
-    def __init__(self, done: int, total: int):
-        super().__init__(f"{done}/{total} images ready")
+    def __init__(self, done: int, total: int, reason: str = ""):
+        super().__init__(f"{done}/{total} images ready; {reason}")
         self.done, self.total = done, total
 
 
@@ -73,7 +73,7 @@ def _cloudflare(prompt: str, out: Path, w: int, h: int, seed: int) -> None:
                           json={"prompt": prompt[:2000], "steps": 6},  # this model rejects "seed"
                           timeout=180)
         if r.status_code == 429 or "4006" in r.text[:300]:
-            raise QuotaExhausted("Cloudflare daily image allowance used up (429)")
+            raise QuotaExhausted(f"Cloudflare {r.status_code}: {r.text[:300]}")
         if r.status_code >= 400:
             raise RuntimeError(f"Cloudflare HTTP {r.status_code}: {r.text[:400]}")
         if r.headers.get("content-type", "").startswith("image"):
@@ -246,7 +246,7 @@ def shot_images(plan: dict, work: Path, cfg: dict, style: str = "") -> dict[str,
             try:
                 out[sid].append(render(sh["prompt"], p, cfg, (i * 7919 + len(sid) * 104729) % 100000,
                                        int(w * 1.25), int(h * 1.25), style))
-            except QuotaExhausted:
+            except QuotaExhausted as qe:
                 made = sum(1 for s2, sh2 in plan.items() for k in range(len(sh2)) if (d / f"{s2}_{k:02d}.png").exists())
-                raise ImagesPending(made, total)
+                raise ImagesPending(made, total, str(qe)[:300])
     return out
