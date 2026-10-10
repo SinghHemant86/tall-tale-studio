@@ -1300,5 +1300,34 @@
       "haveli horror story hindi",
       "village horror story hindi"
     ]
+  },
+  "result": {
+    "video": "output/002-chhupan-chhupai/002-chhupan-chhupai.mp4",
+    "seconds": 924.6,
+    "youtube_id": "_ifXs4sxDog",
+    "publish_at": null,
+    "shorts": [
+      {
+        "file": "output/002-chhupan-chhupai/shorts/short_01.mp4",
+        "youtube_id": "O6J_BpRSvMk",
+        "publish_at": null
+      },
+      {
+        "file": "output/002-chhupan-chhupai/shorts/short_02.mp4",
+        "youtube_id": "mygscdZQrxI",
+        "publish_at": null
+      },
+      {
+        "file": "output/002-chhupan-chhupai/shorts/short_03.mp4",
+        "youtube_id": "6rrxTM97bqY",
+        "publish_at": null
+      },
+      {
+        "file": "output/002-chhupan-chhupai/shorts/short_04.mp4",
+        "youtube_id": "TnVFd5t9-KE",
+        "publish_at": null
+      }
+    ],
+    "portraits": []
   }
 }
