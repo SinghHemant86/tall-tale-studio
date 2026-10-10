@@ -1,1 +1,1 @@
-002-chhupan-chhupai: 269/410 images ready (268/303 images ready)
+002-chhupan-chhupai: 269/410 images ready (268/303 images ready; Cloudflare 429: {"errors":[{"message":"AiError: AiError: you have used up your daily free allocation of 10,000 neurons, please upgrade to Cloudflare's Workers Paid plan if you would like to continue usage. (eb2a5bcc-2007-4db5-b6b9-ebd0b11e7ae1)","code":4006}],"success":false,"result":{},"messages":[)
