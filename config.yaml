@@ -17,7 +17,7 @@ images:
   engine: cloudflare            # cloudflare (free 10k neurons/day) | pollinations (needs paid key) | placeholder
   model: flux
   consistent: true              # draw shots FROM the cast pictures + scene master (FLUX.2 klein), not from scratch
-  cast_approval: true           # stop after drawing the cast until cast/<story>/APPROVED exists
+  cast_approval: false          # true = stop after drawing the cast until cast/<story>/APPROVED exists
   max_images: 420               # per video; made over several mornings (~130/day free), the story waits in the queue
   # visual style comes from the story's genre (studio/genres.py)
   negative: "text, watermark, logo, cartoon, bright colors, smiling"
@@ -93,7 +93,7 @@ youtube:
   category_id: "24"             # Entertainment
   made_for_kids: false
   schedule:                     # publish on a calendar instead of leaving videos private
-    enabled: false              # turn on once the YouTube API audit is approved (see README)
+    enabled: true               # uploads go private with publishAt and go public on the calendar
     timezone: Asia/Kolkata
     long_days: [mon, fri]
     long_time: "20:00"

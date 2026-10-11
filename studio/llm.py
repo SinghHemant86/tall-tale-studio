@@ -99,5 +99,6 @@ def youtube_metadata(bible: dict) -> dict:
         total += cost
     yt["tags"] = tags
     yt["hashtags"] = hashtags
-    yt["text_language"], yt["audio_language"] = "en", ("en" if bible.get("language") == "en" else "hi")
+    lang = "en" if bible.get("language") == "en" else "hi"
+    yt["text_language"], yt["audio_language"] = lang, lang   # Hindi title hook -> Hindi search audience
     return yt

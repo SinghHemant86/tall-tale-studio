@@ -31,7 +31,12 @@ def validate(b: dict) -> dict:
     # Everything written is English (title, description, tags, hashtags, subtitles); only the audio is
     # Hindi, and the thumbnail text may be either.
     yt = b.get("youtube") or {}
-    written = [("title", b["title"]), ("description", yt.get("description", ""))]
+    # Titles: a Hindi hook is welcome, but keep English search words too ("| Hindi Horror Story").
+    for what, t in [("title", b["title"])] + [(f"short {i + 1} title", sh.get("title", ""))
+                                              for i, sh in enumerate(b.get("shorts") or [])]:
+        if dev.search(t) and not latin_words.search(t):
+            raise BibleError(f"{what} needs English search words too, e.g. '| Hindi Horror Story' (\"{t[:60]}\")")
+    written = [("description", yt.get("description", ""))]
     written += [("tag", t) for t in yt.get("tags", [])] + [("hashtag", h) for h in yt.get("hashtags", [])]
     for what, val in written:
         if dev.search(val or ""):
@@ -58,8 +63,6 @@ def validate(b: dict) -> dict:
         bad = [x for x in sh.get("scenes", []) if x not in scene_ids]
         if not sh.get("scenes") or bad:
             raise BibleError(f"short {i + 1}: needs 'scenes' from this story (unknown: {bad})")
-        if dev.search(sh.get("title", "")):
-            raise BibleError(f"short {i + 1}: title must be English")
     from .genres import GENRES
     genre = b.get("genre", "horror")
     if genre not in GENRES:
