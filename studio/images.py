@@ -248,9 +248,16 @@ def _cast_sheet(story: dict, pics: dict[str, Path], out: Path) -> None:
     im.save(out, quality=88)
 
 
+def _formless(story: dict, cid: str) -> bool:
+    """A ghost with no body (a light, a mist) is described in words only; a reference picture makes the
+    model paste the same object everywhere, even indoors."""
+    c = next((x for x in story["characters"] if x["id"] == cid), None)
+    return bool(c and c.get("role") == "ghost" and "no body" in c.get("look", ""))
+
+
 def cast_refs(story: dict, ids: list[str]) -> list[Path]:
     d = cast_dir(story)
-    return [d / f"{i}.png" for i in ids if (d / f"{i}.png").exists()]
+    return [d / f"{i}.png" for i in ids if (d / f"{i}.png").exists() and not _formless(story, i)]
 
 
 def ref_prompt(story: dict, ids: list[str], master: bool, prompt: str) -> str:
@@ -262,7 +269,7 @@ def ref_prompt(story: dict, ids: list[str], master: bool, prompt: str) -> str:
                      f"camera angle and framing as described, do not copy its composition")
         k += 1
     for i in ids:
-        if (cast_dir(story) / f"{i}.png").exists():
+        if (cast_dir(story) / f"{i}.png").exists() and not _formless(story, i):
             parts.append(f"image {k} is a reference sheet of {names.get(i, i)}: draw this person once, with the same "
                          f"face, hair, age and exactly these clothes; never mix their clothes with anyone else's")
             k += 1

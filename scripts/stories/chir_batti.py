@@ -24,8 +24,8 @@ characters = [
              "white dhoti, long wooden herder's staff"},
     {"id": "light", "name": "The Light (chir batti)", "role": "ghost", "gender": "female", "voice": "hi-IN-SwaraNeural",
      "eleven_settings": {"stability": 0.8, "style": 0.05},
-     "look": "a floating ball of pale blue-white light the size of a lantern, glowing softly, hovering low over the "
-             "ground, no body, no face"},
+     "look": "a soft hazy glow of pale blue-white light hovering low over the ground, blurry edges like mist, "
+             "no object, no lamp, no bulb, no body, no face"},
 ]
 
 props = [
@@ -274,7 +274,8 @@ scenes = [
          "a man's hand reaching for a wooden door latch in a dark hut, blue light in the cracks"),
     ]),
     ("s21", f"inside the mud hut at night, a boy sitting up in bed ringing a brass bell, the blue glow at the window "
-            "fading", ["kanji", "hamir", "light"], "reveal", ["bell"], "", [
+            "fading", ["kanji", "hamir", "light"], "reveal", ["bell"],
+     "the blue glow is only OUTSIDE the window, never inside the hut; only one boy", [
         (N, "तभी, अंदर से… टन्न।", "Then, from inside… clang."),
         (N, "कानजी अपने बिस्तर पर बैठा था। हाथ में घंटी।", "Kanji was sitting up in his bed. The bell in his hand.",
          "a boy sitting up in bed in the dark, ringing a brass bell, looking straight at his father"),

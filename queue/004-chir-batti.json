@@ -48,7 +48,7 @@
         "stability": 0.8,
         "style": 0.05
       },
-      "look": "a floating ball of pale blue-white light the size of a lantern, glowing softly, hovering low over the ground, no body, no face"
+      "look": "a soft hazy glow of pale blue-white light hovering low over the ground, blurry edges like mist, no object, no lamp, no bulb, no body, no face"
     }
   ],
   "props": [
@@ -866,6 +866,7 @@
       "props": [
         "bell"
       ],
+      "continuity": "the blue glow is only OUTSIDE the window, never inside the hut; only one boy",
       "lines": [
         {
           "speaker": "narrator",
