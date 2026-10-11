@@ -256,11 +256,13 @@ def ref_prompt(story: dict, ids: list[str], master: bool, prompt: str) -> str:
     names = {c["id"]: c.get("name", c["id"]) for c in _cast_items(story)}
     parts, k = [], 1
     if master:
-        parts.append(f"image {k} is the scene: keep its place, light and every object exactly where it is")
+        parts.append(f"image {k} shows the place: keep the same location, light, weather and objects, but use a NEW "
+                     f"camera angle and framing as described, do not copy its composition")
         k += 1
     for i in ids:
         if (cast_dir(story) / f"{i}.png").exists():
-            parts.append(f"image {k} is {names.get(i, i)}: same face, hair, age and clothes")
+            parts.append(f"image {k} is a reference sheet of {names.get(i, i)}: draw this person once, with the same "
+                         f"face, hair, age and exactly these clothes; never mix their clothes with anyone else's")
             k += 1
     return (("; ".join(parts) + ". ") if parts else "") + prompt
 
@@ -345,7 +347,9 @@ def scene_master(story: dict, sid: str, work: Path, cfg: dict, style: str = "") 
         log(f"  scene master: {sid}")
         ids = [c["id"] for c in present] + props
         base = s.get("image_prompt") or s["setting"]
+        people = "; ".join(f"{c.get('name', c['id'])}: {c['look']}" for c in present)
         prompt = ref_prompt(story, ids, False, f"wide establishing shot of {base}"
+                            + (f", with {people}" if people else "")
                             + (f", {s['continuity']}" if s.get("continuity") else ""))
         w, h = cfg["video"]["width"], cfg["video"]["height"]
         render(prompt, p, cfg, 7000, int(w * 1.25), int(h * 1.25), style, refs=cast_refs(story, ids))
@@ -370,10 +374,15 @@ def shot_images(plan: dict, work: Path, cfg: dict, style: str = "", story: dict 
             for i, sh in enumerate(shots):
                 p = d / f"{sid}_{i:02d}.png"
                 prompt, refs = sh["prompt"], []
+                if story and master and sh["prompt"].startswith("wide establishing shot") and not p.exists():
+                    import shutil
+                    shutil.copy(master, p)          # the master already is this scene's establishing shot
                 if story:
                     ids = sh.get("chars", [])
-                    prompt = ref_prompt(story, ids, True, prompt + (f", {cont}" if cont else ""))
-                    refs = [master] + cast_refs(story, ids)
+                    close = any(w in sh["prompt"].lower() for w in ("close-up", "close up", "detail"))
+                    use_master = master is not None and not close
+                    prompt = ref_prompt(story, ids, use_master, prompt + (f", {cont}" if cont and not close else ""))
+                    refs = ([master] if use_master else []) + cast_refs(story, ids)
                 if not p.exists():
                     log(f"  shot image: {sid} #{i + 1}/{len(shots)}")
                 out[sid].append(render(prompt, p, cfg, (i * 7919 + len(sid) * 104729) % 100000,
