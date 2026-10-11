@@ -48,7 +48,11 @@ def plan(scfg: dict, n_shorts: int, now: datetime | None = None) -> tuple[dateti
         day += timedelta(days=1)
     long_slot = slot
 
+    # first Short 30 min after the long video (it links to it), then one a day
     shorts, day = [], long_slot + timedelta(days=1)
+    first = long_slot + timedelta(minutes=scfg.get("first_short_after_min", 30))
+    if n_shorts and first.isoformat() not in taken_short:
+        shorts.append(first)
     while len(shorts) < n_shorts:
         s = _at(day, scfg.get("short_time", "19:30"))
         if s.isoformat() not in taken_short:
