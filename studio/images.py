@@ -213,11 +213,13 @@ def lock_cast(story: dict, cfg: dict, style: str = "") -> dict[str, Path]:
         p = d / f"{it['id']}.png"
         if not p.exists():
             log(f"  cast: {it['id']}")
-            if it["kind"] == "character":
+            if it["kind"] == "character" and it.get("role") == "ghost" and "no body" in it["look"]:
+                prompt = f"reference picture of {it['look']}, centred, plain dark grey background, no text, no letters"
+            elif it["kind"] == "character":
                 prompt = (f"character reference sheet of {it['look']}: on the left the full body seen from the front, "
-                          f"on the right a close-up of the same face; plain neutral grey background, even soft light")
+                          f"on the right a close-up of the same face; plain neutral grey background, even soft light, no text, no letters, no labels")
             else:
-                prompt = f"object reference picture of {it['look']}, centred, plain neutral grey background, even light"
+                prompt = f"object reference picture of {it['look']}, centred, plain neutral grey background, even light, no text, no letters"
             render(prompt, p, cfg, 1000, 1024, 1024, style, refs=[])
         out[it["id"]] = p
     if cfg["images"].get("cast_approval", True) and not (d / "APPROVED").exists():
@@ -264,7 +266,8 @@ def ref_prompt(story: dict, ids: list[str], master: bool, prompt: str) -> str:
             parts.append(f"image {k} is a reference sheet of {names.get(i, i)}: draw this person once, with the same "
                          f"face, hair, age and exactly these clothes; never mix their clothes with anyone else's")
             k += 1
-    return (("; ".join(parts) + ". ") if parts else "") + prompt
+    rules = " Every person and animal appears only once. No text, letters or captions in the picture."
+    return (("; ".join(parts) + "." + rules + " ") if parts else "") + prompt
 
 
 # Camera vocabulary used to vary consecutive shots (never two identical framings in a row).
@@ -311,7 +314,8 @@ def plan_shots(bible: dict, line_durs: dict, cfg: dict) -> dict[str, list[dict]]
                 ids = []
                 if j < len(custom):
                     prompt = f"{custom[j]}, {base}"
-                    ids = [c["id"] for c in present if c["name"].lower() in custom[j].lower() or c["id"] in custom[j]]
+                    # a custom shot may show anyone in the scene: give it everyone's reference sheet
+                    ids = [c["id"] for c in present]
                 elif spk and j == 0:
                     ids = [spk["id"]]
                     face = "a faceless silhouette of a person" if spk.get("real") else spk["look"]
