@@ -67,6 +67,10 @@ story that breaks them.
   the door latch", "Madho holds the lantern in his right hand"). Change it only in the scene where the
   story changes it (the lock is broken in s24, so from s24 on: "broken padlock on the floor").
 - Every scene gets one master picture (wide, with its people and props); all its shots are drawn from it.
+- When two people share a scene in different states (one lying, one standing), name them in `continuity`
+  ("Hamir lies in the crack; Kanji stands at its edge; only one buffalo") or the model may swap them.
+- A non-human ghost (a light, a shadow) gets "no body" in its look and is drawn as an object.
+- Before a story goes hands-off, run the Cast preview workflow on 2-3 scenes and look at the sheet.
 
 ## Real people and real cases
 - Report, never conclude. State the official position first and clearly (court, police, CBI), then any
