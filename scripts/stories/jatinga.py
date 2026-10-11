@@ -420,6 +420,6 @@ story = {
     },
 }
 
-out = ROOT / "drafts" / f"{story['id']}.json"   # move to queue/ once locked
+out = ROOT / "queue" / f"{story['id']}.json"
 out.write_text(json.dumps(story, indent=2, ensure_ascii=False), encoding="utf-8")
 print("wrote", out)
