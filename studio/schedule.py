@@ -35,15 +35,20 @@ def plan(scfg: dict, n_shorts: int, now: datetime | None = None) -> tuple[dateti
     tz = ZoneInfo(scfg.get("timezone", "Asia/Kolkata"))
     now = (now or datetime.now(tz)).astimezone(tz)
     state = _load()
-    taken_long = set(state["long"])
-    taken_short = set(state["short"])
+    # compare by calendar day: one long video and one Short per day at most
+    taken_long = {datetime.fromisoformat(x).astimezone(tz).date() for x in state["long"]}
+    taken_short = {datetime.fromisoformat(x).astimezone(tz).date() for x in state["short"]}
+    gap = timedelta(days=scfg.get("min_gap_days", 3))
     lead = timedelta(hours=scfg.get("min_lead_hours", 6))
 
     long_days = [DAYS[d.lower()[:3]] for d in scfg.get("long_days", ["mon", "fri"])]
+    avoid = {str(d) for d in scfg.get("avoid_dates", [])}
     day = now
     while True:
         slot = _at(day, scfg.get("long_time", "20:00"))
-        if day.weekday() in long_days and slot >= now + lead and slot.isoformat() not in taken_long:
+        if (day.weekday() in long_days and slot >= now + lead
+                and all(abs(slot.date() - d) >= gap for d in taken_long)
+                and slot.date().isoformat() not in avoid):
             break
         day += timedelta(days=1)
     long_slot = slot
@@ -51,11 +56,11 @@ def plan(scfg: dict, n_shorts: int, now: datetime | None = None) -> tuple[dateti
     # first Short 30 min after the long video (it links to it), then one a day
     shorts, day = [], long_slot + timedelta(days=1)
     first = long_slot + timedelta(minutes=scfg.get("first_short_after_min", 30))
-    if n_shorts and first.isoformat() not in taken_short:
+    if n_shorts and first.date() not in taken_short:
         shorts.append(first)
     while len(shorts) < n_shorts:
         s = _at(day, scfg.get("short_time", "19:30"))
-        if s.isoformat() not in taken_short:
+        if s.date() not in taken_short:
             shorts.append(s)
         day += timedelta(days=1)
     return long_slot, shorts

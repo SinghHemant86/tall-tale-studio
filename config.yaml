@@ -96,8 +96,11 @@ youtube:
     enabled: true               # uploads go private with publishAt and go public on the calendar
     timezone: Asia/Kolkata
     long_days: [mon, fri]
-    long_time: "20:00"
-    short_time: "19:30"         # one Short a day, from the day after the long video
+    long_time: "18:25"   # live ~2-3 h before the 9-11:30 PM horror peak (after puja, dinner, homework)
+    short_time: "17:30"  # after school/office, before evening puja
+    # big festival nights: no long video (Shorts still go out); the next long-video day is used instead
+    avoid_dates: [2026-10-20, 2026-10-29, 2026-11-06, 2026-11-07, 2026-11-08, 2026-11-13]
+    min_gap_days: 3      # at least this many days between two long videos
     min_lead_hours: 6
 
 shorts:
