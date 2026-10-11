@@ -64,7 +64,7 @@
   "scenes": [
     {
       "id": "s01",
-      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, three pale blue-white lights floating low over the salt",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks, moonless night, black sky full of stars, three pale blue-white lights floating low over the salt",
       "characters": [
         "light"
       ],
@@ -205,7 +205,7 @@
     },
     {
       "id": "s05",
-      "setting": "the edge of a Maldhari herders' village of round white mud huts with conical thatched roofs in the Banni grasslands of Kutch, Gujarat at night facing the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, a boy standing alone, a blue light far out on the salt",
+      "setting": "the edge of a Maldhari herders' village of round white mud huts with conical thatched roofs in the Banni grasslands of Kutch, Gujarat at night facing the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks, moonless night, black sky full of stars, a boy standing alone, a blue light far out on the salt",
       "characters": [
         "kanji",
         "light"
@@ -243,7 +243,7 @@
     },
     {
       "id": "s06",
-      "setting": "the edge of the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns at night, an old man with a walking stick grabbing a boy by the arm, a blue light ahead",
+      "setting": "the edge of the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks at night, an old man with a walking stick grabbing a boy by the arm, a blue light ahead",
       "characters": [
         "raghu",
         "kanji",
@@ -386,7 +386,7 @@
     },
     {
       "id": "s10",
-      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, a small boy walking alone on the cracked white salt, faint blue lights far away",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks, moonless night, black sky full of stars, a small boy walking alone on the cracked white salt, faint blue lights far away",
       "characters": [
         "kanji",
         "light"
@@ -422,7 +422,7 @@
     },
     {
       "id": "s11",
-      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, blue lights circling a frightened boy on the salt",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks, moonless night, black sky full of stars, blue lights circling a frightened boy on the salt",
       "characters": [
         "kanji",
         "light"
@@ -470,7 +470,7 @@
     },
     {
       "id": "s12",
-      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, a man-shaped figure made of pale blue light walking towards a boy, the boy's shadow on the salt but no shadow under the figure",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks, moonless night, black sky full of stars, a man-shaped figure made of pale blue light walking towards a boy, the boy's shadow on the salt but no shadow under the figure",
       "characters": [
         "kanji",
         "light"
@@ -511,7 +511,7 @@
     },
     {
       "id": "s13",
-      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, a boy with eyes shut tight, ears straining, blue light figure in front of him",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks, moonless night, black sky full of stars, a boy with eyes shut tight, ears straining, blue light figure in front of him",
       "characters": [
         "kanji",
         "light"
@@ -556,7 +556,7 @@
     },
     {
       "id": "s14",
-      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, a boy running away from the blue lights towards the dark right side, holding his bell",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks, moonless night, black sky full of stars, a boy running away from the blue lights towards the dark right side, holding his bell",
       "characters": [
         "kanji",
         "light"
@@ -592,7 +592,7 @@
     },
     {
       "id": "s15",
-      "setting": "a deep crack in the salt crust of the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns at night, a black buffalo standing beside it, an injured man lying in the crack",
+      "setting": "a deep crack in the salt crust of the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks at night, a black buffalo standing beside it, an injured man lying in the crack",
       "characters": [
         "kanji",
         "hamir"
@@ -602,7 +602,7 @@
         "kali",
         "bell"
       ],
-      "continuity": "the black buffalo stands at the edge of the salt crack",
+      "continuity": "Hamir, the father in a white turban, lies injured inside the salt crack; Kanji, the boy, stands at its edge; only one black buffalo",
       "lines": [
         {
           "speaker": "narrator",
@@ -639,7 +639,7 @@
     },
     {
       "id": "s16",
-      "setting": "the salt crack in the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns at night, a boy helping his limping father up, blue lights gathering in a ring around them",
+      "setting": "the salt crack in the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks at night, a boy helping his limping father up, blue lights gathering in a ring around them",
       "characters": [
         "kanji",
         "hamir",
@@ -650,6 +650,7 @@
         "kali",
         "bell"
       ],
+      "continuity": "Hamir, the father, limps with his staff; Kanji, the boy, supports him; only one black buffalo",
       "lines": [
         {
           "speaker": "narrator",
@@ -681,7 +682,7 @@
     },
     {
       "id": "s17",
-      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns at night, a boy ringing a brass bell, a limping man holding a buffalo's cord, walking with heads down while blue lights follow",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks at night, a boy ringing a brass bell, a limping man holding a buffalo's cord, walking with heads down while blue lights follow",
       "characters": [
         "kanji",
         "hamir",
@@ -726,7 +727,7 @@
     },
     {
       "id": "s18",
-      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns at night, a boy and his father walking with eyes down, a blue light hovering right beside the boy's ear",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks at night, a boy and his father walking with eyes down, a blue light hovering right beside the boy's ear",
       "characters": [
         "kanji",
         "hamir",
@@ -768,7 +769,7 @@
     },
     {
       "id": "s19",
-      "setting": "the edge of a Maldhari herders' village of round white mud huts with conical thatched roofs in the Banni grasslands of Kutch, Gujarat at first light, a pale dawn over the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, a woman and an old man running towards a boy, his limping father and a black buffalo",
+      "setting": "the edge of a Maldhari herders' village of round white mud huts with conical thatched roofs in the Banni grasslands of Kutch, Gujarat at first light, a pale dawn over the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks, a woman and an old man running towards a boy, his limping father and a black buffalo",
       "characters": [
         "jeevi",
         "raghu",

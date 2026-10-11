@@ -317,7 +317,8 @@ def plan_shots(bible: dict, line_durs: dict, cfg: dict) -> dict[str, list[dict]]
                     # a custom shot may show anyone in the scene: give it everyone's reference sheet
                     ids = [c["id"] for c in present]
                 elif spk and j == 0:
-                    ids = [spk["id"]]
+                    # the speaker first, then whoever else may share the frame
+                    ids = [spk["id"]] + [c["id"] for c in present if c["id"] != spk["id"]]
                     face = "a faceless silhouette of a person" if spk.get("real") else spk["look"]
                     prompt = f"cinematic close-up of {face}, speaking, in {base}"
                 elif not shots:

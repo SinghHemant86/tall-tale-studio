@@ -34,7 +34,7 @@ props = [
 ]
 
 V = "a Maldhari herders' village of round white mud huts with conical thatched roofs in the Banni grasslands of Kutch, Gujarat"
-R = "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns"
+R = "the Great Rann of Kutch, an endless flat white salt desert, plain unmarked salt crust with natural hexagon cracks"
 NIGHT = "moonless night, black sky full of stars"
 
 # (id, setting, characters, mood, props, continuity, [(speaker, hindi, english[, shot])])
@@ -196,7 +196,8 @@ scenes = [
     ]),
     ("s15", f"a deep crack in the salt crust of {R} at night, a black buffalo standing beside it, an injured man lying "
             "in the crack", ["kanji", "hamir"], "reveal", ["kali", "bell"],
-     "the black buffalo stands at the edge of the salt crack", [
+     "Hamir, the father in a white turban, lies injured inside the salt crack; Kanji, the boy, stands at its edge; "
+     "only one black buffalo", [
         (N, "और वहाँ, नमक की एक गहरी दरार के किनारे… काली खड़ी थी। गले में घंटी।",
          "And there, at the edge of a deep crack in the salt… stood Kali. The bell on her neck.",
          "a big black buffalo with curved horns standing at the edge of a crack in white salt at night"),
@@ -210,7 +211,8 @@ scenes = [
          "I didn't go. Kali wouldn't let me move. She never left me."),
     ]),
     ("s16", f"the salt crack in {R} at night, a boy helping his limping father up, blue lights gathering in a ring "
-            "around them", ["kanji", "hamir", "light"], "pulse", ["kali", "bell"], "", [
+            "around them", ["kanji", "hamir", "light"], "pulse", ["kali", "bell"],
+     "Hamir, the father, limps with his staff; Kanji, the boy, supports him; only one black buffalo", [
         (N, "कानजी ने बापू को सहारा देकर बाहर निकाला।", "Kanji helped his father climb out."),
         (N, "पर तब तक, चारों तरफ़ रोशनियाँ जमा हो चुकी थीं। एक घेरा।",
          "But by then the lights had gathered all around them. A ring.",
