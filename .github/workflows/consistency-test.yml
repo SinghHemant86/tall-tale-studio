@@ -1,0 +1,26 @@
+name: Consistency test
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r requirements.txt
+      - run: python -u scripts/consistency_test.py
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      - name: Save
+        if: always()
+        run: |
+          git config user.name "tall-tale-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add research
+          git commit -m "Consistency test images" || echo nothing
+          for i in 1 2 3 4 5; do git pull --rebase -q && git push && break; sleep $((i * 5)); done
