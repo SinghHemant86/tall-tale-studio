@@ -1,0 +1,960 @@
+{
+  "id": "004-chir-batti",
+  "title": "रण की वो रोशनी… जो नाम लेकर बुलाती है 😱 | Chir Batti | Hindi Horror Story",
+  "genre": "horror",
+  "art_style": "creepy_comic",
+  "language": "hi",
+  "logline": "In the Rann of Kutch, ghost lights call people in the voices of the ones they took. A ten-year-old herder's son walks into the salt desert with a brass bell to bring his father home.",
+  "characters": [
+    {
+      "id": "kanji",
+      "name": "Kanji",
+      "role": "child_boy",
+      "gender": "male",
+      "voice": "hi-IN-MadhurNeural",
+      "look": "thin Indian boy aged 10 from Kutch, short black hair, sun-tanned skin, white frilled kediyu top, white dhoti, a small red cloth tied on his head"
+    },
+    {
+      "id": "raghu",
+      "name": "Raghu Dada",
+      "role": "old_man",
+      "gender": "male",
+      "voice": "hi-IN-MadhurNeural",
+      "look": "Indian herder aged 70 from Kutch, big curled white moustache, white turban, white frilled kediyu, white dhoti, holding a dark wooden walking stick"
+    },
+    {
+      "id": "jeevi",
+      "name": "Jeevi",
+      "role": "young_woman",
+      "gender": "female",
+      "voice": "hi-IN-SwaraNeural",
+      "look": "Indian woman aged 35 from Kutch, black odhni with small round mirror-work, red embroidered skirt, silver bangles, hair under the odhni"
+    },
+    {
+      "id": "hamir",
+      "name": "Hamir",
+      "role": "authority",
+      "gender": "male",
+      "voice": "hi-IN-MadhurNeural",
+      "look": "Indian herder aged 40 from Kutch, thick black moustache, white turban, white frilled kediyu, white dhoti, long wooden herder's staff"
+    },
+    {
+      "id": "light",
+      "name": "The Light (chir batti)",
+      "role": "ghost",
+      "gender": "female",
+      "voice": "hi-IN-SwaraNeural",
+      "eleven_settings": {
+        "stability": 0.8,
+        "style": 0.05
+      },
+      "look": "a floating ball of pale blue-white light the size of a lantern, glowing softly, hovering low over the ground, no body, no face"
+    }
+  ],
+  "props": [
+    {
+      "id": "bell",
+      "look": "a dented brass buffalo bell hanging on a braided black cord"
+    },
+    {
+      "id": "kali",
+      "look": "a big black Banni buffalo with long curved horns and a braided black cord round its neck"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "s01",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, three pale blue-white lights floating low over the salt",
+      "characters": [
+        "light"
+      ],
+      "mood": "dread",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "कच्छ के रण में अगर रात को कोई रोशनी तुम्हारा नाम पुकारे… उसके पीछे मत जाना।",
+          "en": "In the Rann of Kutch, if a light calls your name at night… don't follow it."
+        },
+        {
+          "speaker": "narrator",
+          "text": "यहाँ के लोग उसे चिर बत्ती कहते हैं। वो रोशनी जो चलती है।",
+          "en": "The people here call it chir batti. The light that walks.",
+          "shot": "three glowing pale blue balls of light drifting over a white salt desert under stars"
+        },
+        {
+          "speaker": "narrator",
+          "text": "कहते हैं, जो उसके पीछे गया, रण ने उसे कभी वापस नहीं किया।",
+          "en": "They say whoever followed it was never given back by the Rann."
+        },
+        {
+          "speaker": "light",
+          "text": "कानजी… कानजी… इधर आओ।",
+          "en": "Kanji… Kanji… come here."
+        },
+        {
+          "speaker": "narrator",
+          "text": "और उस साल, वो रोशनी एक दस साल के लड़के का नाम ले रही थी।",
+          "en": "And that year, the light was calling the name of a ten-year-old boy."
+        }
+      ]
+    },
+    {
+      "id": "s02",
+      "setting": "a Maldhari herders' village of round white mud huts with conical thatched roofs in the Banni grasslands of Kutch, Gujarat at sunset, round mud huts, buffaloes grazing on dry grass, a boy standing at the edge looking towards the white horizon",
+      "characters": [
+        "kanji"
+      ],
+      "mood": "calm",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "बन्नी के घास के मैदान। गोल मिट्टी के घर, जिन्हें भूंगा कहते हैं।",
+          "en": "The grasslands of Banni. Round mud houses called bhungas."
+        },
+        {
+          "speaker": "narrator",
+          "text": "यहाँ मालधारी रहते हैं। भैंसों के साथ, रण के किनारे।",
+          "en": "The Maldhari herders live here. With their buffaloes, at the edge of the Rann."
+        },
+        {
+          "speaker": "narrator",
+          "text": "हर शाम दस साल का कानजी गाँव के आख़िरी घर पर खड़ा होकर रण की तरफ़ देखता था।",
+          "en": "Every evening, ten-year-old Kanji stood at the last house and stared at the Rann.",
+          "shot": "a boy in a white frilled top standing alone at the edge of a grassland, white salt horizon beyond"
+        },
+        {
+          "speaker": "narrator",
+          "text": "क्योंकि तीन रात पहले, उसके बापू उसी तरफ़ गए थे… और लौटे नहीं।",
+          "en": "Because three nights ago, his father had gone that way… and had not come back."
+        }
+      ]
+    },
+    {
+      "id": "s03",
+      "setting": "inside a round mud hut of a Maldhari herders' village of round white mud huts with conical thatched roofs in the Banni grasslands of Kutch, Gujarat at dusk, a worried woman, an old man and a boy sitting by a small fire",
+      "characters": [
+        "jeevi",
+        "raghu",
+        "kanji"
+      ],
+      "mood": "piano",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "उस रात उनकी सबसे अच्छी भैंस, काली, रस्सी तोड़कर रण की तरफ़ भाग गई थी।",
+          "en": "That night their best buffalo, Kali, had broken her rope and run towards the Rann."
+        },
+        {
+          "speaker": "narrator",
+          "text": "हमीर, कानजी के बापू, लाठी उठाकर उसके पीछे गए थे।",
+          "en": "Hamir, Kanji's father, had picked up his staff and gone after her."
+        },
+        {
+          "speaker": "jeevi",
+          "text": "तीन दिन हो गए। गाँव वाले कहते हैं, अब ढूँढना बेकार है।",
+          "en": "It's been three days. The villagers say there's no use searching now."
+        },
+        {
+          "speaker": "kanji",
+          "text": "बापू ज़िंदा हैं, माँ। मुझे पता है।",
+          "en": "Baba is alive, Ma. I know it."
+        },
+        {
+          "speaker": "narrator",
+          "text": "रघु दादा चुप रहे। उन्होंने बस दरवाज़े की तरफ़ देखा, जहाँ से रण दिखता था।",
+          "en": "Raghu Dada said nothing. He only looked at the door, through which the Rann could be seen."
+        }
+      ]
+    },
+    {
+      "id": "s04",
+      "setting": "inside the mud hut at night, an old man telling a story by a small fire, a boy listening wide-eyed",
+      "characters": [
+        "raghu",
+        "kanji"
+      ],
+      "mood": "drone",
+      "lines": [
+        {
+          "speaker": "raghu",
+          "text": "सुन, कानजी। रण में अमावस की रातों को रोशनियाँ चलती हैं।",
+          "en": "Listen, Kanji. On moonless nights, lights walk in the Rann."
+        },
+        {
+          "speaker": "raghu",
+          "text": "पहले दूर दिखती हैं। फिर पास आती हैं। फिर किसी का नाम लेती हैं।",
+          "en": "First they're far away. Then they come closer. Then they call someone's name."
+        },
+        {
+          "speaker": "kanji",
+          "text": "किसका नाम, दादा?",
+          "en": "Whose name, Dada?"
+        },
+        {
+          "speaker": "raghu",
+          "text": "जिसे वो ले जाना चाहती हैं। और जिन्हें वो ले जा चुकीं… उनकी आवाज़ में बोलती हैं।",
+          "en": "Whoever they want to take. And they speak… in the voices of the ones they've already taken."
+        },
+        {
+          "speaker": "narrator",
+          "text": "आग की लौ काँपी। बाहर, बहुत दूर, रण पर कुछ चमका।",
+          "en": "The flame flickered. Outside, far away, something glowed on the Rann.",
+          "shot": "through a round hut's doorway, a tiny blue light glowing far away on a dark white desert"
+        }
+      ]
+    },
+    {
+      "id": "s05",
+      "setting": "the edge of a Maldhari herders' village of round white mud huts with conical thatched roofs in the Banni grasslands of Kutch, Gujarat at night facing the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, a boy standing alone, a blue light far out on the salt",
+      "characters": [
+        "kanji",
+        "light"
+      ],
+      "mood": "dread",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "आधी रात को कानजी की नींद खुली। किसी ने बाहर से पुकारा था।",
+          "en": "At midnight Kanji woke up. Someone had called from outside."
+        },
+        {
+          "speaker": "hamir",
+          "text": "कानजी… कानजी, बेटा… मैं यहाँ हूँ!",
+          "en": "Kanji… Kanji, son… I'm here!",
+          "shot": "a single pale blue light glowing far away on a dark white salt desert, seen from a hut door"
+        },
+        {
+          "speaker": "narrator",
+          "text": "बापू की आवाज़। वही आवाज़, जो हर सुबह उसे जगाती थी।",
+          "en": "Baba's voice. The same voice that woke him every morning."
+        },
+        {
+          "speaker": "kanji",
+          "text": "बापू! बापू, मैं आ रहा हूँ!",
+          "en": "Baba! Baba, I'm coming!",
+          "shot": "a barefoot boy running from the mud huts towards a glowing blue light on a white desert at night"
+        },
+        {
+          "speaker": "narrator",
+          "text": "वो नंगे पाँव रण की तरफ़ दौड़ा।",
+          "en": "He ran barefoot towards the Rann."
+        }
+      ]
+    },
+    {
+      "id": "s06",
+      "setting": "the edge of the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns at night, an old man with a walking stick grabbing a boy by the arm, a blue light ahead",
+      "characters": [
+        "raghu",
+        "kanji",
+        "light"
+      ],
+      "mood": "chase",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "एक झटके में किसी ने उसका हाथ पकड़ लिया। रघु दादा।",
+          "en": "In a jerk, someone caught his arm. Raghu Dada."
+        },
+        {
+          "speaker": "raghu",
+          "text": "रुक जा! वो तेरे बापू नहीं हैं!",
+          "en": "Stop! That is not your father!"
+        },
+        {
+          "speaker": "kanji",
+          "text": "पर दादा, वो बापू की आवाज़ है!",
+          "en": "But Dada, that's Baba's voice!"
+        },
+        {
+          "speaker": "raghu",
+          "text": "हाँ। इसीलिए तो डर है।",
+          "en": "Yes. That's exactly why I'm afraid."
+        },
+        {
+          "speaker": "narrator",
+          "text": "दूर रोशनी एक पल रुकी। जैसे उसने उन्हें सुन लिया हो। फिर धीरे-धीरे बुझ गई।",
+          "en": "The far light paused for a moment. As if it had heard them. Then it slowly went out."
+        }
+      ]
+    },
+    {
+      "id": "s07",
+      "setting": "inside the mud hut at dawn, an old man showing a boy a dented brass buffalo bell",
+      "characters": [
+        "raghu",
+        "kanji"
+      ],
+      "mood": "piano",
+      "props": [
+        "bell"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "सुबह रघु दादा ने कानजी को अपने पास बिठाया।",
+          "en": "In the morning, Raghu Dada sat Kanji down beside him."
+        },
+        {
+          "speaker": "raghu",
+          "text": "एक बात याद रख। वो रोशनी हर आवाज़ की नक़ल कर सकती है। इंसान की, जानवर की।",
+          "en": "Remember one thing. That light can copy every voice. A man's, an animal's."
+        },
+        {
+          "speaker": "raghu",
+          "text": "पर पीतल की नहीं। घंटी की आवाज़ असली होती है।",
+          "en": "But not brass. The sound of a bell is always real."
+        },
+        {
+          "speaker": "narrator",
+          "text": "उन्होंने एक पुरानी पीतल की घंटी उसके हाथ में रखी।",
+          "en": "He placed an old brass bell in his hand.",
+          "shot": "close-up of an old wrinkled hand placing a dented brass bell in a small boy's palm"
+        },
+        {
+          "speaker": "raghu",
+          "text": "काली के गले में भी ऐसी ही घंटी थी। तेरे बापू ने ख़ुद बाँधी थी।",
+          "en": "Kali wore a bell just like this on her neck. Your father tied it himself."
+        },
+        {
+          "speaker": "kanji",
+          "text": "तो अगर बापू काली के पास हैं… तो घंटी बजेगी।",
+          "en": "So if Baba is with Kali… the bell will ring."
+        }
+      ]
+    },
+    {
+      "id": "s08",
+      "setting": "a Maldhari herders' village of round white mud huts with conical thatched roofs in the Banni grasslands of Kutch, Gujarat in afternoon heat, villagers shaking their heads, a woman crying at a hut door",
+      "characters": [
+        "jeevi",
+        "kanji"
+      ],
+      "mood": "drone",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "उस दिन गाँव के आदमी फिर रण में गए। शाम को ख़ाली हाथ लौटे।",
+          "en": "That day the village men went into the Rann again. They came back empty-handed at dusk."
+        },
+        {
+          "speaker": "jeevi",
+          "text": "बस अब कोई नहीं जाएगा। रण ने एक ले लिया है। दूसरा नहीं दूँगी।",
+          "en": "No one else goes now. The Rann has taken one. I won't give it another."
+        },
+        {
+          "speaker": "narrator",
+          "text": "उसने कानजी को सीने से लगा लिया। पर कानजी की आँखें रण पर थीं।",
+          "en": "She held Kanji to her chest. But Kanji's eyes were on the Rann."
+        }
+      ]
+    },
+    {
+      "id": "s09",
+      "setting": "the doorway of a mud hut in a Maldhari herders' village of round white mud huts with conical thatched roofs in the Banni grasslands of Kutch, Gujarat at night, a boy slipping out quietly with a brass bell, moonless night, black sky full of stars",
+      "characters": [
+        "kanji"
+      ],
+      "mood": "dread",
+      "props": [
+        "bell"
+      ],
+      "continuity": "the boy holds the brass bell in his hand",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "दूसरी अमावस की रात। सब सो गए थे।",
+          "en": "The second moonless night. Everyone was asleep."
+        },
+        {
+          "speaker": "narrator",
+          "text": "कानजी ने घंटी कपड़े में लपेटी, ताकि आवाज़ न हो, और चुपके से बाहर निकल गया।",
+          "en": "Kanji wrapped the bell in cloth so it wouldn't ring, and slipped outside."
+        },
+        {
+          "speaker": "narrator",
+          "text": "सामने रण था। सफ़ेद, ख़ामोश, और अंतहीन।",
+          "en": "Ahead was the Rann. White, silent and endless.",
+          "shot": "a small boy from behind, standing at the edge of an endless white salt desert under a starry sky"
+        },
+        {
+          "speaker": "kanji",
+          "text": "बापू, मैं आ रहा हूँ।",
+          "en": "Baba, I'm coming."
+        }
+      ]
+    },
+    {
+      "id": "s10",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, a small boy walking alone on the cracked white salt, faint blue lights far away",
+      "characters": [
+        "kanji",
+        "light"
+      ],
+      "mood": "drone",
+      "props": [
+        "bell"
+      ],
+      "continuity": "the boy holds the brass bell",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "रण में अँधेरा भी सफ़ेद होता है। नमक तारों की रोशनी पकड़ लेता है।",
+          "en": "In the Rann even the dark is white. The salt catches the starlight."
+        },
+        {
+          "speaker": "narrator",
+          "text": "कानजी चलता गया। गाँव की आख़िरी रोशनी पीछे छूट गई।",
+          "en": "Kanji kept walking. The village's last light was left behind."
+        },
+        {
+          "speaker": "narrator",
+          "text": "फिर सामने, दूर, एक नीली रोशनी जली। फिर दूसरी। फिर तीसरी।",
+          "en": "Then ahead, far away, a blue light glowed. Then a second. Then a third.",
+          "shot": "three pale blue lights appearing one by one on a dark horizon of white salt"
+        },
+        {
+          "speaker": "narrator",
+          "text": "वो धीरे-धीरे उसकी तरफ़ आने लगीं।",
+          "en": "Slowly, they began to move towards him."
+        }
+      ]
+    },
+    {
+      "id": "s11",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, blue lights circling a frightened boy on the salt",
+      "characters": [
+        "kanji",
+        "light"
+      ],
+      "mood": "pulse",
+      "props": [
+        "bell"
+      ],
+      "continuity": "the boy clutches the brass bell",
+      "lines": [
+        {
+          "speaker": "jeevi",
+          "text": "कानजी! कानजी, घर आ जा, बेटा! मैं यहाँ हूँ!",
+          "en": "Kanji! Kanji, come home, son! I'm here!",
+          "shot": "a pale blue light hovering behind a frightened boy on white salt at night"
+        },
+        {
+          "speaker": "narrator",
+          "text": "माँ की आवाज़। ठीक उसके पीछे से।",
+          "en": "Ma's voice. Right behind him."
+        },
+        {
+          "speaker": "kanji",
+          "text": "माँ? पर माँ तो घर पर सो रही है…",
+          "en": "Ma? But Ma is asleep at home…"
+        },
+        {
+          "speaker": "raghu",
+          "text": "कानजी, इधर आ। रास्ता इधर है।",
+          "en": "Kanji, come here. The way is here.",
+          "shot": "a pale blue light floating to the left in the dark over cracked salt"
+        },
+        {
+          "speaker": "narrator",
+          "text": "अब दादा की आवाज़। बाईं तरफ़ से। पर दादा भी तो घर पर थे।",
+          "en": "Now Dada's voice. From the left. But Dada was at home too.",
+          "shot": "a boy turning in fear as glowing blue lights circle him on white salt"
+        },
+        {
+          "speaker": "narrator",
+          "text": "कानजी समझ गया। ये वही रोशनियाँ थीं।",
+          "en": "Kanji understood. These were the lights."
+        }
+      ]
+    },
+    {
+      "id": "s12",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, a man-shaped figure made of pale blue light walking towards a boy, the boy's shadow on the salt but no shadow under the figure",
+      "characters": [
+        "kanji",
+        "light"
+      ],
+      "mood": "reveal",
+      "props": [
+        "bell"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "फिर सामने से कोई चलकर आया। सफ़ेद पगड़ी। लंबी लाठी।",
+          "en": "Then someone walked towards him. A white turban. A long staff."
+        },
+        {
+          "speaker": "hamir",
+          "text": "कानजी… मेरे बेटे… चल, घर चलते हैं।",
+          "en": "Kanji… my son… come, let's go home.",
+          "shot": "a tall figure made of pale blue light shaped like a man in a turban with a staff, walking over white salt"
+        },
+        {
+          "speaker": "narrator",
+          "text": "बापू। बिल्कुल बापू जैसे। वही चाल, वही आवाज़।",
+          "en": "Baba. Exactly like Baba. The same walk, the same voice."
+        },
+        {
+          "speaker": "narrator",
+          "text": "कानजी आगे बढ़ा… और रुक गया।",
+          "en": "Kanji stepped forward… and stopped."
+        },
+        {
+          "speaker": "narrator",
+          "text": "नमक पर कानजी की परछाईं थी। पर बापू के पैरों के नीचे… कोई परछाईं नहीं थी।",
+          "en": "On the salt lay Kanji's shadow. But under Baba's feet… there was no shadow at all.",
+          "shot": "close-up of white cracked salt, a boy's shadow on it, and beside it a man's bare feet with no shadow"
+        }
+      ]
+    },
+    {
+      "id": "s13",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, a boy with eyes shut tight, ears straining, blue light figure in front of him",
+      "characters": [
+        "kanji",
+        "light"
+      ],
+      "mood": "dread",
+      "props": [
+        "bell"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "कानजी ने आँखें बंद कर लीं। दादा की बात याद आई।",
+          "en": "Kanji shut his eyes. He remembered Dada's words."
+        },
+        {
+          "speaker": "narrator",
+          "text": "हर आवाज़ झूठी हो सकती है। पीतल की नहीं।",
+          "en": "Every voice can lie. Brass cannot."
+        },
+        {
+          "speaker": "hamir",
+          "text": "आँखें खोल, कानजी। अपने बापू को देख।",
+          "en": "Open your eyes, Kanji. Look at your father.",
+          "shot": "a glowing blue man-shaped light leaning over a small boy who keeps his eyes shut"
+        },
+        {
+          "speaker": "narrator",
+          "text": "उसने सुना। हवा। अपनी धड़कन। उस आवाज़ की फुसफुसाहट।",
+          "en": "He listened. The wind. His own heartbeat. The whisper of that voice."
+        },
+        {
+          "speaker": "narrator",
+          "text": "और फिर… बहुत दूर, दाईं तरफ़ से… टन्न… टन्न।",
+          "en": "And then… very far away, from the right… clang… clang."
+        },
+        {
+          "speaker": "narrator",
+          "text": "एक घंटी।",
+          "en": "A bell."
+        }
+      ]
+    },
+    {
+      "id": "s14",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, moonless night, black sky full of stars, a boy running away from the blue lights towards the dark right side, holding his bell",
+      "characters": [
+        "kanji",
+        "light"
+      ],
+      "mood": "chase",
+      "props": [
+        "bell"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "कानजी ने रोशनी से मुँह फेरा और घंटी की आवाज़ की तरफ़ दौड़ा।",
+          "en": "Kanji turned away from the light and ran towards the sound of the bell."
+        },
+        {
+          "speaker": "hamir",
+          "text": "कानजी! उधर मत जा! वहाँ अँधेरा है!",
+          "en": "Kanji! Don't go that way! It's dark there!",
+          "shot": "blue lights streaking after a running boy across dark salt"
+        },
+        {
+          "speaker": "narrator",
+          "text": "पीछे से बापू की आवाज़ चीख़ी। फिर माँ की। फिर दादा की। सब एक साथ।",
+          "en": "Behind him Baba's voice screamed. Then Ma's. Then Dada's. All at once.",
+          "shot": "a small boy running through darkness on salt, many blue lights chasing behind him"
+        },
+        {
+          "speaker": "narrator",
+          "text": "कानजी नहीं रुका। टन्न… टन्न… आवाज़ पास आती गई।",
+          "en": "Kanji didn't stop. Clang… clang… the sound grew closer."
+        }
+      ]
+    },
+    {
+      "id": "s15",
+      "setting": "a deep crack in the salt crust of the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns at night, a black buffalo standing beside it, an injured man lying in the crack",
+      "characters": [
+        "kanji",
+        "hamir"
+      ],
+      "mood": "reveal",
+      "props": [
+        "kali",
+        "bell"
+      ],
+      "continuity": "the black buffalo stands at the edge of the salt crack",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "और वहाँ, नमक की एक गहरी दरार के किनारे… काली खड़ी थी। गले में घंटी।",
+          "en": "And there, at the edge of a deep crack in the salt… stood Kali. The bell on her neck.",
+          "shot": "a big black buffalo with curved horns standing at the edge of a crack in white salt at night"
+        },
+        {
+          "speaker": "narrator",
+          "text": "और दरार में, पैर पर कपड़ा बाँधे, पड़े थे… बापू।",
+          "en": "And in the crack, a cloth tied around his leg, lay… Baba."
+        },
+        {
+          "speaker": "kanji",
+          "text": "बापू!",
+          "en": "Baba!"
+        },
+        {
+          "speaker": "hamir",
+          "text": "कानजी? तू… तू सच में है?",
+          "en": "Kanji? Are you… are you really here?"
+        },
+        {
+          "speaker": "hamir",
+          "text": "तीन रात से वो रोशनियाँ तेरी आवाज़ में मुझे बुला रही थीं।",
+          "en": "For three nights those lights have been calling me in your voice."
+        },
+        {
+          "speaker": "hamir",
+          "text": "मैं नहीं गया। काली ने हिलने नहीं दिया। वो मुझे छोड़कर नहीं गई।",
+          "en": "I didn't go. Kali wouldn't let me move. She never left me."
+        }
+      ]
+    },
+    {
+      "id": "s16",
+      "setting": "the salt crack in the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns at night, a boy helping his limping father up, blue lights gathering in a ring around them",
+      "characters": [
+        "kanji",
+        "hamir",
+        "light"
+      ],
+      "mood": "pulse",
+      "props": [
+        "kali",
+        "bell"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "कानजी ने बापू को सहारा देकर बाहर निकाला।",
+          "en": "Kanji helped his father climb out."
+        },
+        {
+          "speaker": "narrator",
+          "text": "पर तब तक, चारों तरफ़ रोशनियाँ जमा हो चुकी थीं। एक घेरा।",
+          "en": "But by then the lights had gathered all around them. A ring.",
+          "shot": "a ring of glowing blue lights surrounding a boy, a limping man and a black buffalo on white salt"
+        },
+        {
+          "speaker": "hamir",
+          "text": "रोशनी को मत देखना, बेटा। आँखें ज़मीन पर। कान घंटी पर।",
+          "en": "Don't look at the light, son. Eyes on the ground. Ears on the bell."
+        },
+        {
+          "speaker": "kanji",
+          "text": "और रास्ता?",
+          "en": "And the way?"
+        },
+        {
+          "speaker": "hamir",
+          "text": "काली जानती है। जानवर कभी झूठी आवाज़ के पीछे नहीं जाते।",
+          "en": "Kali knows it. Animals never follow a false voice."
+        }
+      ]
+    },
+    {
+      "id": "s17",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns at night, a boy ringing a brass bell, a limping man holding a buffalo's cord, walking with heads down while blue lights follow",
+      "characters": [
+        "kanji",
+        "hamir",
+        "light"
+      ],
+      "mood": "drone",
+      "props": [
+        "kali",
+        "bell"
+      ],
+      "continuity": "the boy rings the brass bell as they walk",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "वो चल पड़े। आगे काली। पीछे बापू। बीच में कानजी, घंटी बजाते हुए।",
+          "en": "They set off. Kali in front. Baba behind. Kanji in the middle, ringing the bell."
+        },
+        {
+          "speaker": "narrator",
+          "text": "टन्न… टन्न… हर क़दम पर।",
+          "en": "Clang… clang… with every step.",
+          "shot": "close-up of a small hand ringing a dented brass bell"
+        },
+        {
+          "speaker": "jeevi",
+          "text": "हमीर… रुक जाओ… मैं यहाँ हूँ, पीछे देखो…",
+          "en": "Hamir… stop… I'm here, look behind you…",
+          "shot": "pale blue lights following behind two walking figures and a buffalo on white salt"
+        },
+        {
+          "speaker": "raghu",
+          "text": "बेटा, ग़लत रास्ता है… इधर आओ…",
+          "en": "Son, it's the wrong way… come this way…",
+          "shot": "a blue light drifting close beside walking feet on cracked salt"
+        },
+        {
+          "speaker": "narrator",
+          "text": "रोशनियाँ पीछे-पीछे आती रहीं। हर उस आवाज़ में बोलती हुई, जिसे वो जानती थीं।",
+          "en": "The lights kept following. Speaking in every voice they knew."
+        }
+      ]
+    },
+    {
+      "id": "s18",
+      "setting": "the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns at night, a boy and his father walking with eyes down, a blue light hovering right beside the boy's ear",
+      "characters": [
+        "kanji",
+        "hamir",
+        "light"
+      ],
+      "mood": "dread",
+      "props": [
+        "kali",
+        "bell"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "और फिर एक आवाज़ आई जिसने बापू के क़दम रोक दिए।",
+          "en": "And then came a voice that stopped Baba in his tracks."
+        },
+        {
+          "speaker": "kanji",
+          "text": "बापू… मैं यहाँ हूँ… पीछे… आपने मुझे छोड़ दिया…",
+          "en": "Baba… I'm here… behind you… you left me behind…",
+          "shot": "a pale blue light hovering behind a man's shoulder in the dark"
+        },
+        {
+          "speaker": "narrator",
+          "text": "कानजी की आवाज़। पीछे से। जबकि कानजी उनके हाथ को पकड़े खड़ा था।",
+          "en": "Kanji's voice. From behind. While Kanji stood right there, holding his hand."
+        },
+        {
+          "speaker": "kanji",
+          "text": "बापू, वो मैं नहीं हूँ! मैं यहाँ हूँ! घंटी सुनो!",
+          "en": "Baba, that's not me! I'm here! Listen to the bell!"
+        },
+        {
+          "speaker": "narrator",
+          "text": "कानजी ने पूरी ताक़त से घंटी बजाई। टन्न! टन्न! टन्न!",
+          "en": "Kanji rang the bell with all his strength. Clang! Clang! Clang!"
+        }
+      ]
+    },
+    {
+      "id": "s19",
+      "setting": "the edge of a Maldhari herders' village of round white mud huts with conical thatched roofs in the Banni grasslands of Kutch, Gujarat at first light, a pale dawn over the Great Rann of Kutch, an endless flat white salt desert with cracked hexagon patterns, a woman and an old man running towards a boy, his limping father and a black buffalo",
+      "characters": [
+        "jeevi",
+        "raghu",
+        "kanji",
+        "hamir"
+      ],
+      "mood": "reveal",
+      "props": [
+        "kali",
+        "bell"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "पूरब में आसमान फीका पड़ने लगा। रोशनियाँ एक-एक करके बुझ गईं।",
+          "en": "The sky in the east began to pale. The lights went out one by one."
+        },
+        {
+          "speaker": "narrator",
+          "text": "और गाँव के किनारे, माँ और दादा ने देखा… रण से तीन परछाइयाँ लौट रही थीं।",
+          "en": "And at the village edge, Ma and Dada saw… three shadows returning from the Rann.",
+          "shot": "silhouettes of a boy, a limping man and a buffalo walking out of a white desert at dawn"
+        },
+        {
+          "speaker": "jeevi",
+          "text": "हमीर! कानजी!",
+          "en": "Hamir! Kanji!"
+        },
+        {
+          "speaker": "raghu",
+          "text": "पीतल ने झूठ नहीं बोला।",
+          "en": "The brass didn't lie."
+        },
+        {
+          "speaker": "narrator",
+          "text": "उस सुबह बन्नी के एक भूंगे में बरसों बाद सब एक साथ हँसे।",
+          "en": "That morning, in one bhunga of Banni, everyone laughed together for the first time in years."
+        }
+      ]
+    },
+    {
+      "id": "s20",
+      "setting": "inside the mud hut at night, a family asleep by a dying fire, a man waking up, a pale blue glow at the small window",
+      "characters": [
+        "hamir",
+        "kanji",
+        "light"
+      ],
+      "mood": "dread",
+      "props": [
+        "bell"
+      ],
+      "continuity": "the brass bell hangs on a nail by the boy's bed",
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "उस रात सब थककर सो गए।",
+          "en": "That night everyone slept, exhausted."
+        },
+        {
+          "speaker": "narrator",
+          "text": "आधी रात को खिड़की पर एक नीली चमक आई।",
+          "en": "At midnight, a blue glow appeared at the window.",
+          "shot": "a small round hut window with a pale blue glow outside in the dark"
+        },
+        {
+          "speaker": "kanji",
+          "text": "बापू… बापू, मैं बाहर हूँ… दरवाज़ा खोलो…",
+          "en": "Baba… Baba, I'm outside… open the door…",
+          "shot": "blue light leaking through the cracks of a wooden hut door at night"
+        },
+        {
+          "speaker": "narrator",
+          "text": "कानजी की आवाज़। बाहर से।",
+          "en": "Kanji's voice. From outside."
+        },
+        {
+          "speaker": "narrator",
+          "text": "हमीर नींद में उठे। दरवाज़े की तरफ़ बढ़े। उनका हाथ कुंडी तक पहुँचा…",
+          "en": "Hamir rose, half asleep. He moved to the door. His hand reached the latch…",
+          "shot": "a man's hand reaching for a wooden door latch in a dark hut, blue light in the cracks"
+        }
+      ]
+    },
+    {
+      "id": "s21",
+      "setting": "inside the mud hut at night, a boy sitting up in bed ringing a brass bell, the blue glow at the window fading",
+      "characters": [
+        "kanji",
+        "hamir",
+        "light"
+      ],
+      "mood": "reveal",
+      "props": [
+        "bell"
+      ],
+      "lines": [
+        {
+          "speaker": "narrator",
+          "text": "तभी, अंदर से… टन्न।",
+          "en": "Then, from inside… clang."
+        },
+        {
+          "speaker": "narrator",
+          "text": "कानजी अपने बिस्तर पर बैठा था। हाथ में घंटी।",
+          "en": "Kanji was sitting up in his bed. The bell in his hand.",
+          "shot": "a boy sitting up in bed in the dark, ringing a brass bell, looking straight at his father"
+        },
+        {
+          "speaker": "kanji",
+          "text": "बापू। मैं यहाँ हूँ।",
+          "en": "Baba. I'm here."
+        },
+        {
+          "speaker": "narrator",
+          "text": "बाहर की नीली रोशनी काँपी… और बुझ गई।",
+          "en": "The blue light outside trembled… and went out."
+        },
+        {
+          "speaker": "narrator",
+          "text": "रण में आज भी अमावस की रातों को रोशनियाँ चलती हैं। वैज्ञानिक कहते हैं, शायद दलदल की गैस है।",
+          "en": "On moonless nights the lights still walk in the Rann. Scientists say it may be marsh gas."
+        },
+        {
+          "speaker": "narrator",
+          "text": "पर बन्नी के हर घर में, आज भी, दरवाज़े के पास एक पीतल की घंटी टँगी रहती है।",
+          "en": "But in every home in Banni, even today, a brass bell hangs beside the door.",
+          "shot": "a dented brass bell hanging on a nail beside a mud hut door, a faint blue glow far outside"
+        }
+      ]
+    }
+  ],
+  "thumbnail": {
+    "prompt": "a small boy in a white frilled top standing alone on a vast white salt desert at night holding a brass bell, a glowing blue man-shaped light with no shadow reaching towards him",
+    "text": "पीछे मत जाना"
+  },
+  "shorts": [
+    {
+      "scenes": [
+        "s01",
+        "s05"
+      ],
+      "title": "रण में ये रोशनी आपका नाम लेती है 😱 | Chir Batti",
+      "hook": "three pale blue lights drifting over a white salt desert at night"
+    },
+    {
+      "scenes": [
+        "s07"
+      ],
+      "title": "हर आवाज़ झूठ बोल सकती है, ये नहीं 😱 | Chir Batti",
+      "hook": "a dented brass bell placed in a small boy's palm by an old hand"
+    },
+    {
+      "scenes": [
+        "s12",
+        "s13"
+      ],
+      "title": "बापू आए… पर उनकी परछाईं नहीं थी 😱 | Chir Batti",
+      "hook": "a boy's shadow on white salt beside a man's feet with no shadow"
+    },
+    {
+      "scenes": [
+        "s20",
+        "s21"
+      ],
+      "title": "रात को बाहर से मेरी आवाज़ आई 😱 | Chir Batti",
+      "hook": "a pale blue glow at a small round hut window at night"
+    }
+  ],
+  "youtube": {
+    "description": "In the Banni grasslands at the edge of the Great Rann of Kutch, herders tell of chir batti: lights that walk across the salt on moonless nights and call people by name, in the voices of those they have already taken. When his father disappears into the Rann chasing a lost buffalo, ten-year-old Kanji walks out into the white desert with nothing but a brass bell.\n\nChir batti is a real local legend of Kutch. The characters and events in this story are fiction.",
+    "hashtags": [
+      "#ChirBatti",
+      "#RannOfKutch"
+    ],
+    "tags": [
+      "chir batti",
+      "chir batti kutch",
+      "rann of kutch horror",
+      "kutch ghost lights",
+      "gujarat horror story",
+      "banni grassland",
+      "bhoot ki kahani",
+      "darawani kahani",
+      "horror story in hindi",
+      "hindi horror story"
+    ]
+  }
+}
