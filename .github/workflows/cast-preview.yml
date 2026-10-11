@@ -1,0 +1,33 @@
+name: Cast preview
+on:
+  workflow_dispatch:
+    inputs:
+      story:
+        description: "story file, e.g. drafts/003-jatinga.json"
+        required: true
+      scenes:
+        description: "scene ids for sample shots, space separated"
+        default: "s05 s20 s23"
+permissions:
+  contents: write
+jobs:
+  preview:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r requirements.txt
+      - run: python -u scripts/cast_preview.py "${{ inputs.story }}" ${{ inputs.scenes }}
+        env:
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+      - name: Save
+        if: always()
+        run: |
+          git config user.name "tall-tale-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add cast
+          git commit -m "Cast preview" || echo nothing
+          for i in 1 2 3 4 5; do git pull --rebase -q && git push && break; sleep $((i * 5)); done

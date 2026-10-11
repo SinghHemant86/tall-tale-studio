@@ -162,7 +162,7 @@ def main() -> int:
             smeta = {**meta, "description": f"Full story ▶ https://youtu.be/{vid}\n\n{tags_line} #Shorts\n\n"
                                             "Visuals and voices are AI-generated."}
             slot = schedule.rfc3339_utc(short_slots[k]) if short_slots else None
-            short_ids.append(upload.upload(sh["file"], None, f"{sh['title'].split('|')[0].strip()[:90]} #Shorts",
+            short_ids.append(upload.upload(sh["file"], None, f"{sh['title'].strip()[:90]} #Shorts",
                                            smeta, cfg, slot))
     if vid and long_slot:
         schedule.commit(long_slot, short_slots[:len(short_ids)])
