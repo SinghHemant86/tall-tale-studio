@@ -91,8 +91,20 @@ def _shot_list(win: dict, story: dict, scene_times: dict, dur: float) -> list[di
             prompt = win["hook"]
         else:
             prompt = TRAILER_SHOTS[k % len(TRAILER_SHOTS)].format(who=who_txt, setting=s["setting"])
-        shots.append({"prompt": f"{prompt}, {STYLE_TAIL}", "sec": step, "t_long": t_long})
+        ids = [who["id"]] if who and not who.get("real") else []
+        shots.append({"prompt": f"{prompt}, {STYLE_TAIL}", "sec": step, "t_long": t_long,
+                      "scene": s["id"], "chars": ids})
     return shots
+
+
+def _refs(story: dict | None, shot: dict, work: Path) -> tuple[str, list[Path]]:
+    """Same cast and same place as the long video: draw from the cast pictures and the scene master."""
+    if not story or "scene" not in shot:
+        return shot["prompt"], []
+    master = work / "masters" / f"{shot['scene']}.png"
+    ids = shot.get("chars", [])
+    refs = ([master] if master.exists() else []) + images.cast_refs(story, ids)
+    return images.ref_prompt(story, ids, master.exists(), shot["prompt"]), refs
 
 
 def prepare(story: dict, scene_times: dict, subs: list, work: Path, cfg: dict, style: str) -> int:
@@ -114,7 +126,8 @@ def prepare(story: dict, scene_times: dict, subs: list, work: Path, cfg: dict, s
             p = d / f"img_{i:02d}.png"
             if not p.exists():
                 log(f"  short {win['n']} image {i + 1}/{len(plan['shots'])}")
-                images.render(sh["prompt"], p, cfg, 500 + i, SQ, SQ, style)
+                prompt, refs = _refs(story, sh, work)
+                images.render(prompt, p, cfg, 500 + i, SQ, SQ, style, refs=refs)
             made += 1
     return made
 

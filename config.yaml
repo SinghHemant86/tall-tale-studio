@@ -16,6 +16,8 @@ video:
 images:
   engine: cloudflare            # cloudflare (free 10k neurons/day) | pollinations (needs paid key) | placeholder
   model: flux
+  consistent: true              # draw shots FROM the cast pictures + scene master (FLUX.2 klein), not from scratch
+  cast_approval: true           # stop after drawing the cast until cast/<story>/APPROVED exists
   max_images: 420               # per video; made over several mornings (~130/day free), the story waits in the queue
   # visual style comes from the story's genre (studio/genres.py)
   negative: "text, watermark, logo, cartoon, bright colors, smiling"

@@ -54,6 +54,20 @@ story that breaks them.
 - A ghost who is sad, gentle, or not yet revealed looks ordinary or simply pale; a story can stay
   quiet and real-looking and let the narration do the work. Decide per character, per scene.
 
+## Consistency (cast is locked before anything else)
+- Step 0 of every render draws one reference picture per character and key prop into `cast/<story-id>/`
+  and stops. Hemant reviews `cast_sheet.jpg`; swap or delete any picture, then add an empty `APPROVED`
+  file and run again. Only then are voices and shots made, and every shot is drawn FROM these pictures.
+- Each character's `look` is one fixed costume for the whole story: exact age, hair, beard, skin, and named
+  clothes with colours ("short white beard, faded brown kurta, grey wool shawl"). Never "simple clothes".
+  Same person at another age (flashback) = a separate character (madho / madho_child).
+- Key objects that appear in several shots go in `props` ([{"id": "padlock", "look": "big rusted iron
+  padlock on a chain"}]) and are listed in each scene's `props`.
+- A scene can carry `continuity`: the state that must hold in every shot of it ("the padlock hangs from
+  the door latch", "Madho holds the lantern in his right hand"). Change it only in the scene where the
+  story changes it (the lock is broken in s24, so from s24 on: "broken padlock on the floor").
+- Every scene gets one master picture (wide, with its people and props); all its shots are drawn from it.
+
 ## Real people and real cases
 - Report, never conclude. State the official position first and clearly (court, police, CBI), then any
   claims, labelled as claims with who made them ("the family alleged", "a staff member told a news

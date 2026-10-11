@@ -68,7 +68,14 @@ def validate(b: dict) -> dict:
         src = [s for s in b.get("sources", []) if str(s).startswith("http")]
         if not src:
             raise BibleError("true_incident stories need a 'sources' list of links (news, court records, archives)")
+    prop_ids = {p["id"] for p in b.get("props", [])}
+    for p in b.get("props", []):
+        if not p.get("look"):
+            raise BibleError(f"prop '{p.get('id')}' needs a 'look'")
     for s in b["scenes"]:
+        for pid in s.get("props", []):
+            if pid not in prop_ids:
+                raise BibleError(f"scene {s['id']} references unknown prop '{pid}'")
         if "setting" not in s or not s.get("lines"):
             raise BibleError(f"scene {s.get('id')} needs 'setting' and 'lines'")
         for cid in s.get("characters", []):

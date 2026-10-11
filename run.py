@@ -64,6 +64,19 @@ def main() -> int:
     work.mkdir(parents=True, exist_ok=True)
     log(f"Story: {story['title']}  ({genre['name']}, {len(story['scenes'])} scenes)")
 
+    log("0/6 cast (characters and props locked before anything else)")
+    try:
+        images.lock_cast(story, cfg, genre["style"])
+    except (images.CastPending, images.QuotaExhausted) as e:
+        msg = f"{e}. Approve it (or swap any picture), then run again; nothing else was spent."
+        log("   " + msg)
+        summary = os.environ.get("GITHUB_STEP_SUMMARY")
+        if summary:
+            with open(summary, "a", encoding="utf-8") as f:
+                f.write(f"### Cast waiting for approval\n{msg}\n")
+        (bib.QUEUE / "PROGRESS.md").write_text(f"{story['id']}: {msg}\n")
+        return 0
+
     log("1/6 voices")
     lines = voice.speak_all(story, work, cfg, genre)
     log("2/6 shot plan + images")
@@ -77,7 +90,7 @@ def main() -> int:
             log("   thumbnail image")
             images.render(tcfg["prompt"] + ", dramatic single subject, strong contrast, empty dark space on the left",
                           work / "thumbnail_base.png", cfg, 4242, 1280, 720, genre["style"])
-        shot_imgs = images.shot_images(plan, work, cfg, genre["style"])
+        shot_imgs = images.shot_images(plan, work, cfg, genre["style"], story)
         if want_shorts:
             log("   shorts pictures")
             shorts.prepare(story, est_times, est_subs, work, cfg, genre["style"])
