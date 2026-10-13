@@ -1222,5 +1222,34 @@
       "horror story in hindi",
       "hindi horror mystery"
     ]
+  },
+  "result": {
+    "video": "output/003-jatinga/003-jatinga.mp4",
+    "seconds": 774.5,
+    "youtube_id": "nZAP1vCw42M",
+    "publish_at": "2026-10-16T18:25:00+05:30",
+    "shorts": [
+      {
+        "file": "output/003-jatinga/shorts/short_01.mp4",
+        "youtube_id": "TNViZNyLzJo",
+        "publish_at": "2026-10-16T18:55:00+05:30"
+      },
+      {
+        "file": "output/003-jatinga/shorts/short_02.mp4",
+        "youtube_id": "vGh-9n8vJOE",
+        "publish_at": "2026-10-17T17:30:00+05:30"
+      },
+      {
+        "file": "output/003-jatinga/shorts/short_03.mp4",
+        "youtube_id": "wlCZe-usXVE",
+        "publish_at": "2026-10-18T17:30:00+05:30"
+      },
+      {
+        "file": "output/003-jatinga/shorts/short_04.mp4",
+        "youtube_id": "Gu_bWWkpGEo",
+        "publish_at": "2026-10-19T17:30:00+05:30"
+      }
+    ],
+    "portraits": []
   }
 }
