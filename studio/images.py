@@ -55,6 +55,11 @@ def _fit(img: Image.Image, w: int, h: int) -> Image.Image:
     return img.resize((w, h), Image.LANCZOS)
 
 
+class Flagged(RuntimeError):
+    """The image engine's safety filter rejected this prompt/picture combination (Cloudflare code 3030)."""
+    no_retry = True      # asking again with the same input only wastes time
+
+
 class QuotaExhausted(RuntimeError):
     """The image engine's free daily allowance is used up; carry on tomorrow."""
 
@@ -122,6 +127,8 @@ def _cloudflare_ref(prompt: str, out: Path, w: int, h: int, refs: list[Path]) ->
         r = requests.post(url, headers={"Authorization": f"Bearer {token}"}, files=files, timeout=240)
         if r.status_code == 429 or "4006" in r.text[:300]:
             raise QuotaExhausted(f"Cloudflare {r.status_code}: {r.text[:300]}")
+        if r.status_code == 400 and ("3030" in r.text[:400] or "flagged" in r.text[:400].lower()):
+            raise Flagged(f"Cloudflare flagged the output: {r.text[:200]}")
         if r.status_code >= 400:
             raise RuntimeError(f"Cloudflare HTTP {r.status_code}: {r.text[:400]}")
         if r.headers.get("content-type", "").startswith("image"):
@@ -172,7 +179,25 @@ def render(prompt: str, out: Path, cfg: dict, seed: int, w: int, h: int, style: 
     refs = [r for r in (refs or []) if r and Path(r).exists()][:4]
     if engine == "cloudflare" and (refs or icfg.get("consistent", True)):
         try:
-            _cloudflare_ref(full, out, w, h, refs)
+            try:
+                _cloudflare_ref(full, out, w, h, refs)
+            except Flagged as fl:
+                # the safety filter is touchy about some combinations; never let one shot stop a whole video
+                log(f"    shot flagged by the filter ({fl!s:.90}); trying a softer version")
+                soft = ("gentle family-friendly storybook illustration, calm and tasteful, no violence, "
+                        "no blood, no injury, " + full)
+                try:
+                    _cloudflare_ref(soft, out, w, h, refs)
+                except Flagged:
+                    try:
+                        _cloudflare_ref(soft, out, w, h, refs[:1])
+                    except Flagged:
+                        if refs:
+                            log("    still flagged; reusing the scene's reference picture for this shot")
+                            import shutil
+                            shutil.copy(refs[0], out)
+                        else:
+                            _cloudflare(soft, out, w, h, seed)
         except QuotaExhausted:
             raise
         except RuntimeError as e:

@@ -28,7 +28,7 @@ concurrency:
 jobs:
   render:
     runs-on: ubuntu-24.04
-    timeout-minutes: 90
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
 
@@ -57,9 +57,10 @@ jobs:
 
       - name: Reuse voices/images from an earlier attempt at the same story (no credits spent twice)
         if: steps.q.outputs.empty != 'true'
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: |
+            cast
             output/*/voice
             output/*/shots
             output/*/thumbnail_base.png
@@ -101,6 +102,19 @@ jobs:
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           MSG=$(tail -n 15 render.log 2>/dev/null | sed ':a;N;$!ba;s/%/%25/g;s/\r//g;s/\n/%0A/g')
           echo "::error title=Render failed::${MSG}"
+
+      - name: Save voices/images for the next attempt (even if this run failed or timed out)
+        if: steps.q.outputs.empty != 'true' && always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            cast
+            output/*/voice
+            output/*/shots
+            output/*/thumbnail_base.png
+            output/*/shorts/s*/img_*.png
+            output/*/shorts/s*/plan.json
+          key: render-${{ github.run_id }}
 
       - name: Keep the video for 14 days (download from the run page)
         if: steps.q.outputs.empty != 'true' && always()

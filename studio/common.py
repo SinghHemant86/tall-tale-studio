@@ -40,6 +40,8 @@ def retry(fn, attempts: int = 4, base_wait: float = 4.0):
         try:
             return fn()
         except Exception as e:  # noqa: BLE001
+            if getattr(e, "no_retry", False):
+                raise
             last = e
             wait = base_wait * (2 ** i)
             log(f"  retry {i + 1}/{attempts} after error: {e!s:.160} (waiting {wait:.0f}s)")
