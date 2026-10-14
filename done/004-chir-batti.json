@@ -958,5 +958,34 @@
       "horror story in hindi",
       "hindi horror story"
     ]
+  },
+  "result": {
+    "video": "output/004-chir-batti/004-chir-batti.mp4",
+    "seconds": 628.1,
+    "youtube_id": "uJ_JPKueC9o",
+    "publish_at": "2026-10-23T18:25:00+05:30",
+    "shorts": [
+      {
+        "file": "output/004-chir-batti/shorts/short_01.mp4",
+        "youtube_id": "_lVoysZ744E",
+        "publish_at": "2026-10-23T18:55:00+05:30"
+      },
+      {
+        "file": "output/004-chir-batti/shorts/short_02.mp4",
+        "youtube_id": "6JAk_U_zKfk",
+        "publish_at": "2026-10-24T17:30:00+05:30"
+      },
+      {
+        "file": "output/004-chir-batti/shorts/short_03.mp4",
+        "youtube_id": "ea7Z-clHVZM",
+        "publish_at": "2026-10-25T17:30:00+05:30"
+      },
+      {
+        "file": "output/004-chir-batti/shorts/short_04.mp4",
+        "youtube_id": "zbPt-o68OzI",
+        "publish_at": "2026-10-26T17:30:00+05:30"
+      }
+    ],
+    "portraits": []
   }
 }
