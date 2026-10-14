@@ -19,7 +19,7 @@ SQ = 1080                    # the picture is square, full width
 SQ_Y = 380                   # its top edge
 MAX_SEC = 58.0
 END_SEC = 2.5
-SHOT_SEC = 1.5               # a new picture this often
+SHOT_SEC = 3.5               # a new picture this often (was 1.5: too jumpy)
 FPS = 30
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
 
