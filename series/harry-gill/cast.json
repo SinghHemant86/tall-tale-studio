@@ -1,6 +1,6 @@
 {
  "series": "Harry Gill",
- "status": "cast sheets approved by Hemant 2026-10-15; Balwant pending small redesign",
+ "status": "cast sheets approved by Hemant 2026-10-15",
  "style": "soft 3D animated feature-film look, warm cinematic lighting, rounded friendly shapes, detailed fur, big expressive eyes, vibrant but gentle colours",
  "rules": [
   "everyone is dressed for their job; outfits never change between episodes",
@@ -23,8 +23,7 @@
   },
   "balwant": {
    "sheet": "balwant.jpg",
-   "look": "big muscular dark-red-brown bison police constable, curved horns, khaki police cap with badge, khaki short-sleeve uniform shirt with badge and belt pouch, cream striped gym towel on shoulder, proud slightly clueless smile",
-   "note": "redesign pending: make him more gym-obsessed and less like a generic police chief"
+   "look": "big muscular dark-red-brown bison police constable, curved horns, khaki police cap with badge, sleeveless khaki uniform vest with badge, khaki trousers, blue-striped white wristbands on both wrists, cream striped gym towel on shoulder, proud slightly clueless smile, flexing bicep"
   },
   "tota-ram": {
    "sheet": "tota-ram.jpg",
