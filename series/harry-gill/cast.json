@@ -1,0 +1,38 @@
+{
+ "series": "Harry Gill",
+ "status": "cast sheets approved by Hemant 2026-10-15; Balwant pending small redesign",
+ "style": "soft 3D animated feature-film look, warm cinematic lighting, rounded friendly shapes, detailed fur, big expressive eyes, vibrant but gentle colours",
+ "rules": [
+  "everyone is dressed for their job; outfits never change between episodes",
+  "no text or logos in pictures",
+  "Rangeeli keeps teal base with pink patterns; colour change only as a deliberate plot beat"
+ ],
+ "characters": {
+  "harry-gill": {
+   "sheet": "harry-gill.jpg",
+   "expressions": "harry-gill-expressions.jpg",
+   "look": "cute young rust-brown squirrel, cream belly, very big fluffy tail, huge round dark eyes, small tufted ears, small brown flat cap with a square patch, mustard-yellow waistcoat, small cloth nut-satchel across chest with nuts showing"
+  },
+  "rangeeli": {
+   "sheet": "rangeeli.jpg",
+   "look": "elegant female chameleon fashion designer, teal skin with pink patterns and pink crest, big brown eyes with long lashes, round gold glasses, floral pink-orange scarf, yellow measuring tape around neck, curled tail"
+  },
+  "gulabo": {
+   "sheet": "gulabo.jpg",
+   "look": "gentle elderly female sloth florist, shaggy light-brown fur, sleepy kind eyes, green gardening apron with pockets, red hibiscus behind ear, holding a mixed flower bouquet"
+  },
+  "balwant": {
+   "sheet": "balwant.jpg",
+   "look": "big muscular dark-red-brown bison police constable, curved horns, khaki police cap with badge, khaki short-sleeve uniform shirt with badge and belt pouch, cream striped gym towel on shoulder, proud slightly clueless smile",
+   "note": "redesign pending: make him more gym-obsessed and less like a generic police chief"
+  },
+  "tota-ram": {
+   "sheet": "tota-ram.jpg",
+   "look": "cheerful bright-green parrot postman, red beak, khaki postman shirt and khaki cap, brown leather letter bag with envelopes"
+  },
+  "bhola-kaka": {
+   "sheet": "bhola-kaka.jpg",
+   "look": "friendly middle-aged Indian man, round kind face, grey moustache, pink-beige checked shirt, striped cloth towel on shoulder, brown trousers, sandals, steel tea kettle"
+  }
+ }
+}
