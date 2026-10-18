@@ -1,5 +1,46 @@
 # Sound effects
 
-Name files by effect: `knock.mp3`, `door_creak.mp3`, `whisper.wav`, `thunder.mp3`, `footsteps.mp3`.
-A scene with `"sfx": ["knock"]` plays `knock*` at the start of that scene.
-Free sources: Pixabay sound effects, Freesound.org (check each file's licence).
+A scene with `"sfx": ["rain_gentle"]` plays `rain_gentle*` at the start of that scene.
+Files are levelled (beds about -26 LUFS, hits about -20 LUFS), mono, 44.1 kHz.
+`index.json` lists length and kind (bed = long ambience, hit = one-off effect).
+All came from the YouTube Audio Library / Pixabay sets the channel owner downloaded; re-check a file's licence before adding more.
+
+## Catalogue
+- `rain_gentle` (90.1s, bed)
+- `rain_calm` (108.7s, bed)
+- `rain_thunder` (63.3s, bed)
+- `thunder_big` (18.3s, hit)
+- `train_india_interior` (5.6s, bed)
+- `train_metro_arrival` (20.7s, hit)
+- `train_subway_door` (54.4s, bed)
+- `train_pass` (10.6s, hit)
+- `train_stopping` (7.2s, hit)
+- `ghost_whispers` (16.2s, hit)
+- `ghost_drift` (13.6s, bed)
+- `ghost_humming` (16.4s, bed)
+- `ghost_laugh` (14.8s, hit)
+- `ghost_breath_beast` (21.6s, hit)
+- `scream_scary` (3.3s, hit)
+- `cry_woman_sobbing` (18.1s, hit)
+- `cry_woman_soft` (8.1s, hit)
+- `cry_woman_long` (15.2s, hit)
+- `giggle_baby_1` (4.2s, hit)
+- `giggle_baby_2` (11.0s, hit)
+- `giggle_girl_1` (16.6s, hit)
+- `giggle_girl_2` (2.2s, hit)
+- `chuckle_girl` (3.0s, hit)
+- `laugh_girl` (1.4s, hit)
+- `laugh_man_1` (4.1s, hit)
+- `laugh_man_2` (4.1s, hit)
+- `tiger_attack` (18.8s, hit)
+- `tiger_roar_loud` (2.0s, hit)
+- `tiger_roar_light` (10.1s, hit)
+- `tiger_roar_cinematic` (8.1s, hit)
+- `leopard_attack` (3.8s, hit)
+- `lion_roar_long` (55.1s, hit)
+- `lion_roar_short` (2.7s, hit)
+- `lion_snarl` (6.3s, hit)
+- `steps_wet` (137.8s, bed)
+- `steps_leaves` (30.2s, bed)
+- `steps_walk` (4.4s, hit)
+- `scratch_title` (0.9s, hit)
