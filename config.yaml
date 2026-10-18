@@ -95,7 +95,7 @@ youtube:
   schedule:                     # publish on a calendar instead of leaving videos private
     enabled: true               # uploads go private with publishAt and go public on the calendar
     timezone: Asia/Kolkata
-    long_days: [mon, fri]
+    long_days: [fri]
     long_time: "18:25"   # live ~2-3 h before the 9-11:30 PM horror peak (after puja, dinner, homework)
     short_time: "17:30"  # after school/office, before evening puja
     # big festival nights: no long video (Shorts still go out); the next long-video day is used instead
