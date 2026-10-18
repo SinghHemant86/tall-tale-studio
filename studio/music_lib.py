@@ -23,10 +23,11 @@ STEP = 0.5  # seconds per loudness measurement
 ROLE_WORDS = [
     ("intro", ["opener", "opening", "intro", "logo", "title"]),
     ("outro", ["outro", "ending", "credits", "pad", "closing"]),
+    ("texture", ["breath", "whisper"]),
     ("calm", ["music-box", "musicbox", "lullaby", "piano", "calm", "soft", "sad"]),
     ("chase", ["trailer", "chase", "action", "pulse", "heartbeat", "tension", "tense", "run"]),
     ("dread", ["atmosphere", "ambience", "ambient", "background", "soundscape", "drone",
-               "suspense", "eerie", "whisper", "breath", "dissonant", "dark", "mystery", "pad"]),
+               "suspense", "eerie", "dissonant", "dark", "mystery", "pad"]),
 ]
 
 # scene mood -> (preferred role, target intensity percentile within the track)
@@ -107,8 +108,21 @@ def build(folder: Path | None = None) -> dict:
     return lib
 
 
-def choose(lib: dict, genre: str, mood: str, seconds: float, index: int) -> tuple[Path, float] | None:
-    """Pick a track and a start offset for one segment of the video."""
+def new_state(seed: str = "") -> dict:
+    """Per-video memory so the bed never repeats itself: last track, use counts, windows already played."""
+    return {"last": None, "uses": {}, "windows": {}, "texture_used": False,
+            "seed": sum(ord(c) for c in seed) if seed else 0}
+
+
+def choose(lib: dict, genre: str, mood: str, seconds: float, index: int,
+           state: dict | None = None) -> tuple[Path, float] | None:
+    """Pick a track and a start offset for one segment of the video.
+
+    With a state (one per video): never the same track twice in a row, the least-used track wins,
+    the order is shifted per video (seed), a breath/whisper texture track plays at most once
+    (only under dread/drone/ambient moods), and a stretch of a track is not played twice.
+    """
+    state = state if state is not None else new_state()
     role, pct = MOOD_TARGET.get(mood, ("dread", 50))
     items = list(lib.items())
     if not items:
@@ -118,17 +132,41 @@ def choose(lib: dict, genre: str, mood: str, seconds: float, index: int) -> tupl
         return [(k, v) for k, v in items if pred(k, v)]
 
     in_genre = lambda k, v: v["folder"] == genre  # noqa: E731
+    bed = lambda k, v: v["role"] not in ("intro", "outro", "texture")  # noqa: E731
     candidates = (
         pool(lambda k, v: v["folder"] == mood)                          # music/intro/, music/outro/
         or pool(lambda k, v: in_genre(k, v) and v["role"] == role)      # right genre, right role
-        or ([] if role in ("intro", "outro") else pool(lambda k, v: in_genre(k, v) and v["role"] != "intro"))
+        or ([] if role in ("intro", "outro") else pool(lambda k, v: in_genre(k, v) and bed(k, v)))
         or pool(lambda k, v: v["role"] == role)                          # right role, any genre
-        or pool(lambda k, v: v["role"] not in ("intro", "outro"))
+        or pool(bed)
         or items
     )
-    key, info = candidates[index % len(candidates)]
+    # a role with fewer than two tracks (e.g. one chase track) borrows the dread beds, taken at their
+    # loudest stretches, so a long chase never replays the same single track
+    if role in ("chase",) and len(candidates) < 2:
+        candidates = candidates + pool(lambda k, v: in_genre(k, v) and v["role"] == "dread")
+    # the breath/whisper texture is a once-per-video accent under the quietest dread moods only
+    if (mood in ("dread", "drone", "ambient") and not state["texture_used"] and index >= 2 and seconds <= 25):
+        tex = pool(lambda k, v: in_genre(k, v) and v["role"] == "texture")
+        if tex:
+            candidates = tex
+
+    if role in ("intro", "outro") or mood in ("intro", "outro"):
+        ranked = candidates
+    else:
+        # least used first, then a per-video rotation so two videos do not start the same way
+        ranked = sorted(enumerate(candidates), key=lambda t: (
+            state["uses"].get(t[1][0], 0), (t[0] + state["seed"]) % len(candidates)))
+        ranked = [c for _, c in ranked]
+        if len(ranked) > 1 and ranked[0][0] == state["last"]:
+            ranked = ranked[1:] + ranked[:1]
+    key, info = ranked[0]
     path = ROOT / "music" / key
     choose.last_level = info["level_db"]
+    state["last"] = key
+    state["uses"][key] = state["uses"].get(key, 0) + 1
+    if info["role"] == "texture":
+        state["texture_used"] = True
 
     # intro: start so the track's first big hit lands 60% into the card (the logo reveal)
     if role == "intro":
@@ -140,8 +178,17 @@ def choose(lib: dict, genre: str, mood: str, seconds: float, index: int) -> tupl
     win = max(1, int(seconds / STEP))
     target = np.percentile(c, pct)
     means = np.convolve(c, np.ones(win) / win, mode="valid")
-    best = int(np.argmin(np.abs(means - target)))
-    return path, round(best * STEP, 1)
+    # best-fitting start that does not overlap a stretch of this track already used in this video
+    played = state["windows"].setdefault(key, [])
+    for best in np.argsort(np.abs(means - target)):
+        a, b = best * STEP, best * STEP + seconds
+        if all(b <= pa or a >= pb for pa, pb in played):
+            break
+    else:
+        best = int(np.argmin(np.abs(means - target)))
+    a = best * STEP
+    played.append((a, a + seconds))
+    return path, round(a, 1)
 
 
 def describe(lib: dict) -> str:

@@ -97,16 +97,27 @@ def scene_clip(scene: dict, images: list, lines: list, work: Path, cfg: dict, su
     return out
 
 
-def music_bed(segments: list[tuple[str, float]], work: Path, cfg: dict, genre: str = "horror") -> Path:
+def music_bed(segments: list[tuple[str, float]], work: Path, cfg: dict, genre: str = "horror",
+              seed: str = "") -> Path:
     """One music segment per (mood, seconds) pair, each faded in and out, joined end to end."""
     from . import music_lib
     mcfg = cfg["music"]
     lib = music_lib.build(ROOT / mcfg["folder"])
     out = work / "music_bed.wav"
+    # neighbouring scenes with the same mood share one continuous stretch of music (fewer cuts, no restarts)
+    merged: list[list] = []
+    for mood, dur in segments:
+        mood = mood or mcfg["default_mood"]
+        if merged and merged[-1][0] == mood and mood not in ("intro", "outro") and merged[-1][1] < 60:
+            merged[-1][1] += dur
+        else:
+            merged.append([mood, dur])
+    segments = [(m, d) for m, d in merged]
     segs = []
+    state = music_lib.new_state(seed)
     for i, (mood, dur) in enumerate(segments):
         mood = mood or mcfg["default_mood"]
-        pick = music_lib.choose(lib, genre, mood, dur, i)
+        pick = music_lib.choose(lib, genre, mood, dur, i, state)
         seg = work / f"music_{i:02d}.wav"
         if pick:
             track, offset = pick
