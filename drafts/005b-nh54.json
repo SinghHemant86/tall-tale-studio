@@ -57,7 +57,7 @@
  "scenes": [
   {
    "id": "s01",
-   "setting": "a white hatchback seen from inside through a rain-lashed windshield at night, wipers sweeping, the dashboard clock glowing red 03:17, a stone milestone showing 0 in the headlights",
+   "setting": "a white hatchback seen from inside through a rain-lashed windshield at night, wipers sweeping, the dashboard clock glowing red , a stone milestone showing 0 in the headlights",
    "characters": [
     "raghav"
    ],
@@ -97,7 +97,7 @@
    "sfx": [
     "rain_gentle"
    ],
-   "continuity": "the dashboard clock shows 03:17 in red; all car windows are shut"
+   "continuity": "a glowing red dashboard clock,  in red; all car windows are shut"
   },
   {
    "id": "s02",
@@ -243,7 +243,7 @@
    "sfx": [
     "rain_gentle"
    ],
-   "continuity": "all car windows are shut; the dashboard clock shows 03:17"
+   "continuity": "all car windows are shut; a glowing red dashboard clock, "
   },
   {
    "id": "s05",
@@ -402,7 +402,7 @@
   },
   {
    "id": "s08",
-   "setting": "the inside of a car at night, close on a red dashboard clock frozen at 03:17, a speedometer needle at 100, a man's sweating face lit red, a phone in his hand with a red recording dot",
+   "setting": "the inside of a car at night, close on a red dashboard clock frozen at , a speedometer needle at 100, a man's sweating face lit red, a phone in his hand with a red recording dot",
    "characters": [
     "raghav"
    ],
@@ -440,7 +440,7 @@
    "sfx": [
     "rain_gentle"
    ],
-   "continuity": "the dashboard clock reads 03:17 and the speedometer needle rests at 100"
+   "continuity": "a glowing red dashboard clock,  and the speedometer needle rests at 100"
   },
   {
    "id": "s09",
@@ -505,7 +505,7 @@
   },
   {
    "id": "s10",
-   "setting": "the rear-view mirror of a car at night showing the back seat, a figure with long wet hair sitting low in the back seat with her head tilted",
+   "setting": "first-person view from the driver's seat of a car interior at night, looking up into the small rear-view mirror, in the mirror glass the back seat and a wet-haired figure sitting low with her head bowed, rain on the windows",
    "characters": [
     "raghav",
     "woman"
@@ -521,7 +521,13 @@
      "speaker": "narrator",
      "text": "पिछली सीट पर कोई बैठा था। सिर झुका हुआ। गीले बाल।",
      "en": "Someone was sitting in the back seat. Head bowed. Wet hair.",
-     "shot": "a rear-view mirror showing a wet-haired figure sitting in the back seat"
+     "shot": [
+      {
+       "text": "first-person view from the driver's seat of a car interior at night, looking up into the small rear-view mirror, in the mirror glass the back seat and a wet-haired figure sitting low with her head bowed, rain on the windows",
+       "chars": [],
+       "base": false
+      }
+     ]
     },
     {
      "speaker": "narrator",
@@ -532,7 +538,13 @@
      "speaker": "narrator",
      "text": "उसने फिर शीशे में देखा… और सिर थोड़ा और पास झुक चुका था।",
      "en": "He looked into the mirror again… and the head had bent a little closer.",
-     "shot": "a rear-view mirror with the wet-haired head now much closer, almost at his shoulder"
+     "shot": [
+      {
+       "text": "first-person view from the driver's seat of a car interior at night, looking up into the small rear-view mirror, in the mirror glass the back seat and a wet-haired figure sitting low with her head bowed, rain on the windows, her head tilted closer, nearly at the driver's shoulder",
+       "chars": [],
+       "base": false
+      }
+     ]
     }
    ],
    "props": [
