@@ -214,6 +214,67 @@ def render(prompt: str, out: Path, cfg: dict, seed: int, w: int, h: int, style: 
     return out
 
 
+CF_VISION = "@cf/llava-hf/llava-1.5-7b-hf"
+_WORDS = {"zero": 0, "no": 0, "none": 0, "one": 1, "a": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6}
+
+
+def count_people(path: Path) -> int | None:
+    """How many people does a vision model see in this picture? None if it cannot tell (never blocks a render)."""
+    acct, token = os.environ.get("CF_ACCOUNT_ID"), os.environ.get("CF_API_TOKEN")
+    if not (acct and token):
+        return None
+    try:
+        im = Image.open(path).convert("RGB")
+        im.thumbnail((640, 640))
+        b = io.BytesIO()
+        im.save(b, "JPEG", quality=85)
+        r = requests.post(
+            f"https://api.cloudflare.com/client/v4/accounts/{acct}/ai/run/{CF_VISION}",
+            headers={"Authorization": f"Bearer {token}"},
+            json={"image": list(b.getvalue()),
+                  "prompt": "Count the people (humans, including figures, reflections and silhouettes) in this "
+                            "picture. Answer with a single number only.",
+                  "max_tokens": 8}, timeout=90)
+        if r.status_code >= 400:
+            return None
+        txt = str((r.json().get("result") or {}).get("description", "")).lower()
+        for tok in txt.replace(".", " ").replace(",", " ").split():
+            if tok.isdigit():
+                return int(tok)
+            if tok in _WORDS:
+                return _WORDS[tok]
+    except Exception as e:  # noqa: BLE001  - a failed check must never stop a video
+        log(f"    people check unavailable ({e!s:.80})")
+    return None
+
+
+def checked_render(prompt: str, out: Path, cfg: dict, seed: int, w: int, h: int, style: str,
+                   refs: list[Path], expect: int | None, fallback: Path | None = None) -> Path:
+    """Draw a picture, count the people in it, and redraw (twice at most) if there are more than there
+    should be: two drivers, a ghost twice, a twin. After that, fall back to the scene master."""
+    for attempt in range(3):
+        render(prompt, out, cfg, seed, w, h, style, refs=refs)
+        if expect is None or not cfg["images"].get("people_check", True):
+            return out
+        n = count_people(out)
+        try:
+            with open(out.parent.parent / "qa.log", "a") as f:
+                f.write(f"{out.name} expect={expect} seen={n} attempt={attempt + 1}\n")
+        except OSError:
+            pass
+        if n is None or n <= max(expect, 1) + (0 if expect >= 2 else 0):
+            return out
+        log(f"    people check: {n} people seen, {expect} expected; redrawing ({attempt + 1}/3)")
+        out.unlink(missing_ok=True)
+    if fallback and Path(fallback).exists():
+        import shutil
+        shutil.copy(fallback, out)
+        log("    people check failed 3 times; using the scene master for this shot")
+        return out
+    render(prompt, out, cfg, seed, w, h, style, refs=refs)
+    return out
+
+
 class CastPending(RuntimeError):
     """Cast pictures are drawn and wait for approval before anything else is spent."""
 
@@ -245,7 +306,12 @@ def lock_cast(story: dict, cfg: dict, style: str = "") -> dict[str, Path]:
                           f"on the right a close-up of the same face; plain neutral grey background, even soft light, no text, no letters, no labels")
             else:
                 prompt = f"object reference picture of {it['look']}, centred, plain neutral grey background, even light, no text, no letters"
-            render(prompt, p, cfg, 1000, 1024, 1024, style, refs=[])
+            base = it.get("derive_from")
+            refs0 = [d / f"{base}.png"] if base and (d / f"{base}.png").exists() else []
+            if refs0:
+                prompt = ("image 1 shows the same man: draw him again, with exactly the same face, hair and "
+                          "clothes, in this different state: " + prompt)
+            render(prompt, p, cfg, 1000, 1024, 1024, style, refs=refs0)
         out[it["id"]] = p
     if cfg["images"].get("cast_approval", True) and not (d / "APPROVED").exists():
         _cast_sheet(story, out, d / "cast_sheet.jpg")
@@ -285,7 +351,8 @@ def cast_refs(story: dict, ids: list[str]) -> list[Path]:
     return [d / f"{i}.png" for i in ids if (d / f"{i}.png").exists() and not _formless(story, i)]
 
 
-def ref_prompt(story: dict, ids: list[str], master: bool, prompt: str) -> str:
+def ref_prompt(story: dict, ids: list[str], master: bool, prompt: str, expect: int | None = None,
+               props: list[str] | None = None) -> str:
     """Tell the model which reference picture is who."""
     names = {c["id"]: c.get("name", c["id"]) for c in _cast_items(story)}
     parts, k = [], 1
@@ -298,7 +365,16 @@ def ref_prompt(story: dict, ids: list[str], master: bool, prompt: str) -> str:
             parts.append(f"image {k} is a reference sheet of {names.get(i, i)}: draw this person once, with the same "
                          f"face, hair, age and exactly these clothes; never mix their clothes with anyone else's")
             k += 1
+    for pid in props or []:
+        if (cast_dir(story) / f"{pid}.png").exists():
+            parts.append(f"image {k} is the {pid.replace('_', ' ')}: draw this exact object, same shape, colour and "
+                         f"condition, undamaged unless the shot says otherwise")
+            k += 1
     rules = " Every person and animal appears only once. No text, letters or captions in the picture."
+    if expect is not None:
+        rules += (f" Exactly {expect} {'person' if expect == 1 else 'people'} in the picture, no twins, no extra "
+                  "figures, no reflections of people unless the shot asks for a mirror." if expect
+                  else " No people visible in this picture.")
     return (("; ".join(parts) + "." + rules + " ") if parts else "") + prompt
 
 
@@ -332,8 +408,10 @@ def plan_shots(bible: dict, line_durs: dict, cfg: dict) -> dict[str, list[dict]]
         max_shot += 0.5
     plan = {}
     for s in bible["scenes"]:
-        present = [chars[c] for c in s.get("characters", [])]
-        who = "; ".join("a faceless silhouette of a person, seen from behind" if c.get("real") else c["look"]
+        unseen = set(s.get("unseen", []))               # a voice only: never drawn in this scene
+        present = [chars[c] for c in s.get("characters", []) if c not in unseen]
+        tag = lambda c: c.get("tag") or c["look"]       # noqa: E731  - short description, long look stays in the cast sheet
+        who = "; ".join("a faceless silhouette of a person, seen from behind" if c.get("real") else tag(c)
                         for c in present)
         base = s.get("image_prompt") or s["setting"]
         shots, cycle = [], 0
@@ -344,14 +422,20 @@ def plan_shots(bible: dict, line_durs: dict, cfg: dict) -> dict[str, list[dict]]
             spk = chars.get(ln["speaker"])
             for j in range(parts):
                 ids = []
+                extra = 0
                 if j < len(custom):
-                    prompt = f"{custom[j]}, {base}"
-                    # a custom shot may show anyone in the scene: give it everyone's reference sheet
-                    ids = [c["id"] for c in present]
-                elif spk and j == 0:
+                    cs = custom[j]
+                    if isinstance(cs, dict):      # {"text", "chars": [ids], "base": false} = exact control
+                        prompt = cs["text"] + (f", {base}" if cs.get("base", True) else "")
+                        ids = list(cs.get("chars", []))
+                    else:
+                        prompt = f"{cs}, {base}"
+                        # a custom shot may show anyone in the scene: give it everyone's reference sheet
+                        ids = [c["id"] for c in present]
+                elif spk and j == 0 and spk["id"] not in unseen:
                     # the speaker first, then whoever else may share the frame
                     ids = [spk["id"]] + [c["id"] for c in present if c["id"] != spk["id"]]
-                    face = "a faceless silhouette of a person" if spk.get("real") else spk["look"]
+                    face = "a faceless silhouette of a person" if spk.get("real") else tag(spk)
                     prompt = f"cinematic close-up of {face}, speaking, in {base}"
                 elif not shots:
                     prompt = SHOT_TYPES[0].format(setting=base) + (f", featuring {who}" if who else "")
@@ -362,8 +446,10 @@ def plan_shots(bible: dict, line_durs: dict, cfg: dict) -> dict[str, list[dict]]
                     if who and cycle in (1, 4):
                         prompt += f", featuring {who}"
                         ids = [c["id"] for c in present]
-                ids = [i for i in ids if not chars.get(i, {}).get("real")][:3]
-                shots.append({"prompt": prompt, "line": k, "part": j, "parts": parts, "chars": ids})
+                ids = [i for i in ids if not chars.get(i, {}).get("real") and i not in unseen][:3]
+                low = prompt.lower()
+                extra = 1 if ("mirror" in low or "reflect" in low or "behind" in low or "window" in low) else 0
+                shots.append({"prompt": prompt, "line": k, "part": j, "parts": parts, "chars": ids, "extra": extra})
         plan[s["id"]] = shots
     total = sum(len(v) for v in plan.values())
     log(f"  shot plan: {total} shots, max {max_shot:.1f}s each")
@@ -375,21 +461,27 @@ def scene_master(story: dict, sid: str, work: Path, cfg: dict, style: str = "") 
     so the room, the light and objects (a padlock on a latch...) stay put."""
     s = next(x for x in story["scenes"] if x["id"] == sid)
     chars = {c["id"]: c for c in story["characters"]}
-    present = [chars[c] for c in s.get("characters", []) if c in chars and not chars[c].get("real")][:3]
+    unseen = set(s.get("unseen", []))
+    present = [chars[c] for c in s.get("characters", []) if c in chars and not chars[c].get("real")
+               and c not in unseen][:3]
     props = [p for p in s.get("props", [])][: 4 - len(present)]
     d = work / "masters"
     d.mkdir(parents=True, exist_ok=True)
     p = d / f"{sid}.png"
     if not p.exists():
         log(f"  scene master: {sid}")
-        ids = [c["id"] for c in present] + props
+        ids = [c["id"] for c in present]
+        props = props[:max(0, 4 - len(ids))]
         base = s.get("image_prompt") or s["setting"]
-        people = "; ".join(f"{c.get('name', c['id'])}: {c['look']}" for c in present)
+        people = "; ".join(f"{c.get('name', c['id'])}: {c.get('tag') or c['look']}" for c in present)
         prompt = ref_prompt(story, ids, False, f"wide establishing shot of {base}"
                             + (f", with {people}" if people else "")
-                            + (f", {s['continuity']}" if s.get("continuity") else ""))
+                            + (f", {s['continuity']}" if s.get("continuity") else ""), expect=len(present), props=props)
         w, h = cfg["video"]["width"], cfg["video"]["height"]
-        render(prompt, p, cfg, 7000, int(w * 1.25), int(h * 1.25), style, refs=cast_refs(story, ids))
+        checked_render(prompt, p, cfg, 7000, int(w * 1.25), int(h * 1.25), style,
+                       cast_refs(story, ids) + [cast_dir(story) / f"{x}.png" for x in props
+                                                if (cast_dir(story) / f"{x}.png").exists()][:max(0, 4 - len(ids))],
+                       len(present))
     return p
 
 
@@ -418,12 +510,19 @@ def shot_images(plan: dict, work: Path, cfg: dict, style: str = "", story: dict 
                     ids = sh.get("chars", [])
                     close = any(w in sh["prompt"].lower() for w in ("close-up", "close up", "detail"))
                     use_master = master is not None and not close
-                    prompt = ref_prompt(story, ids, use_master, prompt + (f", {cont}" if cont and not close else ""))
-                    refs = ([master] if use_master else []) + cast_refs(story, ids)
+                    sprops = [x for x in scenes.get(sid, {}).get("props", [])
+                              if (cast_dir(story) / f"{x}.png").exists()] if not close else []
+                    sprops = sprops[:max(0, 4 - (1 if use_master else 0) - len(cast_refs(story, ids)))]
+                    prompt = ref_prompt(story, ids, use_master, prompt + (f", {cont}" if cont and not close else ""),
+                                        expect=len(ids), props=sprops)
+                    refs = ([master] if use_master else []) + cast_refs(story, ids) + [
+                        cast_dir(story) / f"{x}.png" for x in sprops]
                 if not p.exists():
                     log(f"  shot image: {sid} #{i + 1}/{len(shots)}")
-                out[sid].append(render(prompt, p, cfg, (i * 7919 + len(sid) * 104729) % 100000,
-                                       int(w * 1.25), int(h * 1.25), style, refs=refs))
+                out[sid].append(checked_render(prompt, p, cfg, (i * 7919 + len(sid) * 104729) % 100000,
+                                               int(w * 1.25), int(h * 1.25), style, refs,
+                                               (len(sh.get("chars", [])) + sh.get("extra", 0)) if story else None,
+                                               fallback=master))
     except QuotaExhausted as qe:
         made = sum(1 for s2, sh2 in plan.items() for k in range(len(sh2)) if (d / f"{s2}_{k:02d}.png").exists())
         raise ImagesPending(made, total, str(qe)[:300])

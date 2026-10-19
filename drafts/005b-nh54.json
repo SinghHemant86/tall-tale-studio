@@ -1,0 +1,910 @@
+{
+ "id": "005b-nh54",
+ "title": "रात 3:17 पर इस रास्ते पर ब्रेक मत लगाना 😱 | NH-54 | Hindi Horror Story",
+ "genre": "horror",
+ "art_style": "creepy_comic",
+ "language": "hi",
+ "logline": "On a rainy night stretch of NH-54, a father racing home for his daughter's birthday keeps passing the same broken bridge and the same woman waving in the rain, and learns what the old dhaba owner meant by 'don't stop between thirteen and zero'.",
+ "characters": [
+  {
+   "id": "raghav",
+   "name": "Raghav",
+   "role": "young_man",
+   "gender": "male",
+   "look": "Indian man in his late thirties, clearly an adult with a mature face, short black hair, three-day stubble, tired eyes with faint lines and dark circles, crumpled blue checked full-sleeve shirt, grey trousers, black wristwatch on the left wrist, thin gold wedding ring",
+   "voice": "hi-IN-MadhurNeural",
+   "tag": "Raghav, a tired Indian man in his late thirties with stubble, in a blue checked shirt"
+  },
+  {
+   "id": "raghav_still",
+   "name": "Raghav (frozen)",
+   "role": "young_man",
+   "gender": "male",
+   "look": "the same Indian man in his late thirties, same face, same hair, same blue checked shirt, skin deathly pale and grey, eyes wide open and unseeing, motionless, hands rigid on a steering wheel",
+   "voice": "hi-IN-MadhurNeural",
+   "tag": "the pale frozen Raghav, same man as Raghav, rigid at the wheel",
+   "derive_from": "raghav"
+  },
+  {
+   "id": "kaka",
+   "name": "Kaka (dhaba owner)",
+   "role": "elder",
+   "gender": "male",
+   "look": "Indian roadside tea seller aged 70, short white stubble and white moustache, deep wrinkles, faded brown kurta, grey wool shawl over his shoulders, saffron cotton cloth round his neck, thin cracked spectacles",
+   "voice": "hi-IN-MadhurNeural",
+   "tag": "Kaka, an old tea seller of seventy with white moustache, brown kurta and grey shawl"
+  },
+  {
+   "id": "woman",
+   "name": "The Woman on the Road",
+   "role": "ghost",
+   "gender": "female",
+   "look": "a very pale thin woman in a soaked dull-red cotton saree clinging to her body, long wet black hair hanging over her entire face so no face is visible, bare feet, grey skin, long thin fingers, unnaturally still",
+   "voice": "hi-IN-SwaraNeural",
+   "eleven_settings": {
+    "stability": 0.7,
+    "style": 0.1
+   },
+   "tag": "the pale woman in a soaked dull-red saree, long wet hair covering her whole face"
+  }
+ ],
+ "props": [
+  {
+   "id": "car",
+   "look": "a plain white small Indian hatchback car in good condition, clean and undamaged, intact windshield, windows and tail-lights, a red rosary hanging from the rear-view mirror"
+  }
+ ],
+ "scenes": [
+  {
+   "id": "s01",
+   "setting": "a white hatchback seen from inside through a rain-lashed windshield at night, wipers sweeping, the dashboard clock glowing red 03:17, a stone milestone showing 0 in the headlights",
+   "characters": [
+    "raghav"
+   ],
+   "mood": "dread",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "अगर रात के सफ़र में मील का पत्थर शून्य दिखे… तो ब्रेक मत दबाना।",
+     "en": "If a milestone reads zero on a night drive… don't press the brake.",
+     "shot": "a stone milestone with a black 0 glowing in car headlights in heavy rain"
+    },
+    {
+     "speaker": "narrator",
+     "text": "क्योंकि वो रास्ता ख़त्म होने का नहीं… किसी के तुम्हें घेर लेने का इशारा है।",
+     "en": "Because it doesn't mean the road is ending… it means something is closing in on you."
+    },
+    {
+     "speaker": "raghav",
+     "text": "अगर किसी को ये मिले… घड़ी में तीन बजकर सत्रह मिनट हैं। और मैं दो घंटे से एक ही जगह पर हूँ।",
+     "en": "If anyone finds this… the clock says 3:17. And I've been in the same place for two hours.",
+     "shot": "a trembling hand holding a phone with a red recording dot, a red dashboard clock behind"
+    },
+    {
+     "speaker": "narrator",
+     "text": "ये राघव की आख़िरी रिकॉर्डिंग थी।",
+     "en": "This was Raghav's last recording."
+    },
+    {
+     "speaker": "narrator",
+     "text": "पर कहानी शुरू होती है उससे कुछ घंटे पहले… एक सुनसान ढाबे पर।",
+     "en": "But the story begins a few hours earlier… at a deserted roadside dhaba."
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "rain_gentle"
+   ],
+   "continuity": "the dashboard clock shows 03:17 in red; all car windows are shut"
+  },
+  {
+   "id": "s02",
+   "setting": "a tiny roadside tea stall (dhaba) on a dark highway under one yellow bulb, rain dripping from a tin roof, a coal stove with a steel kettle, a wooden plank counter, a white hatchback parked outside",
+   "characters": [
+    "raghav",
+    "kaka"
+   ],
+   "mood": "calm",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "रात के सवा बजे थे। राघव अपने गाँव लौट रहा था।",
+     "en": "It was a quarter past one. Raghav was driving home to his village."
+    },
+    {
+     "speaker": "narrator",
+     "text": "सुबह उसकी बेटी मीनू का जन्मदिन था। केक गाड़ी की पिछली सीट पर नहीं, उसके दिल में था।",
+     "en": "Tomorrow was his daughter Meenu's birthday. He had promised to be there before she woke."
+    },
+    {
+     "speaker": "kaka",
+     "text": "चाय पियोगे साहब? बाहर बारिश बहुत है।",
+     "en": "Tea, sir? It's pouring outside."
+    },
+    {
+     "speaker": "raghav",
+     "text": "हाँ काका, एक कड़क चाय। बस आधे घंटे में निकलना है।",
+     "en": "Yes, uncle, one strong tea. I have to leave in half an hour."
+    },
+    {
+     "speaker": "narrator",
+     "text": "बूढ़े ने चूल्हे से चाय उतारी… और दो गिलास रखे।",
+     "en": "The old man lifted the kettle off the stove… and set down two glasses."
+    },
+    {
+     "speaker": "kaka",
+     "text": "अकेले हो?",
+     "en": "Alone?",
+     "shot": "an old tea seller looking past a tired man's shoulder, his face frozen"
+    },
+    {
+     "speaker": "raghav",
+     "text": "हाँ काका, अकेला ही हूँ।",
+     "en": "Yes, uncle. Just me."
+    },
+    {
+     "speaker": "narrator",
+     "text": "बूढ़े की नज़र राघव के पीछे गई… और वहीं ठहर गई।",
+     "en": "The old man's eyes went past Raghav… and stayed there."
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "rain_calm"
+   ],
+   "continuity": "Two steel tea glasses stand on the plank: one steaming in front of Raghav, one untouched with no steam beside it"
+  },
+  {
+   "id": "s03",
+   "setting": "the same tiny roadside tea stall at night in rain, close on an old tea seller's weathered face lit by one yellow bulb and a tired man in his late thirties listening",
+   "characters": [
+    "raghav",
+    "kaka"
+   ],
+   "mood": "drone",
+   "lines": [
+    {
+     "speaker": "kaka",
+     "text": "साहब, मील के पत्थर पर तेरह से शून्य तक का रास्ता है। उसमें गाड़ी कभी मत रोकना।",
+     "en": "Sir, between milestone thirteen and zero, never stop the car."
+    },
+    {
+     "speaker": "raghav",
+     "text": "काका, मैं शहर में पढ़ा हूँ। भूत-प्रेत मैं नहीं मानता। रास्ता है, बस रास्ता।",
+     "en": "Uncle, I studied in the city. I don't believe in ghosts. A road is just a road."
+    },
+    {
+     "speaker": "kaka",
+     "text": "इस मोड़ के बाद शीशे ऊपर चढ़ा लेना। बाहर से कोई हाथ हिलाए, तो रुकना मत।",
+     "en": "After this bend, roll the windows up. If anyone waves from outside, don't stop."
+    },
+    {
+     "speaker": "kaka",
+     "text": "वो रास्ता माँगते नहीं हैं साहब… रास्ता छीन लेते हैं।",
+     "en": "They don't ask for a way, sir… they take it."
+    },
+    {
+     "speaker": "raghav",
+     "text": "ठीक है काका। शीशे चढ़ा लूँगा।",
+     "en": "All right, uncle. I'll keep the windows up."
+    },
+    {
+     "speaker": "narrator",
+     "text": "राघव मुस्कुराया। उसे नहीं पता था कि बूढ़ा उसे चेतावनी नहीं दे रहा था… बल्कि किसी और को।",
+     "en": "Raghav smiled. He didn't know the old man wasn't warning him… but someone else."
+    }
+   ],
+   "sfx": [
+    "rain_calm"
+   ]
+  },
+  {
+   "id": "s04",
+   "setting": "a lonely two-lane national highway through dark flat fields at night in heavy rain, wet black asphalt shining, no other vehicles, no street lights, a white hatchback driving fast, a yellow-topped milestone reading 13 flashing past",
+   "characters": [
+    "raghav"
+   ],
+   "mood": "dread",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "तेरह। राघव ने खिड़कियाँ चढ़ाईं, रेडियो चालू किया और रफ़्तार सौ पर ले ली।",
+     "en": "Thirteen. Raghav rolled up the windows, switched on the radio and pushed the speed to a hundred."
+    },
+    {
+     "speaker": "narrator",
+     "text": "सड़क के दोनों तरफ़ बस काले खेत थे… और बारिश।",
+     "en": "On both sides of the road there were only black fields… and rain.",
+     "shot": "wipers sweeping over a rain-blurred windshield, dark fields beyond"
+    },
+    {
+     "speaker": "narrator",
+     "text": "बारह। ग्यारह। दस। सब कुछ सामान्य था। बहुत ज़्यादा सामान्य।",
+     "en": "Twelve. Eleven. Ten. Everything was normal. Far too normal."
+    },
+    {
+     "speaker": "raghav",
+     "text": "देखा मीनू? बाबा आ रहे हैं। तेरे उठने से पहले पहुँच जाऊँगा।",
+     "en": "See, Meenu? Daddy's coming. I'll be there before you wake up."
+    },
+    {
+     "speaker": "narrator",
+     "text": "तभी रेडियो में एक आवाज़ फुसफुसाई।",
+     "en": "Then a voice whispered through the radio."
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "rain_gentle"
+   ],
+   "continuity": "all car windows are shut; the dashboard clock shows 03:17"
+  },
+  {
+   "id": "s05",
+   "setting": "the inside of a car at night, a dashboard radio glowing with static, a phone map showing a blue dot drifting off the road into blank white, rain on the windshield",
+   "characters": [
+    "raghav",
+    "woman"
+   ],
+   "mood": "drone",
+   "lines": [
+    {
+     "speaker": "woman",
+     "text": "रुको… पीछे… रुको…",
+     "en": "Stop… behind… stop…"
+    },
+    {
+     "speaker": "narrator",
+     "text": "राघव ने झटके से रेडियो बंद कर दिया।",
+     "en": "Raghav switched the radio off with a jerk."
+    },
+    {
+     "speaker": "narrator",
+     "text": "फ़ोन का नक्शा घूमा… नीला निशान सड़क से बाहर चला गया… और नेटवर्क की आख़िरी लकीर भी बुझ गई।",
+     "en": "The map spun… the blue dot slid off the road… and the last bar of signal died."
+    },
+    {
+     "speaker": "raghav",
+     "text": "सिग्नल की दिक़्क़त है… बस और कुछ नहीं।",
+     "en": "Just a signal problem… nothing else."
+    },
+    {
+     "speaker": "narrator",
+     "text": "पर उसकी उँगलियाँ स्टीयरिंग पर कस गई थीं।",
+     "en": "But his fingers had tightened on the wheel."
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "ghost_whispers"
+   ],
+   "unseen": [
+    "woman"
+   ]
+  },
+  {
+   "id": "s06",
+   "setting": "a lonely two-lane national highway through dark flat fields at night in heavy rain, wet black asphalt shining, no other vehicles, no street lights, a pale woman in a soaked dull-red saree standing at the roadside with one arm raised, wet hair hiding her face, a milestone reading 7 beside her, headlights catching her",
+   "characters": [
+    "raghav",
+    "woman"
+   ],
+   "mood": "pulse",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "सात। सड़क के किनारे बारिश में भीगी एक औरत खड़ी थी।",
+     "en": "Seven. A woman stood by the roadside, soaked in the rain.",
+     "shot": [
+      {
+       "text": "a pale woman in a soaked dull-red saree standing alone at the roadside on a dark wet highway, wet hair over her face, one arm raised, rain, seen from a moving car",
+       "chars": [
+        "woman"
+       ],
+       "base": false
+      }
+     ]
+    },
+    {
+     "speaker": "narrator",
+     "text": "लाल साड़ी, गीले बाल चेहरे पर… और एक हाथ, धीरे-धीरे हिलता हुआ।",
+     "en": "Red saree, wet hair over her face… and one hand, slowly waving."
+    },
+    {
+     "speaker": "raghav",
+     "text": "काका ने कहा था… रुकना मत।",
+     "en": "Uncle said… don't stop.",
+     "shot": [
+      {
+       "text": "close-up of Raghav's tense eyes and hands on the steering wheel in the driver's seat, rain on the window, nobody else visible",
+       "chars": [
+        "raghav"
+       ],
+       "base": false
+      }
+     ]
+    },
+    {
+     "speaker": "narrator",
+     "text": "उसने एक्सेलरेटर दबा दिया। औरत पीछे छूट गई।",
+     "en": "He pressed the accelerator. The woman fell behind."
+    },
+    {
+     "speaker": "narrator",
+     "text": "पर पीछे के शीशे में… वो हाथ अब भी हिल रहा था।",
+     "en": "But in the rear-view mirror… that hand was still waving.",
+     "shot": "a rear-view mirror showing a far red-saree figure with one raised hand on a dark wet road"
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "ghost_humming"
+   ],
+   "continuity": "the woman's face is never visible, hidden by wet hair; her right arm is raised"
+  },
+  {
+   "id": "s07",
+   "setting": "a lonely two-lane national highway through dark flat fields at night in heavy rain, wet black asphalt shining, no other vehicles, no street lights, a broken concrete bridge railing and a huge bent banyan tree leaning over the road lit by headlights",
+   "characters": [
+    "raghav"
+   ],
+   "mood": "chase",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "छह। पाँच। चार।",
+     "en": "Six. Five. Four."
+    },
+    {
+     "speaker": "narrator",
+     "text": "सामने एक टूटा हुआ पुल आया। और सड़क पर झुका एक बूढ़ा बरगद।",
+     "en": "A broken bridge came up ahead. And an old banyan bent over the road."
+    },
+    {
+     "speaker": "narrator",
+     "text": "राघव ने ये दोनों पहले भी देखे थे।",
+     "en": "Raghav had seen both of them before."
+    },
+    {
+     "speaker": "narrator",
+     "text": "तीन। दो। एक।",
+     "en": "Three. Two. One."
+    },
+    {
+     "speaker": "narrator",
+     "text": "और फिर मील का पत्थर… शून्य।",
+     "en": "And then the milestone… zero.",
+     "shot": "a stone milestone with a black 0 in headlights"
+    },
+    {
+     "speaker": "narrator",
+     "text": "अगले ही मोड़ पर… फिर तेरह।",
+     "en": "On the very next bend… thirteen again.",
+     "shot": "a stone milestone with a black 13 in headlights"
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "rain_thunder"
+   ]
+  },
+  {
+   "id": "s08",
+   "setting": "the inside of a car at night, close on a red dashboard clock frozen at 03:17, a speedometer needle at 100, a man's sweating face lit red, a phone in his hand with a red recording dot",
+   "characters": [
+    "raghav"
+   ],
+   "mood": "pulse",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "घड़ी तीन बजकर सत्रह मिनट पर रुकी हुई थी। सूई सौ पर अटकी थी।",
+     "en": "The clock was stuck at 3:17. The speedometer was stuck at a hundred."
+    },
+    {
+     "speaker": "raghav",
+     "text": "ये क्या हो रहा है… तेल का काँटा भी वहीं का वहीं है।",
+     "en": "What is happening… even the fuel needle hasn't moved."
+    },
+    {
+     "speaker": "narrator",
+     "text": "उसने काँपते हाथों से फ़ोन निकाला और रिकॉर्डिंग चालू कर दी।",
+     "en": "With shaking hands he pulled out his phone and started recording."
+    },
+    {
+     "speaker": "raghav",
+     "text": "मैं पिछले दो घंटे से सौ की रफ़्तार पर चल रहा हूँ… लेकिन ये पेड़, ये टूटा हुआ पुल… वही जगह बार-बार आ रही है।",
+     "en": "I've been doing a hundred for two hours… but this tree, this broken bridge… the same place keeps coming back."
+    },
+    {
+     "speaker": "narrator",
+     "text": "बाहर बारिश की आवाज़ थी। अंदर, उसके अपने दिल की।",
+     "en": "Outside was the sound of rain. Inside, the sound of his own heart."
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "rain_gentle"
+   ],
+   "continuity": "the dashboard clock reads 03:17 and the speedometer needle rests at 100"
+  },
+  {
+   "id": "s09",
+   "setting": "a lonely two-lane national highway through dark flat fields at night in heavy rain, wet black asphalt shining, no other vehicles, no street lights, a white hatchback speeding past a milestone reading 7, the pale woman in the soaked red saree now standing in the middle of the road with her arm raised",
+   "characters": [
+    "raghav",
+    "woman"
+   ],
+   "mood": "chase",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "तीसरी बार। सात का पत्थर।",
+     "en": "The third time. Milestone seven."
+    },
+    {
+     "speaker": "narrator",
+     "text": "इस बार वो औरत किनारे पर नहीं थी… सड़क के बीचों-बीच खड़ी थी।",
+     "en": "This time the woman wasn't on the roadside… she stood in the middle of the road.",
+     "shot": [
+      {
+       "text": "a pale woman in a soaked dull-red saree standing alone in the middle of a dark wet highway in headlights, hair over her face, rain, no car visible, no other people",
+       "chars": [
+        "woman"
+       ],
+       "base": false
+      }
+     ]
+    },
+    {
+     "speaker": "raghav",
+     "text": "हट जाओ! हट जाओ!",
+     "en": "Move! Get out of the way!",
+     "shot": [
+      {
+       "text": "close-up of Raghav shouting at the wheel inside the car, windshield rain, nobody else visible",
+       "chars": [
+        "raghav"
+       ],
+       "base": false
+      }
+     ]
+    },
+    {
+     "speaker": "narrator",
+     "text": "राघव ने आँखें बंद कर लीं। टक्कर नहीं हुई।",
+     "en": "Raghav shut his eyes. There was no impact."
+    },
+    {
+     "speaker": "narrator",
+     "text": "गाड़ी उसके आर-पार निकल गई। और अंदर एक बर्फ़ीली हवा भर गई।",
+     "en": "The car passed right through her. And an icy wind filled the car."
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "thunder_big"
+   ],
+   "continuity": "the car windows stay shut; the woman's face is hidden by wet hair"
+  },
+  {
+   "id": "s10",
+   "setting": "the rear-view mirror of a car at night showing the back seat, a figure with long wet hair sitting low in the back seat with her head tilted",
+   "characters": [
+    "raghav",
+    "woman"
+   ],
+   "mood": "reveal",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "तभी राघव की नज़र पिछले शीशे पर गई।",
+     "en": "Then Raghav's eyes fell on the rear-view mirror."
+    },
+    {
+     "speaker": "narrator",
+     "text": "पिछली सीट पर कोई बैठा था। सिर झुका हुआ। गीले बाल।",
+     "en": "Someone was sitting in the back seat. Head bowed. Wet hair.",
+     "shot": "a rear-view mirror showing a wet-haired figure sitting in the back seat"
+    },
+    {
+     "speaker": "narrator",
+     "text": "उसने गर्दन घुमाई… सीट ख़ाली थी। बस सीट भीगी हुई थी।",
+     "en": "He turned his head… the seat was empty. Only the seat was soaked."
+    },
+    {
+     "speaker": "narrator",
+     "text": "उसने फिर शीशे में देखा… और सिर थोड़ा और पास झुक चुका था।",
+     "en": "He looked into the mirror again… and the head had bent a little closer.",
+     "shot": "a rear-view mirror with the wet-haired head now much closer, almost at his shoulder"
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "ghost_drift"
+   ],
+   "continuity": "the back seat is empty and soaked when seen directly; the figure is seen only in the mirror",
+   "unseen": [
+    "woman"
+   ]
+  },
+  {
+   "id": "s11",
+   "setting": "the inside of a car at night, a man gripping the steering wheel staring at the mirror, in the mirror a wet-haired woman's hidden face very close behind his shoulder",
+   "characters": [
+    "raghav",
+    "woman"
+   ],
+   "mood": "reveal",
+   "lines": [
+    {
+     "speaker": "woman",
+     "text": "तुमने मुझे लिफ़्ट तो नहीं दी…",
+     "en": "You didn't give me a lift…"
+    },
+    {
+     "speaker": "woman",
+     "text": "पर तुम्हारी पिछली सीट पर जगह बहुत ख़ाली थी।",
+     "en": "But there was so much empty space on your back seat."
+    },
+    {
+     "speaker": "raghav",
+     "text": "कौन हो तुम? तुम्हें क्या चाहिए?",
+     "en": "Who are you? What do you want?"
+    },
+    {
+     "speaker": "woman",
+     "text": "तेरह से शून्य तक… रास्ता कोई भी चला सकता है। बस रुकना नहीं चाहिए।",
+     "en": "From thirteen to zero… anyone can drive this road. They just must never stop."
+    },
+    {
+     "speaker": "woman",
+     "text": "मैं रास्ता नहीं माँगती… मुझे तुम्हारी जगह चाहिए।",
+     "en": "I don't ask for the road… I want your place."
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "ghost_drift"
+   ],
+   "continuity": "the woman is only a reflection in the mirror, face hidden by wet hair",
+   "unseen": [
+    "woman"
+   ]
+  },
+  {
+   "id": "s12",
+   "setting": "the inside of a car at night, a man sobbing over the steering wheel, a small child's birthday card on the dashboard, a milestone with a black 0 glowing ahead through the rain",
+   "characters": [
+    "raghav"
+   ],
+   "mood": "piano",
+   "lines": [
+    {
+     "speaker": "raghav",
+     "text": "नहीं… मुझे घर जाना है। आज मेरी मीनू का जन्मदिन है।",
+     "en": "No… I have to go home. It's my Meenu's birthday today."
+    },
+    {
+     "speaker": "woman",
+     "text": "सब यही कहते हैं।",
+     "en": "Everyone says that."
+    },
+    {
+     "speaker": "narrator",
+     "text": "बारिश तेज़ हो गई। हेडलाइट की रोशनी में मील का पत्थर चमका।",
+     "en": "The rain grew harder. A milestone gleamed in the headlights."
+    },
+    {
+     "speaker": "narrator",
+     "text": "शून्य।",
+     "en": "Zero."
+    },
+    {
+     "speaker": "narrator",
+     "text": "और राघव ने वही किया… जो काका ने मना किया था।",
+     "en": "And Raghav did exactly what the old man had forbidden."
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "cry_woman_soft"
+   ]
+  },
+  {
+   "id": "s13",
+   "setting": "a white hatchback braking hard in the rain beside a yellow milestone with a black 0, headlights glaring, spray flying, dark empty fields",
+   "characters": [
+    "raghav"
+   ],
+   "mood": "chase",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "राघव ने पूरी ताक़त से ब्रेक दबा दिया।",
+     "en": "Raghav slammed the brake with all his strength."
+    },
+    {
+     "speaker": "narrator",
+     "text": "गाड़ी चीख़ती हुई रुकी। इंजन बंद हुआ। बारिश की आवाज़ भी बंद हो गई।",
+     "en": "The car screamed to a halt. The engine died. Even the sound of the rain stopped."
+    },
+    {
+     "speaker": "narrator",
+     "text": "सन्नाटा। ऐसा सन्नाटा, जो कानों में चुभता है।",
+     "en": "Silence. A silence that pricks the ears."
+    },
+    {
+     "speaker": "narrator",
+     "text": "और उस सन्नाटे में, पिछली सीट से किसी के उतरने की आवाज़ आई।",
+     "en": "And in that silence came the sound of someone stepping down from the back seat."
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": []
+  },
+  {
+   "id": "s14",
+   "setting": "a lonely wet highway at night, a man in a blue checked shirt standing beside a white hatchback with the driver door open, rain falling around him but not touching him, a milestone with a black 0 nearby",
+   "characters": [
+    "raghav"
+   ],
+   "mood": "drone",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "राघव दरवाज़ा खोलकर बाहर कूद गया।",
+     "en": "Raghav threw the door open and jumped out."
+    },
+    {
+     "speaker": "narrator",
+     "text": "अजीब बात थी। बारिश उसके चारों तरफ़ गिर रही थी… पर उसे भिगो नहीं रही थी।",
+     "en": "Strangely, rain was falling all around him… but it wasn't wetting him."
+    },
+    {
+     "speaker": "narrator",
+     "text": "उसके कदमों की आवाज़ भी नहीं आ रही थी।",
+     "en": "Even his footsteps made no sound."
+    },
+    {
+     "speaker": "narrator",
+     "text": "वो धीरे-धीरे लौटा और ड्राइवर की खिड़की से अंदर झाँका।",
+     "en": "Slowly he went back and looked in through the driver's window."
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "rain_gentle"
+   ],
+   "continuity": "Raghav's shirt is completely dry although rain falls around him"
+  },
+  {
+   "id": "s15",
+   "setting": "through a car's driver window at night, a pale man in a blue checked shirt sitting rigid at the steering wheel with open staring eyes and hands frozen on the wheel, the broken bridge faintly visible behind",
+   "characters": [
+    "raghav",
+    "raghav_still"
+   ],
+   "mood": "reveal",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "स्टीयरिंग पर कोई बैठा था। हाथ पहिये पर जमे हुए। आँखें खुली, पर बेजान।",
+     "en": "Someone sat at the steering wheel. Hands frozen on the wheel. Eyes open, but lifeless.",
+     "shot": "a pale man's frozen hands gripping a car steering wheel, wet dashboard glass"
+    },
+    {
+     "speaker": "narrator",
+     "text": "वो राघव था।",
+     "en": "It was Raghav."
+    },
+    {
+     "speaker": "narrator",
+     "text": "तीन बजकर सत्रह मिनट पर, इसी मोड़ पर, उसकी गाड़ी टूटे पुल से नीचे गिरी थी।",
+     "en": "At 3:17, at this very bend, his car had gone off the broken bridge."
+    },
+    {
+     "speaker": "narrator",
+     "text": "वो पुल, वो पेड़, वो घड़ी… ये सब उसकी आख़िरी साँस थी, जो ख़त्म ही नहीं हुई।",
+     "en": "The bridge, the tree, the clock… all of it was his last breath, and it never ended."
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "ghost_humming"
+   ],
+   "continuity": "Raghav stands outside; the pale motionless Raghav sits inside gripping the wheel; the car is intact and clean"
+  },
+  {
+   "id": "s16",
+   "setting": "a white hatchback with headlights glowing starting by itself on a dark wet highway and driving away, a man in a blue checked shirt left standing at the roadside, taillights shrinking into rain",
+   "characters": [
+    "raghav"
+   ],
+   "mood": "dread",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "तभी गाड़ी अपने आप स्टार्ट हुई। हेडलाइट जल उठीं।",
+     "en": "Then the car started on its own. The headlights blazed."
+    },
+    {
+     "speaker": "narrator",
+     "text": "औरत पिछली सीट से उठकर आगे आई। और उस जगह बैठ गई, जो कभी राघव की थी।",
+     "en": "The woman moved from the back seat to the front. And sat down in the place that had been Raghav's."
+    },
+    {
+     "speaker": "narrator",
+     "text": "गाड़ी आगे बढ़ गई। राघव को उसी सड़क पर छोड़कर।",
+     "en": "The car drove away. Leaving Raghav on that same road."
+    },
+    {
+     "speaker": "narrator",
+     "text": "उसकी मीनू का जन्मदिन… कभी नहीं आया।",
+     "en": "Meenu's birthday… never came for him."
+    }
+   ],
+   "props": [
+    "car"
+   ],
+   "sfx": [
+    "cry_woman_soft"
+   ],
+   "unseen": [
+    "woman"
+   ]
+  },
+  {
+   "id": "s17",
+   "setting": "a lonely wet highway at night, a man in a blue checked shirt standing at the roadside with one arm slowly rising, in the far distance the glow of oncoming headlights through rain, a milestone reading 7",
+   "characters": [
+    "raghav"
+   ],
+   "mood": "dread",
+   "lines": [
+    {
+     "speaker": "narrator",
+     "text": "दूर से एक और गाड़ी की हेडलाइट दिखाई दी।",
+     "en": "Far away, another car's headlights appeared."
+    },
+    {
+     "speaker": "narrator",
+     "text": "राघव का हाथ अपने आप ऊपर उठने लगा।",
+     "en": "Raghav's hand began to rise on its own."
+    },
+    {
+     "speaker": "narrator",
+     "text": "वो मदद नहीं माँग रहा था। उसे बस… हाथ हिलाना था।",
+     "en": "He wasn't asking for help. He simply… had to wave."
+    },
+    {
+     "speaker": "narrator",
+     "text": "और वो हिलता रहा। धीरे-धीरे। हर आने वाली गाड़ी के लिए।",
+     "en": "And he kept waving. Slowly. For every car that came."
+    }
+   ],
+   "sfx": [
+    "ghost_drift"
+   ],
+   "continuity": "Raghav's right arm is raised and waving; his face is calm and empty"
+  },
+  {
+   "id": "s18",
+   "setting": "the same tiny roadside tea stall at night in rain under one yellow bulb, an old tea seller handing two steel glasses of tea to a new traveller with a bag, a different car parked outside",
+   "characters": [
+    "kaka"
+   ],
+   "mood": "calm",
+   "lines": [
+    {
+     "speaker": "kaka",
+     "text": "साहब, इस मोड़ के बाद शीशे ऊपर चढ़ा लेना।",
+     "en": "Sir, after this bend, roll your windows up."
+    },
+    {
+     "speaker": "kaka",
+     "text": "बाहर से कोई हाथ हिलाए, तो रुकना मत।",
+     "en": "If anyone waves from outside, don't stop."
+    },
+    {
+     "speaker": "narrator",
+     "text": "और बूढ़े ने मेज़ पर दो गिलास रख दिए।",
+     "en": "And the old man set two glasses on the plank."
+    },
+    {
+     "speaker": "narrator",
+     "text": "अगर कभी रात के सफ़र में मील का पत्थर शून्य दिखे… तो ब्रेक मत दबाना।",
+     "en": "If you ever see a milestone reading zero on a night drive… don't press the brake."
+    }
+   ],
+   "sfx": [
+    "rain_calm"
+   ],
+   "continuity": "two steel tea glasses on the plank, one steaming and one with no steam"
+  }
+ ],
+ "thumbnail": {
+  "prompt": "a rain-soaked white hatchback car interior seen over the driver's shoulder at night, in the rear-view mirror a pale woman with wet black hair hiding her face sitting right behind him, red dashboard glow, dark empty space on the left",
+  "text": "पीछे कौन है?"
+ },
+ "shorts": [
+  {
+   "scenes": [
+    "s01",
+    "s02"
+   ],
+   "title": "If the milestone shows zero, don't brake 😱 | NH-54",
+   "hook": "a stone milestone with a black 0 glowing in car headlights in heavy rain"
+  },
+  {
+   "scenes": [
+    "s05",
+    "s06"
+   ],
+   "title": "She waved from the roadside… and never stopped 😱 | NH-54",
+   "hook": "a pale woman in a soaked red saree waving from a dark rainy roadside, face hidden by hair"
+  },
+  {
+   "scenes": [
+    "s10",
+    "s11"
+   ],
+   "title": "You never gave me a lift 😱 | NH-54 Horror",
+   "hook": "a rear-view mirror showing a wet-haired figure sitting in the back seat"
+  },
+  {
+   "scenes": [
+    "s14",
+    "s15"
+   ],
+   "title": "The rain wasn't touching him 😱 | NH-54",
+   "hook": "a pale man's frozen hands gripping a steering wheel through a rainy window"
+  }
+ ],
+ "youtube": {
+  "description": "On a rain-soaked night stretch of NH-54, a father racing home for his daughter's birthday keeps passing the same broken bridge, the same bent banyan tree and the same woman waving from the roadside. A tea-stall owner had warned him: never stop between milestone thirteen and zero. This is a Hindi horror story about a haunted highway.\n\nThe highway ghost legend is fiction inspired by Indian roadside folklore; all characters and events are made up.",
+  "hashtags": [
+   "#NH54",
+   "#HighwayHorror"
+  ],
+  "tags": [
+   "haunted highway",
+   "nh 54 horror",
+   "highway ghost story",
+   "bhoot ki kahani",
+   "night drive horror",
+   "milestone zero legend",
+   "hindi horror story",
+   "darawani kahani",
+   "road bhoot"
+  ]
+ }
+}

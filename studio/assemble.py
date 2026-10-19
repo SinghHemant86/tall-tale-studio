@@ -54,7 +54,7 @@ def scene_clip(scene: dict, images: list, lines: list, work: Path, cfg: dict, su
     sfx_files = [p for p in (_find_audio(ROOT / "sfx", s) for s in scene.get("sfx", [])) if p]
     for j, p in enumerate(sfx_files):
         inputs += ["-i", str(p)]
-        fc += f";[{n + j}:a]aresample=44100,aformat=channel_layouts=mono,volume=0.7[x{j}]"
+        fc += f";[{n + j}:a]aresample=44100,aformat=channel_layouts=mono,volume={cfg.get("sfx_volume", 0.3)},atrim=0:{min(total, 14):.2f},afade=t=out:st={max(0, min(total, 14) - 2.5):.2f}:d=2.5[x{j}]"
     if sfx_files:
         mix_in = "[voice]" + "".join(f"[x{j}]" for j in range(len(sfx_files)))
         fc += f";{mix_in}amix=inputs={1 + len(sfx_files)}:duration=first:normalize=0[aout]"
